@@ -1,4 +1,6 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 interface Test {
   ID_date_groupe: number | null;
@@ -10,9 +12,10 @@ interface Test {
 }
 
 @Component({
-  selector: 'app-test-management',
-  templateUrl: './test-management.component.html',
-  styleUrls: ['./test-management.component.css']
+  selector: 'app-test',
+  templateUrl: './test.component.html',
+  styleUrls: ['./test.component.css'],
+  
 })
 export class TestManagementComponent {
   tests: Test[] = [];
