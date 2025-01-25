@@ -1,4 +1,15 @@
+<<<<<<< HEAD
 /* You can add global styles to this file, and also import other style files */
+=======
+body{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+/* You can add global styles to this file, and also import other style files
+>>>>>>> safa_branch
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -57,4 +68,8 @@
   button:hover {
     opacity: 0.8;
   }
+<<<<<<< HEAD
   
+=======
+   */
+>>>>>>> safa_branch

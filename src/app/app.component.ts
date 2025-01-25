@@ -1,20 +1,17 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
-import { TestComponent } from './test/test.component';
-// Interface pour représenter un test
+import { RouterModule } from '@angular/router';  // Importer RouterModule
+import { LoginComponent } from './login/login.component';  // Import LoginContainer
+import { RegisterComponent } from './register/register.component';
+import { ActivateAccountComponent } from './activate-account/activate-account.component';  // Import RegisterContainer
+import { CommonModule } from '@angular/common'; // Pour ngClass
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [FormsModule, CommonModule, TestComponent],
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  standalone: true,  // Permet de travailler sans module
+  imports: [RouterModule, LoginComponent, RegisterComponent, CommonModule,ActivateAccountComponent]  // Ajoute les composants ici
 })
-
-
-
 export class AppComponent {
-  title = 'Gestion des Tests TOEIC';
+  title = 'TOEIC_APP';
 }
