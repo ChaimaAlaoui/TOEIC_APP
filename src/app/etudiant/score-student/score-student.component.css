@@ -1,0 +1,140 @@
+/* Styles généraux */
+body {
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  font-family: 'Arial', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 20px;
+}
+
+/* Carte principale */
+.card {
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  padding: 2rem;
+  width: 100%;
+  max-width: 1200px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Tableau des scores TOEIC */
+.table-flat {
+  width: 100%;
+  margin-bottom: 0;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.table-flat thead th {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 12px;
+  text-align: center;
+}
+
+.table-flat tbody td {
+  padding: 12px;
+  border-bottom: 1px solid #f0f0f0;
+  text-align: center;
+}
+
+.table-flat tbody tr:hover {
+  background-color: #f8f9fa;
+}
+
+/* Styles pour les sous-parties */
+.table-flat tbody td ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+}
+
+.table-flat tbody td ul li {
+  margin-bottom: 5px;
+}
+
+/* Historique des scores */
+.history-section {
+  margin-top: 2rem;
+}
+
+.history-section h3 {
+  color: #007bff;
+  margin-bottom: 1rem;
+}
+
+.history-section ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.history-section ul li {
+  margin-bottom: 10px;
+  font-size: 0.95rem;
+}
+
+/* Boutons */
+.btn-outline-secondary {
+  border-color: #007bff;
+  color: #007bff;
+}
+
+.btn-outline-secondary:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn-outline-secondary:disabled {
+  opacity: 0.5;
+}
+
+/* Couleurs de texte */
+.text-success {
+  color: #28a745;
+}
+
+.text-info {
+  color: #17a2b8;
+}
+
+.text-primary {
+  color: #007bff;
+}
+
+.text-danger {
+  color: #dc3545;
+}
+
+/* Barre de recherche */
+.search-bar {
+  width: 200px;
+}
+
+.search-bar .form-control-sm {
+  font-size: 0.875rem;
+}
+
+/* Pagination */
+.pagination-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.5rem;
+}
+
+.pagination-controls button {
+  font-size: 0.875rem;
+}

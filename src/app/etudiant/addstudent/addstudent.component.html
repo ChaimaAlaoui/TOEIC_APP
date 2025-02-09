@@ -1,0 +1,68 @@
+<div class="container d-flex justify-content-center align-items-center vh-100">
+  <div class="card p-4 shadow" style="width: 100%; max-width: 500px;">
+    <h2 class="text-center mb-4" style="font-size: 1.5rem;">Ajouter un étudiant</h2>
+    <form (ngSubmit)="addStudent()">
+      <!-- Nom, Prénom -->
+      <div class="row mb-3">
+        <div class="form-group col-md-6">
+          <label for="studentLastName">Nom</label>
+          <input type="text" class="form-control" id="studentLastName" [(ngModel)]="studentLastName" name="studentLastName" placeholder="Entrez le nom" required>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="studentFirstName">Prénom</label>
+          <input type="text" class="form-control" id="studentFirstName" [(ngModel)]="studentFirstName" name="studentFirstName" placeholder="Entrez le prénom" required>
+        </div>
+      </div>
+
+      <!-- Promotion (Liste déroulante) -->
+      <div class="form-group mb-3">
+        <label for="studentPromotionId">Promotion</label>
+        <select class="form-control" id="studentPromotionId" [(ngModel)]="studentPromotionId" name="studentPromotionId" required>
+          <option value="" disabled selected>Choisissez une promotion</option>
+          <option *ngFor="let promo of promotions" [value]="promo.id">{{ promo.nom }}</option>
+        </select>
+      </div>
+
+      <!-- Groupe (Liste déroulante) -->
+      <div class="form-group mb-3">
+        <label for="studentGroupId">Groupe</label>
+        <select class="form-control" id="studentGroupId" [(ngModel)]="studentGroupId" name="studentGroupId" required>
+          <option value="" disabled selected>Choisissez un groupe</option>
+          <option *ngFor="let groupe of groupes" [value]="groupe.id">{{ groupe.nom }}</option>
+        </select>
+      </div>
+
+      <!-- Site (Liste déroulante) -->
+      <div class="form-group mb-3">
+        <label for="studentSiteId">Site</label>
+        <select class="form-control" id="studentSiteId" [(ngModel)]="studentSiteId" name="studentSiteId" required>
+          <option value="" disabled selected>Choisissez un site</option>
+          <option *ngFor="let site of sites" [value]="site.id">{{ site.nom }}</option>
+        </select>
+      </div>
+
+            <!-- Spécialité (Liste déroulante statique) -->
+      <div class="form-group mb-3">
+        <label for="studentSpecialite">Spécialité</label>
+        <select class="form-control" id="studentSpecialite" [(ngModel)]="studentSpecialite" name="studentSpecialite" required>
+          <option value="" disabled selected>Choisissez une spécialité</option>
+          <option value="Informatique">Informatique</option>
+          <option value="Génie Industriel">Génie Industriel</option>
+          <option value="Génie Energétique et Environnement">Génie Energétique et Environnement</option>
+          <option value="Agroalimentaire">Agroalimentaire</option>
+        </select>
+      </div>
+
+      <!-- Email -->
+      <div class="form-group mb-3">
+        <label for="studentEmail">Email</label>
+        <input type="email" class="form-control" id="studentEmail" [(ngModel)]="studentEmail" name="studentEmail" required>
+      </div>
+
+      <div class="d-flex justify-content-between">
+        <button type="submit" class="btn btn-primary">Ajouter</button>
+        <button type="button" class="btn btn-secondary" [routerLink]="['/studentlist']">Retour</button>
+      </div>
+    </form>
+  </div>
+</div>

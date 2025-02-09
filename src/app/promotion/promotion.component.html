@@ -1,0 +1,57 @@
+<div class="container mt-4">
+    <div class="card">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h2>Liste des Promotions</h2>
+          <div>
+            <button class="btn btn-primary btn-sm" routerLink="/addpromotion">
+              <i class="fas fa-plus"></i> Ajouter une Promotion
+            </button>
+            <div class="search-bar ml-2">
+              <input type="text" class="form-control form-control-sm" placeholder="Rechercher..." [(ngModel)]="searchText">
+            </div>
+          </div>
+        </div>
+  
+        <!-- Tableau -->
+        <table class="table table-flat">
+          <thead>
+            <tr>
+              <th>Nom</th>
+              <th>Site</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let promotion of filteredPromotions">
+              <td>{{ promotion.nom }}</td>
+              <td>{{ promotion.site }}</td>
+              <td>
+                <a [routerLink]="['/update-promotion', promotion.id]" class="text-primary">
+                  <i class="fas fa-edit"></i>
+                </a>
+                <a (click)="deletePromotion(promotion.id)" class="text-danger ml-2">
+                  <i class="fas fa-times"></i>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+  
+        <!-- Paginateur -->
+        <div class="d-flex justify-content-between align-items-center mt-3">
+          <div>
+            <button class="btn btn-outline-secondary btn-sm" (click)="previousPage()" [disabled]="currentPage === 1">
+              <i class="fas fa-chevron-left"></i> Précédent
+            </button>
+            <button class="btn btn-outline-secondary btn-sm ml-2" (click)="nextPage()" [disabled]="currentPage === totalPages">
+              Suivant <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
+          <div>
+            Page {{ currentPage }} sur {{ totalPages }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

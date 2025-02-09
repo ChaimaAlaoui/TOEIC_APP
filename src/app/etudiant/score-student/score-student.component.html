@@ -1,0 +1,112 @@
+<div class="container mt-4">
+  <div class="card">
+    <div class="card-body">
+      <!-- En-tête avec titre et bouton de retour -->
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Résultats TOEIC de l'Étudiant</h2>
+        <button class="back-btn" [routerLink]="['/studentlist']">Back</button>
+        
+      </div>
+
+      <!-- Informations de l'étudiant -->
+      <div class="row mb-4">
+        <div class="col-md-6">
+          <p><strong>Nom :</strong> Dupont</p>
+        </div>
+        <div class="col-md-6">
+          <p><strong>Prénom :</strong> Jean</p>
+        </div>
+      </div>
+
+      <!-- Tableau des résultats TOEIC -->
+      <table class="table table-flat">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Partie Orale</th>
+            <th>Sous-parties Orales</th>
+            <th>Score Oral / 495</th>
+            <th>Partie Écrite</th>
+            <th>Sous-parties Écrites</th>
+            <th>Score Écrit / 495</th>
+            <th>Score Total / 990</th>
+            <th>Note C.C / 20</th>
+            <th>Note ECUE TOEIC / 20</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Résultat 1 -->
+          <tr>
+            <td>10/10/2023</td>
+            <td>Résultat Oral</td>
+            <td>
+              Partie 1: 5/6<br>
+              Partie 2: 21/39<br>
+              Partie 3: 15/30<br>
+              Partie 4: 10/20
+            </td>
+            <td>320</td>
+            <td>Résultat Écrit</td>
+            <td>
+              Partie 5: 25/30<br>
+              Partie 6: 18/25<br>
+              Partie 7: 35/40
+            </td>
+            <td>450</td>
+            <td>770</td>
+            <td>16</td>
+            <td>18</td>
+          </tr>
+
+          <!-- Résultat 2 -->
+          <tr>
+            <td>15/09/2023</td>
+            <td>Résultat Oral</td>
+            <td>
+              Partie 1: 4/6<br>
+              Partie 2: 18/39<br>
+              Partie 3: 12/30<br>
+              Partie 4: 8/20
+            </td>
+            <td>280</td>
+            <td>Résultat Écrit</td>
+            <td>
+              Partie 5: 20/30<br>
+              Partie 6: 15/25<br>
+              Partie 7: 30/40
+            </td>
+            <td>400</td>
+            <td>680</td>
+            <td>14</td>
+            <td>16</td>
+          </tr>
+
+          <!-- Résultat 3 -->
+          <tr>
+            <td>20/08/2023</td>
+            <td>Résultat Oral</td>
+            <td>
+              Partie 1: 6/6<br>
+              Partie 2: 25/39<br>
+              Partie 3: 20/30<br>
+              Partie 4: 15/20
+            </td>
+            <td>380</td>
+            <td>Résultat Écrit</td>
+            <td>
+              Partie 5: 28/30<br>
+              Partie 6: 20/25<br>
+              Partie 7: 38/40
+            </td>
+            <td>480</td>
+            <td>860</td>
+            <td>18</td>
+            <td>19</td>
+          </tr>
+        </tbody>
+      </table>
+
+          
+    </div>
+  </div>
+</div>

@@ -1,0 +1,130 @@
+/* Style général du formulaire */
+body {
+    background: linear-gradient(135deg, #6a11cb, #2575fc); /* Fond dégradé */
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  
+  .card {
+    background: rgba(255, 255, 255, 0.9); /* Fond semi-transparent */
+    border: none;
+    border-radius: 15px; /* Bordures arrondies */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Ombre portée */
+    padding: 2rem;
+    width: 100%;
+    max-width: 500px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px); /* Effet de levée au survol */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+  }
+  
+  h2 {
+    color: #333;
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-weight: bold;
+  }
+  
+  /* Style des champs de formulaire */
+  .form-control {
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 0.9rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .form-control:focus {
+    border-color: #6a11cb; /* Changement de couleur au focus */
+    box-shadow: 0 0 8px rgba(106, 17, 203, 0.5); /* Ombre au focus */
+    outline: none;
+  }
+  
+  /* Style des étiquettes */
+  label {
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+  
+  /* Style du bouton */
+  .btn-primary {
+    background: linear-gradient(135deg, #6a11cb, #2575fc); /* Dégradé */
+    border: none;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 1rem;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+  }
+  
+  .btn-primary:hover {
+    background: linear-gradient(135deg, #2575fc, #6a11cb); /* Dégradé inversé */
+    transform: translateY(-2px); /* Effet de levée */
+  }
+  
+  .btn-primary:active {
+    transform: translateY(0); /* Effet d'enfoncement */
+  }
+  
+  /* Style du sélecteur */
+  select.form-control {
+    appearance: none; /* Supprime l'apparence par défaut */
+    background: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236a11cb' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e")
+      no-repeat right 10px center; /* Icône personnalisée */
+    background-size: 16px;
+    padding-right: 30px;
+  }
+  
+  /* Animation d'entrée du formulaire */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .card {
+    animation: fadeIn 0.5s ease-out; /* Animation d'entrée */
+  }
+  /*back btn*/
+  /* Style du bouton Back */
+.back-btn {
+    background: linear-gradient(135deg, #ffffff, #f0f0f0); /* Dégradé blanc */
+    border: 1px solid #ddd; /* Bordure légère */
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: #333; /* Texte sombre */
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ombre légère */
+  }
+  
+  /* Effet au survol */
+  .back-btn:hover {
+    background: linear-gradient(135deg, #f0f0f0, #ffffff); /* Dégradé inversé */
+    transform: translateY(-2px); /* Effet de levée */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Ombre plus prononcée */
+  }
+  
+  /* Effet au clic */
+  .back-btn:active {
+    transform: translateY(0); /* Effet d'enfoncement */
+  }
