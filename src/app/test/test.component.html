@@ -1,84 +1,65 @@
-<div class="container">
-    <h1>Gestion des Tests TOEIC</h1>
-    <form (ngSubmit)="onSubmit()">
-      <div>
-        <label>Titre :</label>
-        <input [(ngModel)]="test.Titre" name="titre" type="text" required placeholder="Entrez le titre du test" />
-      </div>
-      <div>
-        <label>Description :</label>
-        <textarea [(ngModel)]="test.Description" name="description"></textarea>
-      </div>
-      <div>
-        <label>Type :</label>
-        <select [(ngModel)]="test.Type" name="type" required>
-          <option value="Écrit">Écrit</option>
-          <option value="Oral">Oral</option>
-        </select>
-      </div>
-      <div>
-        <label>Date :</label>
-        <input [(ngModel)]="test.Date" name="date" type="date" required />
-      </div>
-      <div>
-        <label>Groupe :</label>
-        <select [(ngModel)]="test.groupe" name="groupe" required>
-          <option value="Cls 1 24-25 PODVIN">Cls 1 24-25 PODVIN</option>
-          <option value="Cls 2 24-25 PODVIN">Cls 2 24-25 PODVIN</option>
-        </select>
-      </div>
-      <button type="submit">Enregistrer</button>
-    </form>
+
+
+<div class="container my-5">
+  <h1 class="text-center mb-4">📘 Création d’un Test TOEIC</h1>
   
-    <h2>Liste des Tests</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Titre</th>
-          <th>Type</th>
-          <th>Date</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let t of tests">
-          <td>{{ t.ID_date_groupe }}</td>
-          <td>{{ t.Titre }}</td>
-          <td>{{ t.Type }}</td>
-          <td>{{ t.Date }}</td>
-          <td>
-            <button (click)="editTest(t)">Modifier</button>
-            <button (click)="deleteTest(t.ID_date_groupe!)">Supprimer</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  
-    <h2>Saisie des réponses</h2>
-    <form (ngSubmit)="saveResponses()">
-      <table>
-        <thead>
-          <tr>
-            <th>Question</th>
-            <th>Réponse</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let question of questions">
-            <td>{{ question.numero }}</td>
-            <td>
-              <select [(ngModel)]="question.reponse" name="reponse{{ question.numero }}">
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-                <option value="D">D</option>
-              </select>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <button type="submit">Enregistrer les réponses</button>
-    </form>
-  </div>
-  
+  <form>
+    <!-- Titre -->
+    <div class="form-group mb-3">
+      <label for="Titre">Nom du Test :</label>
+      <input type="text" id="Titre" [(ngModel)]="test.Titre" name="Titre" class="form-control" required placeholder="Entrez le nom du test">
+    </div>
+
+    <!-- Description -->
+    <div class="form-group mb-3">
+      <label for="Description">Description :</label>
+      <textarea id="Description" [(ngModel)]="test.Description" name="Description" class="form-control" placeholder="Entrez la description"></textarea>
+    </div>
+
+    <!-- Site -->
+    <div class="form-group mb-3">
+      <label for="Site">Site :</label>
+      <select id="Site" [(ngModel)]="test.Site" name="Site" class="form-control" required>
+        <option value="Calais">Calais</option>
+        <option value="Saint-Omer">Saint-Omer</option>
+        <option value="Boulogne-sur-Mer">Boulogne-sur-Mer</option>
+        <option value="Dunkerque">Dunkerque</option>
+      </select>
+    </div>
+
+    <!-- Date -->
+    <div class="form-group mb-3">
+      <label for="Date">Date :</label>
+      <input type="date" id="Date" [(ngModel)]="test.Date" name="Date" class="form-control" required>
+    </div>
+
+    <div class="form-group mb-3">
+      <button type="button" class="btn btn-secondary form-control" (click)="selectionnerClasse()">
+        Selectionner classe
+      </button>
+    </div>
+
+   
+    <div class="form-group mb-3">
+      <button type="button" class="btn btn-secondary form-control" (click)="onConfigureReponses()">
+        Configurer les réponses
+      </button>
+    </div>
+
+    <button type="button" class="btn btn-secondary mr-3">
+      <i class="fas fa-print"></i> Imprimer Feuilles
+    </button>
+    <button type="button" class="btn btn-secondary">
+      <i class="fas fa-search"></i> Examiner Test
+    </button>
+    <div class="text-center mt-4">
+      <button type="button" class="btn btn-primary" (click)="onSaveTest()">Enregistrer Test</button>
+    </div>
+  </form>
+
+
+</div>
+
+
+ 
+

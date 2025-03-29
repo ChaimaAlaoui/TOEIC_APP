@@ -1,0 +1,16 @@
+<app-navbar></app-navbar>
+
+<div class="container pdf-container">
+    <h1 class="title">Feuille de Réponses</h1>
+    
+    <!-- Affichage direct du PDF via un iframe -->
+    <iframe src="/assets/images/test_sheet.pdf" class="pdf-viewer"></iframe>
+    
+    <!-- Bouton pour imprimer l'ensemble de la page -->
+    <div class="print-button-container">
+      <button class="btn btn-print" (click)="printPDF()">
+        <i class="fas fa-print"></i> Imprimer
+      </button>
+    </div>
+  </div>
+  

@@ -2,32 +2,31 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_cors import CORS
-from flask_mail import Mail
 
-# Initialisation des extensions
+# Initialisation des extensions globales
 db = SQLAlchemy()
 migrate = Migrate()
-mail = Mail()
 
 def create_app():
     app = Flask(__name__)
-
+    
     # Charger la configuration
     app.config.from_object('app.config.Config')
 
     # Initialiser les extensions
     db.init_app(app)
     migrate.init_app(app, db)
-    mail.init_app(app)  # Initialiser Flask-Mail
 
     # Configurer CORS
-    CORS(app, resources={r"/*": {"origins": "http://localhost:4200", "allow_headers": ["Content-Type"], "methods": ["GET", "POST", "OPTIONS"]}})
+    CORS(app, resources={r"/*": {"origins": "http://localhost:4200",
+                                  "allow_headers": ["Content-Type"],
+                                  "methods": ["GET", "POST", "OPTIONS", "PUT", "DELETE"]}})
 
-    # Importer les modèles après l'initialisation
+    # Importer les modèles après l'initialisation des extensions
     from app import models
 
-    # Enregistrer les routes
-    from app.routes import register_routes
-   
+    # Enregistrer les routes en utilisant une fonction d'initialisation des routes
+    from app.routes import init_routes
+    init_routes(app)
 
     return app

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Accueil - TOEIC Grader</title>
+</head>
+<body>
+  <!-- Barre de navigation -->
+  <app-navbar></app-navbar>
+
+  <!-- Section Hero -->
+  <section class="hero animate-on-scroll" appAnimateOnScroll>
+    <div class="container hero-content">
+      <div class="hero-text">
+        <h1>Bienvenue sur TOEIC Grader</h1>
+        <p>Gérez vos tests et évaluations en toute simplicité.</p>
+        <a routerLink="/test" class="btn btn-primary">Créer un Test</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section Services / Fonctionnalités -->
+  <section class="services container animate-on-scroll" appAnimateOnScroll>
+    <h2>Nos Services</h2>
+    <div class="cards">
+      <div class="card">
+        <i class="fas fa-book card-icon"></i>
+        <h3>Créer un Test</h3>
+        <p>Créez et gérez vos tests TOEIC en quelques clics.</p>
+        <a routerLink="/test" class="btn btn-secondary">Créer un Test</a>
+      </div>
+      <div class="card">
+        <i class="fas fa-users card-icon"></i>
+        <h3>Gérer les Classes</h3>
+        <p>Organisez vos groupes d’étudiants.</p>
+        <a routerLink="/classes" class="btn btn-secondary">Voir les Classes</a>
+      </div>
+      <div class="card">
+        <i class="fas fa-chart-line card-icon"></i>
+        <h3>Évaluations et Suivi</h3>
+        <p>Analysez la progression et les résultats des étudiants.</p>
+        <a routerLink="/evaluations" class="btn btn-secondary">Voir les Évaluations</a>
+      </div>
+      <div class="card">
+        <i class="fas fa-upload card-icon"></i>
+        <h3>Importer les Copies</h3>
+        <p>Importez et corrigez automatiquement les réponses.</p>
+        <a routerLink="/reponseetudiant" class="btn btn-secondary">Importer</a>
+      </div>
+      <div class="card">
+        <i class="fas fa-print card-icon"></i>
+        <h3>Impression</h3>
+        <p>Imprimez les feuilles de réponses de chaque étudiant.</p>
+        <a routerLink="/impression" class="btn btn-secondary">Imprimer</a>
+      </div>
+
+      <div class="card">
+        <i class="fas fa-download card-icon"></i>
+        <h3>Exporter ou révisez vos notes</h3>
+        <p>Exporter en fichier XLS/CSV</p>
+        <p>Évaluer les statistiques des étudiants</p>
+        <a routerLink="/impression" class="btn btn-secondary">Imprimer</a>
+      </div>
+      
+    
+    </div>
+
+    
+  </section>
+
+  <section class="nature container animate-on-scroll" appAnimateOnScroll>
+    <div class="nature-content">
+      <div class="nature-text">
+        <h2>Le principe ? Accompagner vos étudiants vers la réussite TOEIC</h2>
+        <p>
+          Pour chaque test géré via TOEIC Grader, nous vous offrons un suivi personnalisé
+  et une analyse détaillée des performances.
+        </p>
+        <a routerLink="/contact" class="btn btn-primary">En savoir plus</a>
+      </div>
+      <div class="nature-image">
+        <img src="assets/images/img2.png" alt="Forêt verdoyante" />
+      </div>
+    </div>
+  </section>
+  
+
+  <!-- Section CTA -->
+  <section class="cta container animate-on-scroll" appAnimateOnScroll>
+    <h2>Prêt à commencer ?</h2>
+    <p>Créez votre premier test TOEIC dès aujourd'hui et suivez la progression de vos étudiants.</p>
+    <a routerLink="/test" class="btn btn-primary">Créer un Test Maintenant</a>
+  </section>
+
+  <!-- Pied de page -->
+  <footer class="footer animate-on-scroll" appAnimateOnScroll>
+    <div class="container footer-container">
+      <p>© 2025 TOEIC Platform. Tous droits réservés.</p>
+      <nav class="footer-nav">
+        <a routerLink="/privacy">Politique de confidentialité</a>
+        <a routerLink="/terms">Conditions d'utilisation</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>

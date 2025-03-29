@@ -1,0 +1,31 @@
+
+
+<div class="container test-groupe-container">
+  <div class="header-section">
+    <a routerLink="/groupes" class="btn btn-secondary">Ajouter Groupe</a>
+  </div>
+
+  <div class="search-bar">
+    <input type="text" [(ngModel)]="searchTerm" placeholder="Rechercher un groupe..." />
+  </div>
+
+  <div class="group-list">
+    <div class="group-card" *ngFor="let group of filteredGroupes">
+      <div class="group-info">
+        <h2>{{ group.nom }}</h2>
+        <p>{{ group.description }}</p>
+        <!-- Nouveaux champs -->
+        <p>Titre : {{ group.titre }}</p>
+        <p>Nombre d'évaluations : {{ group.nombre_evaluation }}</p>
+        <p>Nombre d'étudiants : {{ group.nombre_etudiant }}</p>
+      </div>
+      <div class="group-selection">
+        <input type="checkbox" [(ngModel)]="group.selected" name="group{{ group.id_groupe }}" />
+      </div>
+    </div>
+  </div>
+
+  <div class="text-center mt-4">
+    <button class="btn btn-primary" (click)="onSubmitSelection()">Confirmer la sélection</button>
+  </div>
+</div>
