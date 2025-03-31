@@ -1,30 +1,27 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';  // Ajout de l'import pour Router
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  imports: [FormsModule, CommonModule]
+  imports: [FormsModule, CommonModule, RouterLink]
 })
 export class LoginComponent {
   passwordFieldType: string = 'password';
 
   email: string = '';
   password: string = '';
-  errorMessage: string = ''; 
-  successMessage: string = '';
-  formValid: boolean = false;
+  errorMessage: string = '';
+  statusMessage: string = '';
+  messageType: string = '';
 
   errors: any = {
     email: '',
     password: '',
   };
-
-  statusMessage: string = '';
-  messageType: string = '';
 
   constructor(private router: Router) {}
 
@@ -32,39 +29,42 @@ export class LoginComponent {
     this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password';
   }
 
-  navigateToRegister() {
-    this.router.navigate(['/register']); 
-  }
-
   validateEmail() {
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@etu\.eilco\.univ-littoral\.fr$/;
+    if (!this.email) {
+      this.errors.email = 'Email is required';
+      return;
+    }
+    
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     this.errors.email = emailRegex.test(this.email)
       ? ''
-      : 'Veuillez entrer un email académique valide.';
-    this.updateFormValid();
+      : 'Please enter a valid email address';
   }
 
   validatePassword() {
-    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d).{8,}$/; // Minimum 8 caractères, 1 lettre et 1 chiffre
+    if (!this.password) {
+      this.errors.password = 'Password is required';
+      return;
+    }
+    
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d).{8,}$/;
     this.errors.password = passwordRegex.test(this.password)
       ? ''
-      : 'Le mot de passe doit contenir au moins 8 caractères, une lettre et un chiffre.';
-    this.updateFormValid();
+      : 'Password must be at least 8 characters with at least one letter and one number';
   }
 
-  updateFormValid() {
-    this.formValid = (
-      this.email.trim() !== '' &&
-      this.password.trim() !== '' &&
-      Object.values(this.errors).every((error) => !error)
-    );
+  hasErrors(): boolean {
+    return Object.values(this.errors).some(error => error !== '');
   }
 
   login() {
-    if (!this.formValid) {
-      this.errorMessage = 'Veuillez corriger les erreurs avant de continuer.';
-      this.statusMessage = this.errorMessage;
-      this.messageType = 'error';
+    // Validate all fields on submit
+    this.validateEmail();
+    this.validatePassword();
+    
+    // Check if there are any validation errors
+    if (this.hasErrors()) {
+      this.errorMessage = 'Please correct the errors before continuing';
       return;
     }
 
@@ -82,30 +82,26 @@ export class LoginComponent {
     })
       .then((response) => {
         if (!response.ok) {
-          throw new Error(`Erreur HTTP : ${response.status}`);
+          throw new Error(`HTTP Error: ${response.status}`);
         }
         return response.json();
       })
       .then((data) => {
         if (data.status === 'success' && data.accountActivated) {
-          this.successMessage = 'Connexion réussie. Bienvenue !';
-          this.statusMessage = this.successMessage;
+          this.statusMessage = 'Login successful. Welcome!';
           this.messageType = 'success';
-          this.router.navigate(['/dashboard']);  // Redirection vers le dashboard après connexion réussie
+          this.router.navigate(['/']);  
         } else if (data.status === 'success' && !data.accountActivated) {
-          this.errorMessage = 'Votre compte n\'est pas encore activé. Veuillez vérifier votre email.';
-          this.statusMessage = this.errorMessage;
+          this.statusMessage = 'Your account is not activated yet. Please check your email.';
           this.messageType = 'error';
         } else {
-          this.errorMessage = 'Nom d\'utilisateur ou mot de passe incorrect.';
-          this.statusMessage = this.errorMessage;
+          this.statusMessage = 'Incorrect username or password.';
           this.messageType = 'error';
         }
       })
       .catch((error) => {
-        console.error('Erreur lors de la connexion:', error);
-        this.errorMessage = 'Une erreur est survenue. Veuillez réessayer.';
-        this.statusMessage = this.errorMessage;
+        console.error('Error during login:', error);
+        this.statusMessage = 'An error occurred. Please try again.';
         this.messageType = 'error';
       });
   }

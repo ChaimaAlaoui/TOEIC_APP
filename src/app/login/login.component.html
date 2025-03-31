@@ -1,54 +1,60 @@
 <section class="container_login">
-  <img src="assets/images/eilco_logo.png" alt="eilco_logo" class="logo_eilco" />
-  
-  <section class="login">
-      <div class="image_eilco">
-          <img src="assets/images/eilco_calais.jpg" alt="image_campus" class="image_campus" />
+  <div class="form_login">
+    <!-- Conteneur pour l'image circulaire et le logo -->
+    <div class="image_eilco_circle">
+      <img src="assets/images/eilco_calais.jpg" alt="image_campus" class="image_campus_circle" />
+      <img src="assets/images/eilco_logo.png" alt="eilco_logo" class="logo_eilco_center" />
+    </div>
+
+    <div class="login_name">Login</div>
+
+    <!-- Error message global (s'affiche uniquement lors de la soumission) -->
+    <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show" role="alert">
+      {{ errorMessage }}
+      <button type="button" class="btn-close" (click)="errorMessage = ''" aria-label="Close"></button>
+    </div>
+
+    <!-- Status message -->
+    <div *ngIf="statusMessage" class="alert alert-dismissible fade show" [ngClass]="{
+      'alert-success': messageType === 'success',
+      'alert-danger': messageType === 'error',
+      'alert-warning': messageType === 'warning',
+      'alert-info': messageType === 'info'
+    }" role="alert">
+      {{ statusMessage }}
+      <button type="button" class="btn-close" (click)="statusMessage = ''" aria-label="Close"></button>
+    </div>
+
+    <!-- Formulaire de connexion -->
+    <form (ngSubmit)="login()" class="form">
+      <div>
+        <div class="form_group">
+          <i class="fas fa-envelope form_icon"></i>
+          <input [(ngModel)]="email" name="email" type="email" placeholder="Email" required (input)="validateEmail()" />
+        </div>
+        <small *ngIf="errors.email" class="error_login">{{ errors.email }}</small>
       </div>
+
+      <div>
+        <div class="form_group">
+          <input [(ngModel)]="password" name="password" [type]="passwordFieldType" placeholder="Password" id="password" required (input)="validatePassword()" />
+          <i class="toggle-password fas" 
+             [class.fa-eye]="passwordFieldType === 'password'" 
+             [class.fa-eye-slash]="passwordFieldType === 'text'" 
+             (click)="togglePasswordVisibility()"></i>
+        </div>
+        <small *ngIf="errors.password" class="error_login">{{ errors.password }}</small>
+      </div>
+
+      <button type="submit" class="login_button">Login</button>
       
-      <div class="form_login">
-          <div class="login_name">Login</div>
-
-          <!-- Message de statut -->
-          <div *ngIf="statusMessage" [ngClass]="{'success': messageType === 'success', 'error': messageType === 'error'}" class="status-message">
-            {{ statusMessage }}
-          </div>
-  
-          <!-- Formulaire de connexion -->
-          <form (ngSubmit)="login()" class="form">
-            <div>
-            <div class="form_group">
-                <i class="fas fa-envelope form_icon"></i>
-                <input [(ngModel)]="email" name="email" type="email" placeholder="Email" required (ngModelChange)="validateEmail()" />
-               
-            </div>
-            <small *ngIf="errors.email" class="error_login">{{ errors.email }}</small>
-          </div>
-
-            <div>
-            <div class="form_group">
-                <i class="fas fa-lock form_icon"></i>
-                <input [(ngModel)]="password" name="password" [type]="passwordFieldType" placeholder="Password" id="password" required (ngModelChange)="validatePassword()" />
-                <i class="fas toggle-password" 
-                   [class.fa-eye]="passwordFieldType === 'password'" 
-                   [class.fa-eye-slash]="passwordFieldType === 'text'" 
-                   (click)="togglePasswordVisibility()"></i>
-               
-            </div>
-            <small *ngIf="errors.password" class="error_login">{{ errors.password }}</small>
-          </div>
-        
-            <button type="submit" [disabled]="!formValid" class="login_button">Login</button>
-            
-            
-            <div class="create_account">
-                <a href="#" class="Register-link">Forgot your password?</a>
-            </div>
-        
-            <div class="create_account">
-                <a (click)="navigateToRegister()" class="Register-link">Create an account</a>
-            </div>
-        </form>
+      <div class="create_account">
+        <a routerLink="/forgot-password" class="Register-link">Forgot your password?</a>
       </div>
-  </section>
+
+      <div class="create_account">
+        <a routerLink="/register" class="Register-link">Create an account</a>
+      </div>
+    </form>
+  </div>
 </section>

@@ -13,9 +13,7 @@ class Teacher(db.Model):
         return f"<Teacher {self.nom} {self.prenom}>"
     
     def set_password(self, password):
-        # Hachage du mot de passe avant de le stocker
         self.mot_de_passe = generate_password_hash(password)
 
     def check_password(self, password):
-        # Vérification du mot de passe avec le mot de passe haché stocké
         return check_password_hash(self.mot_de_passe, password)

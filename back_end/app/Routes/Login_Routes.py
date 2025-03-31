@@ -1,6 +1,6 @@
 from flask import request, jsonify
 from app import db, mail
-from app.models import Teacher
+from app.Models.Teacher import Teacher
 from werkzeug.security import generate_password_hash
 from flask_mail import Message
 import logging

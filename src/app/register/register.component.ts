@@ -1,34 +1,16 @@
 import { Component } from '@angular/core';
-import { Router} from '@angular/router'; // Pour la redirection
-import { FormsModule } from '@angular/forms'; // Pour ngModel
+import { Router, RouterModule} from '@angular/router';
+import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-
-
-
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
-  imports: [FormsModule,CommonModule], 
-
+  standalone: true,imports: [FormsModule, CommonModule, RouterModule], 
 })
 export class RegisterComponent {
-
   passwordFieldType: string = 'password';
-
- 
-
-  togglePasswordVisibility() {
-    this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password';
-  }
-
-  navigateToLogin() {
-    this.router.navigate(['/login']);  // Fonction pour naviguer vers la page d'inscription
-  }
-
-
-
   firstName: string = '';
   lastName: string = '';
   email: string = '';
@@ -38,6 +20,8 @@ export class RegisterComponent {
   formValid: boolean = false; 
   statusMessage: string = ''; 
   messageType: string = ''; 
+  formTouched: boolean = false;
+  submitted: boolean = false; // Nouvelle variable pour suivre si le formulaire a été soumis
 
   errors: any = {
     firstName: '',
@@ -49,46 +33,71 @@ export class RegisterComponent {
 
   constructor(private router: Router) {}  
 
+  togglePasswordVisibility() {
+    this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password';
+  }
 
+  navigateToLogin() {
+    this.router.navigate(['/login']);  
+  }
 
   validateFirstName() {
-    this.errors.firstName = this.firstName.trim() ? '' : 'Le prénom est requis.';
-    console.log('First Name Error:', this.errors.firstName); 
+    // Ne mettre à jour formTouched que si l'utilisateur interagit directement avec ce champ
+    // La validation globale sera gérée par validateAll() lors de la soumission
+    this.errors.firstName = this.firstName.trim() ? '' : 'First name is required.';
     this.updateFormValid();
   }
   
   validateLastName() {
-    this.errors.lastName = this.lastName.trim() ? '' : 'Le nom est requis.';
-    console.log('Last Name Error:', this.errors.lastName);  
+    this.errors.lastName = this.lastName.trim() ? '' : 'Last name is required.';
     this.updateFormValid();
   }
 
   validateEmail() {
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@etu\.eilco\.univ-littoral\.fr$/;
-    this.errors.email = emailRegex.test(this.email)
-      ? ''
-      : 'Veuillez entrer un email académique valide.';
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    this.errors.email = this.email.trim() ? 
+      (emailRegex.test(this.email) ? '' : 'Please enter a valid email address.') : 
+      'Email is required.';
     this.updateFormValid();
   }
 
   validatePassword() {
-    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d).{8,}$/; // Minimum 8 caractères, 1 lettre et 1 chiffre
-    this.errors.password = passwordRegex.test(this.password)
-      ? ''
-      : 'Le mot de passe doit contenir au moins 8 caractères, une lettre et un chiffre.';
+    if (!this.password.trim()) {
+      this.errors.password = 'Password is required.';
+    } else {
+      const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d).{8,}$/; // Minimum 8 characters, 1 letter and 1 number
+      this.errors.password = passwordRegex.test(this.password)
+        ? ''
+        : 'Password must contain at least 8 characters, one letter and one number.';
+    }
     this.updateFormValid();
   }
 
   validateConfirmPassword() {
-    this.errors.confirmPassword =
-      this.password === this.confirmPassword
-        ? ''
-        : 'Les mots de passe ne correspondent pas.';
+    if (!this.confirmPassword.trim()) {
+      this.errors.confirmPassword = 'Password confirmation is required.';
+    } else {
+      this.errors.confirmPassword =
+        this.password === this.confirmPassword
+          ? ''
+          : 'Passwords do not match.';
+    }
     this.updateFormValid();
   }
 
+  validateAll() {
+    // Marquer le formulaire comme soumis pour afficher toutes les erreurs
+    this.submitted = true;
+    this.formTouched = true;
+    
+    this.validateFirstName();
+    this.validateLastName();
+    this.validateEmail();
+    this.validatePassword();
+    this.validateConfirmPassword();
+  }
+
   updateFormValid() {
-   
     this.formValid = (
       this.firstName.trim() !== '' &&
       this.lastName.trim() !== '' &&
@@ -99,50 +108,49 @@ export class RegisterComponent {
   }
 
   register() {
+    this.validateAll();
+    
     if (!this.formValid) {
-      this.errorMessage = 'Veuillez corriger les erreurs avant de continuer.';
+      this.errorMessage = 'Please correct the errors before continuing.';
       return;
     }
+    
+    this.errorMessage = '';
 
-
-  const user = {
+    const user = {
       firstName: this.firstName,
       lastName: this.lastName,
       email: this.email,
       password: this.password,
     };
 
-   
-  fetch('http://127.0.0.1:5000/api/register', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(user),
-  })
-    .then((response) => {
-      if (!response.ok) throw new Error(`Erreur HTTP : ${response.status}`);
-      return response.json();
+    fetch('http://127.0.0.1:5000/api/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(user),
     })
-    .then((data) => {
-      if (data.status === "success" && data.emailSent) {
-        this.statusMessage = 'Votre compte est créé avec succès. Veuillez vérifier votre boîte email pour l’activer.';
-        this.messageType = 'success';
-      } else if (data.status === "success" && !data.emailSent) {
-        this.statusMessage = 'Votre compte est créé, mais une erreur est survenue lors de l’envoi de l’email. Veuillez contacter le support.';
+      .then((response) => {
+        if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
+        return response.json();
+      })
+      .then((data) => {
+        if (data.status === "success" && data.emailSent) {
+          this.statusMessage = 'Your account has been successfully created. Please check your email to activate it.';
+          this.messageType = 'success';
+        } else if (data.status === "success" && !data.emailSent) {
+          this.statusMessage = 'Your account has been created, but there was an error sending the email. Please contact support.';
+          this.messageType = 'warning';
+        } else {
+          this.statusMessage = data.message || 'An error occurred while creating the account. Please try again.';
+          this.messageType = 'error';
+        }
+      })
+      .catch((error) => {
+        console.error('Error during registration:', error);
+        this.statusMessage = 'An error occurred. Please try again.';
         this.messageType = 'error';
-      } else {
-        this.statusMessage = 'Une erreur est survenue lors de la création du compte. Veuillez réessayer.';
-        this.messageType = 'error';
-      }
-    })
-   
-    .catch((error) => {
-      console.error('Erreur lors de l\'enregistrement:', error);
-      this.statusMessage = 'Une erreur est survenue. Veuillez réessayer.';
-      this.messageType = 'error';
-    });
-}
-
-
+      });
+  }
 }
