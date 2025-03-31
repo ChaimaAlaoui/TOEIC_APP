@@ -90,7 +90,7 @@ export class LoginComponent {
         if (data.status === 'success' && data.accountActivated) {
           this.statusMessage = 'Login successful. Welcome!';
           this.messageType = 'success';
-          this.router.navigate(['/']);  
+          this.router.navigate(['/home']);  
         } else if (data.status === 'success' && !data.accountActivated) {
           this.statusMessage = 'Your account is not activated yet. Please check your email.';
           this.messageType = 'error';

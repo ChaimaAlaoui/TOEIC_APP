@@ -3,12 +3,8 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-groupe',
   imports: [],
-  template: `
-    <p>
-      groupe works!
-    </p>
-  `,
-  styles: ``
+  templateUrl: './groupe.component.html',
+  styleUrl: './groupe.component.css'
 })
 export class GroupeComponent {
 

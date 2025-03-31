@@ -1,0 +1,194 @@
+/* ======= Reset / Base ======= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Corps de page */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fc;
+  color: #2c3e50;
+}
+
+/* Conteneur principal */
+.container {
+  /* Largeur maximale plus restreinte pour éviter que le tableau soit trop large */
+  max-width: 1000px;
+  margin: 40px auto; /* Centre le conteneur */
+  background: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Conteneur du tableau */
+.table-container {
+  /* Centre le tableau dans le conteneur si nécessaire */
+  margin: 0 auto;
+  /* Garde un overflow-x auto pour permettre un défilement horizontal si l'écran est trop petit */
+  overflow-x: auto;
+  /* Largeur max pour éviter que le tableau déborde */
+  max-width: 100%;
+}
+
+.evaluation-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 auto; /* Centre le tableau à l'intérieur de .table-container */
+}
+
+.evaluation-table thead {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.evaluation-table th,
+.evaluation-table td {
+  padding: 15px;
+  text-align: left;
+  font-size: 16px;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.evaluation-table th {
+  font-weight: bold;
+}
+
+/* Pour marquer les lignes paires */
+.evaluation-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.evaluation-table tbody tr:hover {
+  background-color: #e9ecef;
+}
+
+
+/* Titres */
+.title {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 2rem;
+  color: #2c3e50;
+}
+
+/* Barre de recherche */
+.search-bar {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.search-bar input {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  transition: border-color 0.3s;
+}
+
+.search-bar input:focus {
+  border-color: #3b82f6;
+  outline: none;
+}
+
+/* Tableau des évaluations */
+.table-container {
+  overflow-x: auto;
+}
+
+.evaluation-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.evaluation-table thead {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.evaluation-table th,
+.evaluation-table td {
+  padding: 15px;
+  text-align: left;
+  font-size: 16px;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.evaluation-table th {
+  font-weight: bold;
+}
+
+.evaluation-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.evaluation-table tbody tr:hover {
+  background-color: #e9ecef;
+}
+
+/* Boutons */
+.btn {
+  font-size: 0.9rem;
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  margin-right: 8px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Bouton Supprimer (rouge) */
+.btn-delete {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.btn-delete:hover {
+  background-color: #c82333;
+  transform: translateY(-2px);
+}
+
+/* Bouton Dupliquer (bleu) */
+.btn-duplicate {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.btn-duplicate:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+/* Retrait de la marge sur le dernier bouton */
+td > .btn:last-child {
+  margin-right: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .title {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+  
+  .evaluation-table th,
+  .evaluation-table td {
+    padding: 10px;
+    font-size: 14px;
+  }
+  
+  .btn {
+    font-size: 0.8rem;
+    padding: 6px 12px;
+  }
+}
+
+
+.evaluation-table th.actions,
+.evaluation-table td.action-buttons {
+  text-align: center;
+}

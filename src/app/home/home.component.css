@@ -1,0 +1,521 @@
+/* ====== RESET / BASE ====== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Corps de page */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fc;
+  color: #2c3e50;
+  /* Animation fade-in globale (optionnelle) */
+  animation: fadeInPage 0.8s ease-in;
+}
+
+/* Animation d'apparition de la page */
+@keyframes fadeInPage {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Conteneur global */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ====== NAVBAR ====== */
+.navbar {
+  background-color: #ffffff;
+  border-bottom: 1px solid #eee;
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #3b82f6;
+}
+
+.nav-menu a {
+  margin-left: 20px;
+  text-decoration: none;
+  color: #2c3e50;
+  font-weight: 500;
+  position: relative; /* Pour l’effet de soulignement */
+}
+
+.nav-menu a:hover {
+  color: #3b82f6;
+}
+
+/* Effet de soulignement progressif au survol */
+.nav-menu a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0%;
+  height: 2px;
+  background: #3b82f6;
+  transition: width 0.3s;
+}
+.nav-menu a:hover::after {
+  width: 100%;
+}
+
+.nav-cta {
+  background-color: #3b82f6;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.nav-cta:hover {
+  background-color: #2563eb;
+}
+
+/* ====== HERO ====== */
+/* ====== HERO ====== */
+.hero {
+  position: relative;
+  color: #fff;
+  padding: 60px 0;
+  overflow: hidden;
+  /* Hauteur minimale pour afficher suffisamment l'image */
+  min-height: 60vh;
+  /* Utilisation de l'image en fond */
+  background: url("/assets/images/exam-hero.jpg") center center / cover no-repeat;
+  transition: background-size 0.5s ease;
+
+}
+.hero:hover {
+  background-size: 110%;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.3); /* Opacité 30% */
+  z-index: 0;
+}
+.hero-content {
+  position: relative;
+  z-index: 1; /* Le contenu passe au-dessus de l’overlay */
+}
+
+
+
+/* Animation du dégradé */
+@keyframes animateGradient {
+  0% {
+    background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
+  }
+  100% {
+    background: linear-gradient(135deg, #6366f1 0%, #3b82f6 100%);
+  }
+}
+
+.hero-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.hero-text {
+  max-width: 600px;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: slideInUp 1s forwards; /* Apparition du texte */
+}
+
+/* Animation d’apparition du texte Hero */
+@keyframes slideInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-text h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+.hero-text p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+}
+
+.hero-image img {
+  max-width: 500px;
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* ====== BOUTONS ====== */
+.btn {
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 4px;
+  padding: 12px 24px;
+  transition: background-color 0.3s, transform 0.2s;
+  text-align: center;
+}
+
+.btn-primary {
+  background-color: #007bff; /* Bleu principal */
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3; /* Bleu foncé pour le hover */
+  transform: translateY(-2px);
+}
+
+
+.btn-secondary {
+  background-color: #fff;
+  color: #3b82f6;
+  border: 1px solid #3b82f6;
+}
+
+.btn-secondary:hover {
+  background-color: #3b82f6;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* ====== SERVICES (cards) ====== */
+/* Section Services */
+.services {
+  padding: 60px 0;
+  text-align: center; /* Centrer le titre et, si besoin, le contenu */
+}
+
+.services h2 {
+  font-size: 2rem;
+  margin-bottom: 40px;
+}
+
+/* Grille responsive des cartes */
+.cards {
+  display: grid;
+  /* Force 3 colonnes, peu importe la taille de l’écran (jusqu’à un certain point) */
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px; /* Espacement horizontal et vertical entre les cartes */
+}
+
+/* Style de chaque carte */
+.card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  padding: 20px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  display: flex;          
+  flex-direction: column; 
+  align-items: center;     
+}
+
+@media (max-width: 992px) {
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* 1 colonne sur mobile */
+@media (max-width: 576px) {
+  .cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card-icon {
+  font-size: 2rem;
+  color: #3b82f6;
+  margin-bottom: 10px;
+}
+
+/* Titre de la carte */
+.card h3 {
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+  color: #2c3e50;
+}
+
+/* Paragraphe */
+.card p {
+  margin-bottom: 20px;
+  line-height: 1.4;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+/* Bouton en bas de carte */
+.card a.btn {
+  margin-top: auto; /* Pousse le bouton vers le bas si le contenu est long */
+}
+
+/* Effet de survol */
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+
+.card-icon {
+  font-size: 2rem;
+  color: #3b82f6;
+  margin-bottom: 10px;
+}
+
+/* ====== TESTIMONIAL ====== */
+.testimonial {
+  padding: 60px 0;
+  text-align: center;
+}
+
+.testimonial h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.testimonial p {
+  max-width: 700px;
+  margin: 0 auto 30px auto;
+  line-height: 1.5;
+}
+
+.logos {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.logos img {
+  filter: grayscale(100%);
+  transition: filter 0.3s, transform 0.3s;
+  max-width: 100px;
+  max-height: 50px;
+}
+
+.logos img:hover {
+  filter: none;
+  transform: scale(1.1);
+}
+
+/* ====== CTA ====== */
+.cta {
+  padding: 60px 0;
+  text-align: center;
+}
+
+.cta h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.cta p {
+  max-width: 600px;
+  margin: 0 auto 30px auto;
+  font-size: 1.1rem;
+  color: #555;
+}
+
+/* ====== FOOTER ====== */
+.footer {
+  background-color: #f1f5f9;
+  padding: 20px 0;
+}
+
+.footer-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer-container p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.footer-nav a {
+  margin-left: 20px;
+  font-size: 0.9rem;
+  text-decoration: none;
+  color: #2c3e50;
+}
+
+.footer-nav a:hover {
+  color: #3b82f6;
+}
+
+/* ====== RESPONSIVE ====== */
+@media (max-width: 992px) {
+  .hero-content {
+    flex-direction: column;
+    text-align: center;
+  }
+  .hero-text {
+    margin-bottom: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-text h1 {
+    font-size: 2.2rem;
+  }
+  .hero-text p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .navbar .nav-menu a {
+    margin-left: 10px;
+  }
+  .footer-container {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+/* ====== Section Partenaires & Réussites TOEIC ====== */
+.testimonial {
+  padding: 60px 0;
+  text-align: center;
+  background-color: #f1f5f9;  /* Une couleur de fond neutre */
+}
+
+.testimonial h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: #007bff;  /* Accent bleu pour rappeler l'univers TOEIC */
+}
+
+.testimonial p {
+  max-width: 800px;
+  margin: 0 auto 30px auto;
+  font-size: 1.1rem;
+  color: #555;
+  line-height: 1.5;
+}
+
+/* Logos : ajustement pour aligner et espacer les images */
+.logos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.logos img {
+  max-width: 150px;
+  max-height: 80px;
+  transition: transform 0.3s, filter 0.3s;
+  filter: grayscale(100%);
+}
+
+.logos img:hover {
+  transform: scale(1.1);
+  filter: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .testimonial h2 {
+    font-size: 2rem;
+  }
+  .testimonial p {
+    font-size: 1rem;
+  }
+  .logos img {
+    max-width: 120px;
+    max-height: 70px;
+  }
+}
+
+/* ====== SECTION NATURE ====== */
+.nature {
+  padding: 60px 0;
+  background-color: #f9f9f9; /* Couleur de fond douce */
+}
+
+.nature-content {
+  display: flex;
+  align-items: center;       /* Centre verticalement l'image et le texte */
+  justify-content: space-between;
+  gap: 30px;
+  flex-wrap: wrap;          /* Permet le passage en colonne sur petits écrans */
+}
+
+/* Bloc texte */
+.nature-text {
+  flex: 1;                   /* Prend l'espace disponible */
+  min-width: 300px;          /* Évite que le bloc devienne trop étroit */
+  margin-right: 20px;        /* Espacement avec l'image si besoin */
+}
+
+.nature-text h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #007bff;            /* Couleur d'accent */
+}
+
+.nature-text p {
+  font-size: 1.1rem;
+  color: #555;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+/* Bouton dans le bloc texte */
+.nature-text .btn {
+  margin-top: 10px;
+}
+
+/* Bloc image */
+.nature-image {
+  flex: 1;
+  min-width: 300px;
+  text-align: center;        /* Centre l'image si la colonne est plus large */
+}
+
+.nature-image img {
+  max-width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Responsive : sur écrans plus petits, on passe le texte et l'image en colonne */
+@media (max-width: 768px) {
+  .nature-content {
+    flex-direction: column;
+    text-align: center;
+  }
+  .nature-text {
+    margin-right: 0;
+  }
+  .nature-text h2 {
+    font-size: 1.8rem;
+  }
+}

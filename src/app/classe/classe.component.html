@@ -1,0 +1,29 @@
+<app-navbar></app-navbar>
+
+<div class="container my-5">
+  <h1 class="text-center mb-4">Classe</h1>
+  <form (ngSubmit)="onSubmit()">
+    <!-- Champ pour le Titre de la classe -->
+    <div class="form-group mb-3">
+      <label for="Promo">Classe</label>
+      <input type="text" id="Promo" name="Promo" class="form-control" required placeholder="Entrez la classe" [(ngModel)]="classe.Titre">
+    </div>
+    <!-- Vous pouvez ajouter d'autres champs pour Type, Date, groupe, etc. -->
+    
+    <div class="text-center mt-4">
+      <!-- Bouton pour ouvrir le sélecteur de fichier CSV -->
+      <button type="button" class="btn btn-imprimer" (click)="triggerFileInput()">
+        <i class="fas fa-print"></i> Imprimer Liste
+      </button>
+      <button type="button" class="btn btn-secondary">
+        <i class="fas fa-clipboard-list"></i> Evaluation
+      </button>
+    </div>
+    
+    <div class="text-center mt-4">
+      <button type="submit" class="btn-submit">Enregistrer</button>
+    </div>
+  </form>
+  <!-- Input caché pour sélectionner un fichier CSV -->
+  <input type="file" #fileInput accept=".csv" style="display: none" (change)="handleFileInput($event)" />
+</div>

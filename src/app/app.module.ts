@@ -1,23 +1,19 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule } from '@angular/router';  // Assure-toi que RouterModule est importé
-import { AppComponent } from './app.component';
+import { RouterModule } from '@angular/router';  
+import { AppComponent } from './app.component'; // ✅ Import du composant standalone
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 
-import { routes } from './app.routes'; // Importer tes routes ici
+import { routes } from './app.routes';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    RegisterComponent
-  ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(routes), // Utiliser forRoot pour configurer les routes principales
+    RouterModule.forRoot(routes), // ✅ Utiliser forRoot pour configurer les routes principales
+    AppComponent  // ✅ Importer AppComponent ici car il est standalone
   ],
   providers: [],
-  bootstrap: [AppComponent]
+ 
 })
 export class AppModule { }

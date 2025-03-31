@@ -14,4 +14,3 @@ class Config:
     MAIL_USERNAME = 'elalamisafa2003@gmail.com' 
     MAIL_PASSWORD = 'aojz nien jciv ymvh'   
     MAIL_DEFAULT_SENDER = 'elalamisafa2003@gmail.com' 
-

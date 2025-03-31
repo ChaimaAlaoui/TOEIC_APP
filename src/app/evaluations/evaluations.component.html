@@ -1,0 +1,35 @@
+<app-navbar></app-navbar>
+
+<div class="container my-5">
+  <h1 class="title">Liste des Évaluations</h1>
+  
+  <!-- Barre de recherche -->
+  <div class="search-bar">
+    <input type="text" [(ngModel)]="searchTerm" placeholder="Rechercher une évaluation..." />
+  </div>
+
+  <!-- Tableau des évaluations filtrées -->
+  <div class="table-container">
+    <table class="evaluation-table">
+      <thead>
+        <tr>
+          <th>Titre</th>
+          <th>Description</th>
+          <th>Date</th>
+          <th class="actions">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let evaluation of filteredEvaluations" class="evaluation-row">
+          <td>{{ evaluation.titre }}</td>
+          <td>{{ evaluation.description }}</td>
+          <td>{{ evaluation.date }}</td>
+          <td class="action-buttons">
+            <button class="btn btn-delete" (click)="deleteEvaluation(evaluation.id)">Supprimer</button>
+            <button class="btn btn-duplicate" (click)="duplicateEvaluation(evaluation.id)">Dupliquer</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

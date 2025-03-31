@@ -1,0 +1,31 @@
+<div class="container my-5">
+  <h1 class="text-center mb-4">Configuration des Réponses Correctes</h1>
+  <form (ngSubmit)="onSaveConfig()">
+    <div class="grid-container">
+      <div *ngFor="let question of configQuestions" class="grid-item">
+        <div class="question-label">Q{{ question.numero_question }}</div>
+        <div class="radio-group">
+          <label class="radio-label">
+            <input type="radio" [(ngModel)]="question.choix" name="answer{{question.numero_question}}" value="A" />
+            A
+          </label>
+          <label class="radio-label">
+            <input type="radio" [(ngModel)]="question.choix" name="answer{{question.numero_question}}" value="B" />
+            B
+          </label>
+          <label class="radio-label">
+            <input type="radio" [(ngModel)]="question.choix" name="answer{{question.numero_question}}" value="C" />
+            C
+          </label>
+          <label class="radio-label">
+            <input type="radio" [(ngModel)]="question.choix" name="answer{{question.numero_question}}" value="D" />
+            D
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-4">
+      <button type="submit" class="btn btn-primary">Sauvegarder Configuration</button>
+    </div>
+  </form>
+</div>

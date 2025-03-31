@@ -1,0 +1,75 @@
+@keyframes fadeInPage {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  /* Conteneur global */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  /* ====== NAVBAR ====== */
+  .navbar {
+    background-color: #ffffff;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+  }
+  
+  .logo {
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #3b82f6;
+  }
+  
+  .nav-menu a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #2c3e50;
+    font-weight: 500;
+    position: relative; /* Pour l’effet de soulignement */
+  }
+  
+  .nav-menu a:hover {
+    color: #3b82f6;
+  }
+  
+  /* Effet de soulignement progressif au survol */
+  .nav-menu a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 0%;
+    height: 2px;
+    background: #3b82f6;
+    transition: width 0.3s;
+  }
+  .nav-menu a:hover::after {
+    width: 100%;
+  }
+  
+  .nav-cta {
+    background-color: #3b82f6;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+  }
+  
+  .nav-cta:hover {
+    background-color: #2563eb;
+  }
+  
