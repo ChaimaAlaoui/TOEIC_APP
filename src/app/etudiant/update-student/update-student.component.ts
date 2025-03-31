@@ -1,6 +1,6 @@
+import { RouterLink } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
@@ -17,16 +17,27 @@ export class UpdateStudentComponent implements OnInit {
   studentId!: string;
   studentLastName = '';
   studentFirstName = '';
-  studentPromotionId = '';
-  studentGroupId = '';
   studentSiteId = '';
+  studentPromotionId = '';
+  studentSemestreId = '';
+  studentGroupId = '';
   studentSpecialite = '';
   studentEmail = '';
 
   // Listes pour les sélections
-  promotions: any[] = [];
-  groupes: any[] = [];
   sites: any[] = [];
+  promotions: any[] = [];
+  semestres: any[] = [];
+  groupes: any[] = [];
+  specialites: string[] = [
+    'Informatique',
+    'Génie Industriel',
+    'Génie Energétique et Environnement',
+    'Agroalimentaire'
+  ];
+
+  // Propriétés pour gérer les erreurs
+  errors: any = {};
 
   constructor(
     private route: ActivatedRoute,
@@ -35,47 +46,29 @@ export class UpdateStudentComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.studentId = this.route.snapshot.paramMap.get('id')!; // Récupère l'ID depuis l'URL
-    this.getStudentDetails();
-    this.fetchPromotions();
-    this.fetchGroupes();
+    this.studentId = this.route.snapshot.paramMap.get('id')!;
     this.fetchSites();
+    this.fetchStudentDetails();
   }
 
   // Récupérer les détails de l'étudiant
-  getStudentDetails() {
+  fetchStudentDetails() {
     fetch(`http://localhost:5000/api/etudiants/${this.studentId}`)
       .then((response) => response.json())
       .then((data) => {
         this.studentLastName = data.nom;
         this.studentFirstName = data.prenom;
-        this.studentPromotionId = data.promotion_id;
-        this.studentGroupId = data.groupe_id;
         this.studentSiteId = data.site_id;
+        this.studentPromotionId = data.promotion_id;
+        this.studentSemestreId = data.semestre_id;
+        this.studentGroupId = data.groupe_id;
         this.studentSpecialite = data.specialite;
         this.studentEmail = data.email;
+
+        // Charger les promotions, semestres et groupes après avoir récupéré les détails de l'étudiant
+        this.onSiteChange(this.studentSiteId, true);
       })
       .catch((error) => console.error('Erreur lors de la récupération des détails de l\'étudiant:', error));
-  }
-
-  // Récupération des promotions
-  fetchPromotions() {
-    fetch('http://localhost:5000/api/promotions')
-      .then((res) => res.json())
-      .then((data) => {
-        this.promotions = data;
-      })
-      .catch((error) => console.error('Erreur lors du chargement des promotions:', error));
-  }
-
-  // Récupération des groupes
-  fetchGroupes() {
-    fetch('http://localhost:5000/api/groupes')
-      .then((res) => res.json())
-      .then((data) => {
-        this.groupes = data;
-      })
-      .catch((error) => console.error('Erreur lors du chargement des groupes:', error));
   }
 
   // Récupération des sites
@@ -88,14 +81,113 @@ export class UpdateStudentComponent implements OnInit {
       .catch((error) => console.error('Erreur lors du chargement des sites:', error));
   }
 
+  // Lorsque le site est sélectionné
+  onSiteChange(siteId: string, isInitialLoad: boolean = false) {
+    this.studentSiteId = siteId;
+    this.studentPromotionId = '';
+    this.studentSemestreId = '';
+    this.studentGroupId = '';
+    this.promotions = [];
+    this.semestres = [];
+    this.groupes = [];
+
+    if (siteId) {
+      this.fetchPromotionsBySite(siteId, isInitialLoad);
+    }
+  }
+
+  // Récupération des promotions par site
+  fetchPromotionsBySite(siteId: string, isInitialLoad: boolean = false) {
+    fetch(`http://localhost:5000/api/promotions/by_site/${siteId}`)
+      .then((res) => res.json())
+      .then((data) => {
+        this.promotions = data;
+
+        // Si c'est le chargement initial, sélectionner la promotion existante
+        if (isInitialLoad) {
+          this.onPromotionChange(this.studentPromotionId, true);
+        }
+      })
+      .catch((error) => console.error('Erreur lors du chargement des promotions:', error));
+  }
+
+  // Lorsque la promotion est sélectionnée
+  onPromotionChange(promotionId: string, isInitialLoad: boolean = false) {
+    this.studentPromotionId = promotionId;
+    this.studentSemestreId = '';
+    this.studentGroupId = '';
+    this.semestres = [];
+    this.groupes = [];
+
+    if (promotionId) {
+      this.fetchSemestresByPromotion(promotionId, isInitialLoad);
+    }
+  }
+
+  // Récupération des semestres par promotion
+  fetchSemestresByPromotion(promotionId: string, isInitialLoad: boolean = false) {
+    fetch(`http://localhost:5000/api/semestres/by_promotion?promotion_id=${promotionId}`)
+      .then((res) => res.json())
+      .then((data) => {
+        this.semestres = data;
+
+        // Si c'est le chargement initial, sélectionner le semestre existant
+        if (isInitialLoad) {
+          this.onSemestreChange(this.studentSemestreId, true);
+        }
+      })
+      .catch((error) => console.error('Erreur lors du chargement des semestres:', error));
+  }
+
+  // Lorsque le semestre est sélectionné
+  onSemestreChange(semestreId: string, isInitialLoad: boolean = false) {
+    this.studentSemestreId = semestreId;
+    this.studentGroupId = '';
+    this.groupes = [];
+
+    if (semestreId && this.studentPromotionId && this.studentSiteId) {
+      this.fetchGroupesBySitePromotionSemestre(this.studentSiteId, this.studentPromotionId, semestreId, isInitialLoad);
+    }
+  }
+
+  // Récupération des groupes par site, promotion et semestre
+  fetchGroupesBySitePromotionSemestre(siteId: string, promotionId: string, semestreId: string, isInitialLoad: boolean = false) {
+    const url = `http://localhost:5000/api/groupes/by_site_promotion_semestre?site_id=${siteId}&promotion_id=${promotionId}&semestre_id=${semestreId}`;
+
+    fetch(url)
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error('Erreur lors du chargement des groupes');
+        }
+        return res.json();
+      })
+      .then((data) => {
+        this.groupes = data;
+
+        // Si c'est le chargement initial, sélectionner le groupe existant
+        if (isInitialLoad) {
+          this.studentGroupId = this.studentGroupId; // Pré-sélectionner le groupe existant
+        }
+      })
+      .catch((error) => {
+        console.error('Erreur lors du chargement des groupes:', error);
+        this.groupes = []; // Réinitialiser la liste des groupes en cas d'erreur
+      });
+  }
+
   // Méthode pour mettre à jour l'étudiant
   updateStudent() {
+    if (!this.validateForm()) {
+      return;
+    }
+
     const updatedStudent = {
       nom: this.studentLastName,
       prenom: this.studentFirstName,
-      promotion_id: this.studentPromotionId,
-      groupe_id: this.studentGroupId,
       site_id: this.studentSiteId,
+      promotion_id: this.studentPromotionId,
+      semestre_id: this.studentSemestreId,
+      groupe_id: this.studentGroupId,
       specialite: this.studentSpecialite,
       email: this.studentEmail
     };
@@ -109,7 +201,6 @@ export class UpdateStudentComponent implements OnInit {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log('Étudiant mis à jour avec succès:', data);
         this.dialog.open(SuccessDialogComponent, {
           width: '300px',
           data: { message: 'Étudiant mis à jour avec succès !' },
@@ -120,5 +211,20 @@ export class UpdateStudentComponent implements OnInit {
         });
       })
       .catch((error) => console.error('Erreur lors de la mise à jour de l\'étudiant:', error));
+  }
+
+  // Méthode pour valider le formulaire
+  validateForm(): boolean {
+    this.errors = {};
+    if (!this.studentLastName) this.errors['studentLastName'] = 'Le nom est requis.';
+    if (!this.studentFirstName) this.errors['studentFirstName'] = 'Le prénom est requis.';
+    if (!this.studentSiteId) this.errors['studentSiteId'] = 'Le site est requis.';
+    if (!this.studentPromotionId) this.errors['studentPromotionId'] = 'La promotion est requise.';
+    if (!this.studentSemestreId) this.errors['studentSemestreId'] = 'Le semestre est requis.';
+    if (!this.studentGroupId) this.errors['studentGroupId'] = 'Le groupe est requis.';
+    if (!this.studentSpecialite) this.errors['studentSpecialite'] = 'La spécialité est requise.';
+    if (!this.studentEmail) this.errors['studentEmail'] = 'L\'email est requis.';
+
+    return Object.keys(this.errors).length === 0;
   }
 }

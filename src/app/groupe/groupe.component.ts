@@ -57,7 +57,8 @@ export class GroupeComponent implements OnInit {
   get filteredGroupes() {
     return this.groupes
       .filter((groupe) =>
-        groupe.nom.toLowerCase().includes(this.searchText.toLowerCase())
+        groupe.nom.toLowerCase().includes(this.searchText.toLowerCase()) ||
+        groupe.site.toLowerCase().includes(this.searchText.toLowerCase())
       )
       .slice(
         (this.currentPage - 1) * this.itemsPerPage,

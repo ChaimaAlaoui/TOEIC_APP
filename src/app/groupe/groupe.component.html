@@ -4,7 +4,7 @@
         <div class="d-flex justify-content-between align-items-center mb-3">
           <h2>Liste des Groupes</h2>
           <div>
-            <button class="btn btn-primary btn-sm" routerLink="/add-groupe">
+            <button class="btn btn-primary btn-sm" routerLink="/addgroup">
               <i class="fas fa-plus"></i> Ajouter un Groupe
             </button>
             <div class="search-bar ml-2">
@@ -19,6 +19,7 @@
             <tr>
               <th>Nom</th>
               <th>Promotion</th>
+              <th>Semestre</th>
               <th>Site</th> 
               <th>Action</th>
             </tr>
@@ -27,9 +28,10 @@
             <tr *ngFor="let groupe of filteredGroupes">
               <td>{{ groupe.nom }}</td>
               <td>{{ groupe.promotion }}</td>
+              <td>{{ groupe.semestre }}</td> 
               <td>{{ groupe.site }}</td>  
               <td>
-                <a [routerLink]="['/update-groupe', groupe.id]" class="text-primary">
+                <a [routerLink]="['/updategroup', groupe.id]" class="text-primary">
                   <i class="fas fa-edit"></i>
                 </a>
                 <a (click)="deleteGroupe(groupe.id)" class="text-danger ml-2">
