@@ -1,0 +1,98 @@
+body {
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    font-family: 'Arial', sans-serif;
+    font-size: 0.8rem; /* Applied last reduced size */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+  }
+  h2 {
+    font-size: 1.1rem; /* Reduced further */
+  }
+  .search-bar {
+    width: 200px;
+  }
+  
+  .search-bar .form-control-sm {
+    font-size: 0.8rem; /* Adjusted for consistency */
+  }
+  
+  .card {
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    padding: 2rem;
+    width: 100%;
+    max-width: 1000px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    font-size: 0.8rem; /* Reduced for compactness */
+
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+  }
+  
+  .table-flat {
+    width: 100%;
+    margin-bottom: 0;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .table-flat thead th {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 12px;
+    text-align: left;
+    font-size: 0.8rem; /* Applied smaller font size */
+  }
+  
+  .table-flat tbody tr {
+    border-bottom: 1px solid #f0f0f0;
+  }
+  
+  .table-flat tbody tr:hover {
+    background-color: #f8f9fa;
+  }
+  
+  .text-primary {
+    color: #007bff;
+  }
+  
+  .text-danger {
+    color: #dc3545;
+  }
+  
+  .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    font-size: 0.8rem; /* Consistent with smaller font size */
+  }
+  
+  .btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+  }
+  
+  .btn-outline-secondary {
+    border-color: #007bff;
+    color: #007bff;
+    font-size: 0.8rem; /* Consistent with smaller font size */
+  }
+  
+  .btn-outline-secondary:hover {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .btn-outline-secondary:disabled {
+    opacity: 0.5;
+  }
+  

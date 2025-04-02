@@ -8,6 +8,7 @@ interface Evaluation {
   titre: string;
   description: string;
   date: string;
+  groupe:String;
 }
 
 @Component({
@@ -24,11 +25,11 @@ export class EvaluationsComponent implements OnInit {
   ngOnInit(): void {
     // Remplacez par vos données réelles si nécessaire
     this.evaluations = [
-      { id: 1, titre: 'Évaluation TOEIC 1', description: 'Description 1', date: "01/04/2023" },
-      { id: 2, titre: 'Évaluation TOEIC 2', description: 'Description 2', date: "04/04/2024" },
-      { id: 3, titre: 'Test TOEIC Avancé', description: 'Description avancée', date: "10/05/2023" },
-      { id: 4, titre: 'Évaluation TOEIC Standard', description: 'Description standard', date: "15/06/2023" },
-      { id: 5, titre: 'test 1', description: 'descripti1', date: "19/03/2025" },
+      { id: 1, titre: 'Évaluation TOEIC 1', description: 'Description 1', date: "01/04/2023" ,groupe:"1"},
+      { id: 2, titre: 'Évaluation TOEIC 2', description: 'Description 2', date: "04/04/2024", groupe:"1" },
+      { id: 3, titre: 'Test TOEIC Avancé', description: 'Description avancée', date: "10/05/2023" ,groupe:"1"},
+      { id: 4, titre: 'Évaluation TOEIC Standard', description: 'Description standard', date: "15/06/2023",groupe:"1"  },
+      { id: 5, titre: 'test 1', description: 'descripti1', date: "19/03/2025",groupe:"1" },
       // Ajoutez d'autres évaluations si besoin
     ];
   }

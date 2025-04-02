@@ -6,20 +6,24 @@
         <div class="question-label">Q{{ question.numero_question }}</div>
         <div class="radio-group">
           <label class="radio-label">
+            <span>A</span>
             <input type="radio" [(ngModel)]="question.choix" name="answer{{question.numero_question}}" value="A" />
-            A
+            
           </label>
           <label class="radio-label">
+            <span>B</span>
             <input type="radio" [(ngModel)]="question.choix" name="answer{{question.numero_question}}" value="B" />
-            B
+          
           </label>
           <label class="radio-label">
+            <span>C</span>
             <input type="radio" [(ngModel)]="question.choix" name="answer{{question.numero_question}}" value="C" />
-            C
+            
           </label>
           <label class="radio-label">
+            <span>D</span>
             <input type="radio" [(ngModel)]="question.choix" name="answer{{question.numero_question}}" value="D" />
-            D
+            
           </label>
         </div>
       </div>

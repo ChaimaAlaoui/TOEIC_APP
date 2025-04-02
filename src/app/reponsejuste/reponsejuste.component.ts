@@ -1,19 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { ReponseJuste } from '../models/reponse-juste.model';
-
 import { Router } from '@angular/router';
 import { TestCreationService } from '../services/testcreation.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
+interface ReponseQuestion {
+  numero_question: number;
+  choix: string;
+}
+
 @Component({
   selector: 'app-reponse-juste',
   templateUrl: './reponsejuste.component.html',
   styleUrls: ['./reponsejuste.component.css'],
+  standalone: true,
   imports: [CommonModule, FormsModule]
 })
 export class ReponseJusteComponent implements OnInit {
-  configQuestions: ReponseJuste[] = [];
+  configQuestions: ReponseQuestion[] = [];
 
   constructor(
     private testCreationService: TestCreationService,
@@ -21,20 +25,32 @@ export class ReponseJusteComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    
-    for (let i = 1; i <= 200; i++) {
-      this.configQuestions.push({
-        numero_question: i,
-        choix: 'A',
-        id_test: 0  
-      });
+    const savedReponses = this.testCreationService.getReponses();
+    if (savedReponses.length > 0) {
+      // Convert from service format to component format
+      this.configQuestions = savedReponses.map(item => ({
+        numero_question: parseInt(item.num_question), 
+        choix: item.choix
+      }));
+    } else {
+      for (let i = 1; i <= 200; i++) {
+        this.configQuestions.push({
+          numero_question: i,
+          choix: 'A'
+        });
+      }
     }
   }
 
   onSaveConfig(): void {
-    // Stocker la configuration des réponses dans le service
-    this.testCreationService.setReponses(this.configQuestions);
-    alert('Configuration des réponses enregistrée localement. Retournez à la page Test pour finaliser.');
+    // Convert from component format to service format
+    const serviceReponses = this.configQuestions.map(item => ({
+      num_question: item.numero_question.toString(),
+      choix: item.choix
+    }));
+    
+    this.testCreationService.setReponses(serviceReponses);
+    alert('Configuration des réponses enregistrée.');
     this.router.navigate(['/test']);
   }
 }

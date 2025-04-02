@@ -1,96 +1,135 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Test } from '../models/test.model';
-import { TestService } from '../services/test.service';
+import { Router, RouterModule } from '@angular/router';
 import { TestCreationService } from '../services/testcreation.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ReponseJusteService } from '../services/reponsejuste.service';
+import { HttpClient } from '@angular/common/http'; // Importer HttpClient pour récupérer les données
 
 @Component({
   selector: 'app-test',
   standalone: true,
   templateUrl: './test.component.html',
   styleUrls: ['./test.component.css'],
-  imports: [CommonModule, FormsModule]
+  imports: [CommonModule, FormsModule, RouterModule]
 })
-
-
 export class TestComponent implements OnInit {
 
-  test: Test = {
+  test = {
     Titre: '',
     Description: '',
     Site: '',
     Date: ''
   };
   
-
+  selectedGroups: number[] = [];
+  responses: { num_question: string, choix: string }[] = [];
+  sites: { id: number, nom: string }[] = [];
+  
   constructor(
-    private testService: TestService,
     private testCreationService: TestCreationService,
     private router: Router,
-    private reponseJusteService: ReponseJusteService
+    private http: HttpClient // Injecter HttpClient
   ) {}
 
   ngOnInit(): void {
-    // Si un test a été sauvegardé temporairement, le récupérer
+    // Récupérer les données du test depuis le service
     const storedTest = this.testCreationService.getTestData();
+    this.fetchSites();  // Charger les sites au démarrage
     if (storedTest) {
       this.test = storedTest;
     }
+    
+    // Récupérer les groupes sélectionnés
+    this.selectedGroups = this.testCreationService.getSelectedGroupes();
+    
+    // Récupérer les réponses configurées
+    this.responses = this.testCreationService.getReponses();
   }
+// Méthode pour récupérer les sites depuis l'API
+fetchSites(): void {
+  fetch('http://localhost:5000/api/sitesachraf')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Erreur de réseau');
+      }
+      return response.json();
+    })
+    .then(data => {
+      this.sites = data; // Remplir le tableau des sites avec les données récupérées
+      console.log('Sites récupérés:', this.sites);
+    })
+    .catch(error => {
+      console.error('Erreur lors de la récupération des sites', error);
+    });
+}
+
 
   onConfigureReponses(): void {
-    // Stocker le test dans le service et naviguer vers la configuration des réponses
     this.testCreationService.setTestData(this.test);
     this.router.navigate(['/reponsejuste']);
   }
 
   onSaveTest(): void {
-    // Récupérer le test temporaire
-    const finalTest = this.testCreationService.getTestData() || this.test;
-    this.testService.createTest(finalTest).subscribe({
-      next: (res: any) => {
-        const createdTestId = res.id_test;
-        alert('Test créé avec succès ! ID = ' + createdTestId);
-        
-        // Récupérer les réponses temporairement stockées
-        const reponses = this.testCreationService.getReponses();
-        // Mettre à jour l'id_test de chaque réponse
-        reponses.forEach(r => r.id_test = createdTestId);
-        
-        // Maintenant, vous pouvez appeler le service pour sauvegarder les réponses en base,
-        // par exemple :
-        this.reponseJusteService.createReponsesBatch(reponses).subscribe({
-          next: (resp) => {
-            alert(resp.message);
-            // Nettoyage après succès
-            this.testCreationService.clearAll();
-            this.test = { Titre: '', Description: '', Site: '', Date: '' };
-          },
-          error: (err) => {
-            console.error(err);
-            alert('Erreur lors de la sauvegarde des réponses.');
-          }
-        });
+    if (!this.test.Titre || !this.test.Date) {
+      alert('Veuillez remplir au moins le titre et la date du test');
+      return;
+    }
+  
+    if (this.selectedGroups.length === 0) {
+      alert('Veuillez sélectionner au moins un groupe');
+      return;
+    }
+  
+    if (this.responses.length === 0) {
+      alert('Veuillez configurer les réponses du test');
+      return;
+    }
+  
+    const testData = {
+      nom: this.test.Titre,
+      description: this.test.Description,
+      date: this.test.Date,
+      site: this.test.Site,
+    };
+  
+    const requestBody = {
+      test_data: testData,
+      test_responses: this.responses,
+      selected_groups: this.selectedGroups
+    };
+  
+    console.log("Données envoyées :", requestBody.test_data);
+    console.log("Données envoyées :", requestBody.selected_groups);
+    console.log("Données envoyées :", requestBody.selected_groups);
+  
+    fetch('http://127.0.0.1:5000/api/tests', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
       },
-      error: (err) => {
-        console.error(err);
-        alert('Erreur lors de la création du test.');
+      body: JSON.stringify(requestBody)
+    })
+    .then(response => response.json())
+    .then(result => {
+      if (result.success) {
+        alert('Test enregistré avec succès');
+        this.testCreationService.clearAll();
+        this.test = { Titre: '', Description: '', Site: '', Date: '' };
+        this.selectedGroups = [];
+        this.responses = [];
+      } else {
+        alert(`Erreur: ${result.error || 'Erreur inconnue'}`);
       }
+    })
+    .catch(error => {
+      console.error('Erreur:', error);
+      alert('Erreur lors de l\'enregistrement du test');
     });
   }
 
-
-  selectionnerClasse() {
-    
+  selectionnerClasse(): void {
     this.testCreationService.setTestData(this.test);
+    console.log(this.test);
     this.router.navigate(['/classes']);
-    
-      
-
-    
-    }
-  
+  }
 }

@@ -1,0 +1,124 @@
+/* Style général */
+body {
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  font-family: 'Arial', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+/* Réduction de la carte */
+.card {
+  background: rgba(255, 255, 255, 0.95);
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 1rem; /* Padding réduit */
+  width: 100%;
+  max-width: 320px; /* Largeur réduite */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Titres */
+h2 {
+  color: #333;
+  font-size: 1.2rem; /* Taille réduite */
+  margin-bottom: 0.8rem; /* Espacement réduit */
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Champs de formulaire */
+.form-control {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 5px; /* Padding réduit */
+  font-size: 0.8rem; /* Taille de texte réduite */
+  margin-bottom: 0.5rem; /* Moins d'espace entre les champs */
+}
+
+.form-control:focus {
+  border-color: #6a11cb;
+  box-shadow: 0 0 4px rgba(106, 17, 203, 0.4);
+  outline: none;
+}
+
+/* Labels */
+label {
+  font-weight: bold;
+  color: #555;
+  margin-bottom: 0.2rem; /* Réduction de l'espacement */
+  font-size: 0.75rem; /* Texte plus petit */
+}
+
+/* Boutons */
+.btn-primary, .back-btn {
+  border-radius: 6px;
+  padding: 6px 10px; /* Padding réduit */
+  font-size: 0.8rem; /* Texte plus petit */
+  font-weight: bold;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+/* Bouton primaire */
+.btn-primary {
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  color: white;
+  border: none;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #2575fc, #6a11cb);
+  transform: translateY(-1px);
+}
+
+/* Bouton retour */
+.back-btn {
+  background: #f5f5f5;
+  color: #333;
+  border: 1px solid #ddd;
+}
+
+.back-btn:hover {
+  background: #eaeaea;
+  transform: translateY(-1px);
+}
+
+/* Réduction des animations */
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+      transform: translateY(5px); /* Déplacement réduit */
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+.card {
+  animation: fadeIn 0.3s ease-out;
+}
+/* Message d'erreur */
+.error-message {
+  color: #dc3545; /* Couleur rouge */
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-top: 5px;
+  padding: 8px;
+  background-color: #f8d7da; /* Fond rose clair */
+  border: 1px solid #f5c6cb; /* Bordure rouge clair */
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.error-message small {
+  font-size: 0.75rem;
+}

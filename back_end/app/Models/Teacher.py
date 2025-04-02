@@ -1,7 +1,7 @@
 from app import db
 from datetime import date
 
-class Test(db.Model):
+class TestDetails(db.Model):
     __tablename__ = 'tests'
 
     id_test = db.Column(db.Integer, primary_key=True)
@@ -10,10 +10,6 @@ class Test(db.Model):
     site = db.Column(db.String(50), nullable=True)
     date = db.Column(db.Date, nullable=True)
     
-    """
-    testgroupe = db.relationship('TestGroupe', back_populates='tests')
-    """
-
     reponses = db.relationship('ReponseJuste', backref='test', cascade="all, delete-orphan", lazy=True)
 
     def __init__(self, titre, description, site, date):
@@ -22,12 +18,11 @@ class Test(db.Model):
         self.site = site
         self.date = date
 
-    
     def modifier_test(self, new_data):
         self.titre = new_data.get('titre', self.titre)
         self.description = new_data.get('description', self.description)
         self.site = new_data.get('site', self.site)
-        self.date = new_data.get('date', self.site)
+        self.date = new_data.get('date', self.date)
 
     def suppression_test(self):
         db.session.delete(self)

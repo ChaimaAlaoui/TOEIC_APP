@@ -1,7 +1,9 @@
 from flask import Blueprint, request, jsonify
 from app import db
-from app.Models.Teacher import  ReponseJuste, Test
+from app.Models.Teacher import  ReponseJuste
 from datetime import datetime
+
+from app.Models.myModels import Etudiant, Groupe, ReponseProf, Site, test_groupe, Test
 
 
 test_bp = Blueprint('test_bp', __name__)
@@ -83,6 +85,90 @@ def delete_test(test_id):
     return jsonify({'message': 'Test supprimé avec succès'}), 200
 
 
+
+
+
+# @test_bp.route('/api/sitesachraf', methods=['GET'])
+# def get_sites():
+#     # Récupérer tous les sites depuis la base de données
+#     sites = Site.query.all()  # Assurez-vous que Site est une table dans votre base de données
+#     result = [{"id": site.id, "nom": site.nom} for site in sites]  # Adapté selon les attributs de votre modèle
+#     return jsonify(result)
+   
+# @test_bp.route('/api/tests', methods=['POST'])
+# def create_test():
+#     """Créer un nouveau test avec ses réponses et associations aux groupes"""
+#     try:
+#         data = request.json
+        
+#         if not data:
+#             return jsonify({'error': 'Aucune donnée reçue'}), 400
+            
+#         test_data = data.get('test_data', {})
+#         test_responses = data.get('test_responses', [])
+#         selected_groups = data.get('selected_groups', [])
+        
+#         # Vérifier les données requises
+#         if not test_data.get('nom'):
+#             return jsonify({'error': 'Le nom du test est requis'}), 400
+            
+#         if not test_data.get('date'):
+#             return jsonify({'error': 'La date du test est requis'}), 400
+            
+#         if not selected_groups:
+#             return jsonify({'error': 'Au moins un groupe doit être sélectionné'}), 400
+            
+#         if not test_responses:
+#             return jsonify({'error': 'Les réponses du test sont requises'}), 400
+        
+#         # Créer le test
+#         test = Test(
+#             nom=test_data.get('nom'),
+#             date=datetime.strptime(test_data.get('date'), '%Y-%m-%d') if isinstance(test_data.get('date'), str) else test_data.get('date')
+#         )
+        
+#         # Ajouter la description si elle existe
+#         if test_data.get('description'):
+#             test.description = test_data.get('description')
+        
+#         # Ajouter le test à la session
+#         db.session.add(test)
+#         db.session.flush()  # Pour obtenir l'ID du test
+        
+#         # Associer les groupes sélectionnés au test
+#         for groupe_id in selected_groups:
+#             groupe = Groupe.query.get(groupe_id)
+#             if groupe:
+#                 test.groupes.append(groupe)
+                
+#                 # Ajouter également le site et la promotion associés au groupe
+#                 if groupe.site not in test.sites:
+#                     test.sites.append(groupe.site)
+                    
+#                 if groupe.promotion not in test.promotions:
+#                     test.promotions.append(groupe.promotion)
+        
+#         # Créer les réponses du professeur
+#         for response in test_responses:
+#             reponse_prof = ReponseProf(
+#                 num_question=response.get('num_question'),
+#                 choix=response.get('choix'),
+#                 test_id=test.id
+#             )
+#             db.session.add(reponse_prof)
+        
+#         # Enregistrer tout en base de données
+#         db.session.commit()
+        
+#         return jsonify({
+#             'success': True,
+#             'message': 'Test créé avec succès',
+#             'test_id': test.id
+#         })
+        
+#     except Exception as e:
+#         db.session.rollback()
+#         return jsonify({'error': str(e)}), 500
 
 
 

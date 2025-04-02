@@ -124,7 +124,7 @@ export class RegisterComponent {
       password: this.password,
     };
 
-    fetch('http://127.0.0.1:5000/api/register', {
+    fetch('http://127.0.0.1:5000/api/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

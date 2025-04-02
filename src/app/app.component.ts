@@ -16,5 +16,5 @@ import { TestComponent } from './test/test.component';
   // Ajoute les composants ici
 })
 export class AppComponent {
-  title = 'TOEIC_APP';
+  title = 'Gestion des Tests TOEIC';
 }

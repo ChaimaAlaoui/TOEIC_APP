@@ -1,0 +1,31 @@
+<div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="card p-4 shadow" style="width: 100%; max-width: 500px;">
+      <h2 class="text-center mb-4" style="font-size: 1.5rem;">Ajouter une Promotion</h2>
+      <form (ngSubmit)="addPromo()">
+        <!-- Niveau de la Promotion (Liste déroulante) -->
+        <div class="form-group mb-3">
+          <label for="promoLevel">Niveau de la Promotion</label>
+          <select class="form-control" id="promoLevel" [(ngModel)]="promoLevel" name="promoLevel" required>
+            <option value="" disabled selected>Choisissez un niveau</option>
+            <option *ngFor="let level of levels" [value]="level">{{ level }}</option>
+          </select>
+          <div class="error-message" *ngIf="errors['promoLevel']">{{ errors['promoLevel'] }}</div>
+        </div>
+  
+        <!-- Site (Liste déroulante) -->
+        <div class="form-group mb-3">
+          <label for="promoSiteId">Site</label>
+          <select class="form-control" id="promoSiteId" [(ngModel)]="promoSiteId" name="promoSiteId" required>
+            <option value="" disabled selected>Choisissez un site</option>
+            <option *ngFor="let site of sites" [value]="site.id">{{ site.nom }}</option>
+          </select>
+          <div class="error-message" *ngIf="errors['promoSiteId']">{{ errors['promoSiteId'] }}</div>
+        </div>
+  
+        <div class="d-flex justify-content-between">
+          <button type="submit" class="btn btn-primary">Ajouter</button>
+          <button type="button" class="btn btn-secondary" [routerLink]="['/promotionlist']">Retour</button>
+        </div>
+      </form>
+    </div>
+  </div>

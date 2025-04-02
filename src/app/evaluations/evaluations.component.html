@@ -16,6 +16,7 @@
           <th>Titre</th>
           <th>Description</th>
           <th>Date</th>
+          <th>Groupe</th> <!-- Colonne pour le groupe -->
           <th class="actions">Actions</th>
         </tr>
       </thead>
@@ -24,12 +25,22 @@
           <td>{{ evaluation.titre }}</td>
           <td>{{ evaluation.description }}</td>
           <td>{{ evaluation.date }}</td>
+          <td>{{ evaluation.groupe }}</td>
+          
+         
+
           <td class="action-buttons">
             <button class="btn btn-delete" (click)="deleteEvaluation(evaluation.id)">Supprimer</button>
             <button class="btn btn-duplicate" (click)="duplicateEvaluation(evaluation.id)">Dupliquer</button>
+            <!-- Bouton pour télécharger la feuille de réponse -->
+            <button class="btn btn-primary" >Télécharger la feuille</button>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
 </div>
+
+<!-- jsPDF pour générer le PDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
