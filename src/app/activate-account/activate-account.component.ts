@@ -10,65 +10,82 @@ import { ActivatedRoute, Router } from '@angular/router';
   imports: [FormsModule, CommonModule],
 })
 export class ActivateAccountComponent implements OnInit {
-  statusMessage: string = '';
-  messageType: string = '';
-  loading: boolean = true;
-  token: string = '';
+  
+  // Déclaration des variables
+  statusMessage: string = ''; 
+  messageType: string = ''; 
+  loading: boolean = true; 
+  token: string = ''; 
 
+  // Constructeur pour injecter les dépendances
   constructor(private route: ActivatedRoute, private router: Router) {}
 
+  // Méthode ngOnInit appelée lors de l'initialisation du composant
   ngOnInit(): void {
-    // Simuler un délai de chargement pour montrer l'animation
+    // Simule un délai de chargement pour afficher une animation
     setTimeout(() => {
-      this.token = this.route.snapshot.paramMap.get('token') || '';
+      this.token = this.route.snapshot.paramMap.get('token') || ''; // Récupère le token depuis l'URL
       if (this.token) {
+        // Si un token est trouvé, tenter l'activation
         this.activateAccount(this.token);
       } else {
+        // Si aucun token n'est trouvé, afficher un message d'erreur
         this.loading = false;
         this.statusMessage = 'Aucun token d\'activation trouvé.';
         this.messageType = 'error';
       }
-    }, 1500); // Délai de 1.5 seconde pour afficher l'animation de chargement
+    }, 1500); // Délai de 1.5 seconde pour l'animation de chargement
   }
 
+  // Méthode pour activer le compte avec le token
   activateAccount(token: string) {
+    // Envoie une requête à l'API pour activer le compte
     fetch(`http://127.0.0.1:5000/api/activate/${token}`)
-      .then((response) => response.json())
+      .then((response) => response.json()) // Conversion de la réponse en JSON
       .then((data) => {
-        this.loading = false;
+        // Une fois la réponse reçue
+        this.loading = false; // Désactive l'animation de chargement
         if (data.status === 'success') {
+          // Si l'activation a réussi
           this.statusMessage = 'Votre compte a été activé avec succès. Vous pouvez maintenant vous connecter et accéder à toutes les fonctionnalités de notre plateforme.';
-          this.messageType = 'success';
+          this.messageType = 'success'; // Type du message est 'success'
         } else {
+          // Si l'activation a échoué
           this.statusMessage = data.message || 'Le lien d\'activation est invalide ou a expiré. Veuillez contacter le support si vous avez besoin d\'aide.';
-          this.messageType = 'error';
+          this.messageType = 'error'; // Type du message est 'error'
         }
       })
       .catch((error) => {
-        this.loading = false;
+        // En cas d'erreur lors de la requête
+        this.loading = false; // Désactive l'animation de chargement
         this.statusMessage = 'Une erreur est survenue lors de l\'activation du compte. Veuillez réessayer ultérieurement ou contacter le support.';
-        this.messageType = 'error';
-        console.error('Erreur d\'activation:', error);
+        this.messageType = 'error'; // Type du message est 'error'
+        console.error('Erreur d\'activation:', error); // Affiche l'erreur dans la console
       });
   }
 
+  // Méthode pour naviguer vers la page de connexion
   navigateToLogin() {
-    this.router.navigate(['/login']);
+    this.router.navigate(['/login']); // Redirige l'utilisateur vers la page de login
   }
 
+  // Méthode pour réessayer l'activation
   tryAgain() {
-    this.loading = true;
+    this.loading = true; // Active l'animation de chargement
     setTimeout(() => {
+      // Essaye de réactiver le compte avec le même token
       if (this.token) {
         this.activateAccount(this.token);
       } else {
+        // Si aucun token n'est trouvé, afficher un message d'erreur
         this.loading = false;
         this.statusMessage = 'Aucun token d\'activation trouvé.';
       }
-    }, 1000);
+    }, 1000); // Délai de 1 seconde avant la réactivation
   }
 
+  // Méthode pour naviguer vers la page d'accueil
   navigateToHome() {
-    this.router.navigate(['/']);
+    this.router.navigate(['/']); // Redirige l'utilisateur vers la page d'accueil
   }
 }

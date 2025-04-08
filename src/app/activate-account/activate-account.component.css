@@ -1,3 +1,4 @@
+/* Body */
 body {
   margin: 0;
   padding: 0;
@@ -5,6 +6,7 @@ body {
   background: linear-gradient(120deg, #f5f7fa, #c3cfe2);
 }
 
+/* Activation container */
 .activation-container {
   display: flex;
   justify-content: center;
@@ -13,13 +15,15 @@ body {
   padding: 20px;
 }
 
+/* Activation card */
 .activation-card {
   background-color: #fff;
   border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
   padding: 30px;
   width: 100%;
-  max-width: 500px;
+  max-width: 700px;
+  height: 600px;
   text-align: center;
   animation: fadeIn 0.5s ease-in-out;
 }
@@ -309,19 +313,19 @@ body {
   .activation-card {
     padding: 20px;
   }
-  
+
   .logo {
     max-width: 150px;
   }
-  
+
   .status-message h2 {
     font-size: 20px;
   }
-  
+
   .status-message p {
     font-size: 14px;
   }
-  
+
   .action-button {
     font-size: 14px;
     padding: 10px 16px;

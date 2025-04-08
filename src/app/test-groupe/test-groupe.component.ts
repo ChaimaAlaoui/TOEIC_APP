@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { TestCreationService } from '../services/testcreation.service';
+import { NavbarComponent } from '../navbar/navbar.component';
 
 interface Groupe {
   id_groupe: number;
@@ -21,7 +22,7 @@ interface Groupe {
   templateUrl: './test-groupe.component.html',
   styleUrls: ['./test-groupe.component.css'],
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule]
+  imports: [CommonModule, FormsModule, RouterModule, NavbarComponent]
 })
 export class TestGroupeComponent implements OnInit {
  

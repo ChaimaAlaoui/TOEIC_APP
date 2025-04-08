@@ -32,20 +32,35 @@ def create_app():
     mail.init_app(app) 
 
    
-    CORS(app, resources={r"/*": {"origins": "http://localhost:4200", "allow_headers": ["Content-Type"], "methods": ["GET", "POST", "OPTIONS", "DELETE"]}})
+    CORS(app, resources={r"/*": {"origins": "http://localhost:4200", "allow_headers": ["Content-Type"], "methods": ["GET", "POST", "OPTIONS", "DELETE", "PUT"]}})
     
    
-    # Importer et enregistrer les routes automatiquement
-    from app.Routes.Login_Routes2 import register_routes, activate, login_user,add_test,trouver_sites,trouvergroups
-    from app.Routes.myRoutes import init_routes
-    
-    init_routes(app)
-    trouver_sites(app)
+    from app.Routes.Etudiant_Routes import init_etudiant_routes
+    from app.Routes.Evaluations_Routes import register_evaluation_routes
+    from app.Routes.Groupe_Routes import init_groupe_routes
+    from app.Routes.Login_Route import login_user
+    from app.Routes.Promotion_Routes import init_promotion_routes
+    from app.Routes.Register_Routes import register_routes,activate
+    from app.Routes.Scores_Routes import init_score_routes
+    from app.Routes.Semestre_Routes import init_semestre_routes
+    from app.Routes.Site_Routes import init_site_routes
+    from app.Routes.Test_Routes import register_test_routes
+    init_etudiant_routes(app)
+    register_evaluation_routes(app)
+    init_groupe_routes(app)
+    login_user(app)
+    init_promotion_routes(app)
     register_routes(app)
     activate(app)
-    login_user(app)
-    add_test(app)
-    trouvergroups(app)
+    init_score_routes(app)
+    init_semestre_routes(app)
+    init_site_routes(app)
+    register_test_routes(app)
+
+
+
+
+    
    
 
     return app

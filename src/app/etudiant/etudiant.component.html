@@ -1,76 +1,79 @@
-<div class="container mt-4">
-  <div class="card">
-    <div class="card-body">
-      <div class="d-flex justify-content-between align-items-center mb-3">
-        <h2>Liste des Étudiants</h2>
-        <div>
-          <button class="btn btn-primary btn-sm" routerLink="/addstudent">
-            <i class="fas fa-plus"></i> Ajouter un Étudiant
-          </button>
-          <div class="search-bar ml-2">
-            <input type="text" class="form-control form-control-sm" placeholder="Rechercher..." [(ngModel)]="searchText">
-          </div>
-        </div>
-      </div>
+<app-navbar></app-navbar>
 
-      <!-- Tableau -->
-      <table class="table table-flat">
-        <thead>
-          <tr>
-            <th>Nom</th>
-            <th>Prénom</th>
-            <th>Promotion</th>
-            <th>Semestre</th>
-            <th>Groupe</th>
-            <th>Site</th>
-            <th>Spécialité</th>
-            <th>Email</th>
-            <th>Score</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let student of filteredStudents">
-            <td>{{ student.nom }}</td>
-            <td>{{ student.prenom }}</td>
-            <td>{{ student.promotion }}</td>
-            <td>{{ student.semestre }}</td>
-            <td>{{ student.groupe }}</td>
-            <td>{{ student.site }}</td>
-            <td>{{ student.specialite }}</td>
-            <td>{{ student.email }}</td>
-        
-            <td>
-              <a [routerLink]="['/scorestudent', student.id]" class="text-info">
-                <i class="fas fa-chart-line"></i>
-              </a>
-            </td>
-            <td>
-              <a [routerLink]="['/update-student', student.id]" class="text-primary">
-                <i class="fas fa-edit"></i>
-              </a>
-              <a (click)="deleteStudent(student.id)" class="text-danger ml-2">
-                <i class="fas fa-times"></i>
-              </a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+<div class="container my-5">
+  <h1 class="title">Liste des Étudiants</h1>
+  
+  <!-- Search and Add Button Row -->
+  <div class="action-row">
+    <div class="search-bar">
+      <input type="text" [(ngModel)]="searchText" placeholder="Rechercher un étudiant..." />
+    </div >
+    <div class="same">
+    <button class="btn btn-add" routerLink="/addstudent">
+      <i class="fas fa-plus"></i> Ajouter un Étudiant
+    </button>
 
-      <!-- Paginateur -->
-      <div class="d-flex justify-content-between align-items-center mt-3">
-        <div>
-          <button class="btn btn-outline-secondary btn-sm" (click)="previousPage()" [disabled]="currentPage === 1">
-            <i class="fas fa-chevron-left"></i> Précédent
-          </button>
-          <button class="btn btn-outline-secondary btn-sm ml-2" (click)="nextPage()" [disabled]="currentPage === totalPages">
-            Suivant <i class="fas fa-chevron-right"></i>
-          </button>
-        </div>
-        <div>
-          Page {{ currentPage }} sur {{ totalPages }}
-        </div>
-      </div>
+    <button class="btn btn-add btn-add-list" routerLink="/uploadstudent">
+      <i class="fas fa-plus"></i> Import CSV List
+    </button>
+  </div>
+</div>
+
+  <!-- Table for students -->
+  <div class="table-container">
+    <table class="evaluation-table">
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Prénom</th>
+          <th>Promotion</th>
+          <th>Semestre</th>
+          <th>Groupe</th>
+          <th>Site</th>
+          <th>Spécialité</th>
+          <th>Score</th>
+          <th class="actions">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let student of filteredStudents" class="evaluation-row">
+          <td>{{ student.nom }}</td>
+          <td>{{ student.prenom }}</td>
+          <td>{{ student.promotion }}</td>
+          <td>{{ student.semestre }}</td>
+          <td>{{ student.groupe }}</td>
+          <td>{{ student.site }}</td>
+          <td>{{ student.specialite }}</td>
+          <td>
+            <a [routerLink]="['/scorestudent', student.id]" class="btn-icon btn-score">
+              <i class="fas fa-chart-line"></i>
+            </a>
+          </td>
+          <td class="action-buttons">
+            <a [routerLink]="['/update-student', student.id]" class="btn-icon btn-edit">
+              <i class="fas fa-edit"></i>
+            </a>
+            <button class="btn-icon btn-delete" (click)="deleteStudent(student.id)">
+              <i class="fas fa-times"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <!-- Pagination -->
+  <div class="pagination-controls">
+    <div class="pagination-buttons">
+      <button class="btn btn-pagination" (click)="previousPage()" [disabled]="currentPage === 1">
+        <i class="fas fa-chevron-left"></i> Précédent
+      </button>
+      <button class="btn btn-pagination" (click)="nextPage()" [disabled]="currentPage === totalPages">
+        Suivant <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
+    <div class="pagination-info">
+      Page {{ currentPage }} sur {{ totalPages }}
     </div>
   </div>
 </div>

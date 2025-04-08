@@ -2,9 +2,7 @@ from flask_cors import CORS
 from werkzeug.security import generate_password_hash
 from app import db
 from app import create_app
-from app.Routes.Login_Routes2 import register_routes
-from app.Routes.Login_Routes2 import activate
-from app.Routes.Login_Routes2 import login_user
+# from app.Routes.Login_Routes2 import login_user
 from app.Models import *
 
 app = create_app()

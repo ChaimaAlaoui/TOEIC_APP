@@ -5,7 +5,7 @@
   padding: 20px;
   background-color: #ffffff;
   border-radius: 16px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
   font-family: 'Segoe UI', sans-serif;
 }
 
@@ -17,7 +17,7 @@
 }
 
 .header-section .btn {
-  background-color: #6c63ff;
+  background-color: #1890cc;
   border: none;
   color: white;
   padding: 10px 20px;
@@ -28,7 +28,7 @@
 }
 
 .header-section .btn:hover {
-  background-color: #574fd6;
+  background-color: #0d5892;
 }
 
 /* Barre de recherche */
@@ -44,32 +44,35 @@
   border-radius: 30px;
   font-size: 16px;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .search-bar input:focus {
   outline: none;
-  border-color: #6c63ff;
-  box-shadow: 0 0 10px rgba(108, 99, 255, 0.2);
+  border-color: #1890cc;
+  box-shadow: 0 0 10px rgba(24, 144, 204, 0.2);
 }
 
 /* Liste des groupes */
 .group-list {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 30px;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Carte de groupe */
 .group-card {
   display: flex;
+  width: 90%;
   justify-content: space-between;
   align-items: center;
-  background-color: #f8f9ff;
-  border-left: 5px solid #6c63ff;
-  padding: 20px;
+  background-color: #f0f7fb;
+  border-left: 8px solid #1890cc;
+  padding: 10px 40px;
   border-radius: 12px;
-  box-shadow: 0 8px 16px rgba(108, 99, 255, 0.1);
+  box-shadow: 0 8px 16px rgba(24, 144, 204, 0.2);
   transition: transform 0.2s ease;
 }
 
@@ -84,7 +87,7 @@
 .group-info h2 {
   margin: 0 0 8px;
   font-size: 20px;
-  color: #333;
+  color: #2c3e50;
 }
 
 .group-info p {
@@ -100,9 +103,10 @@
 }
 
 .group-selection input[type="checkbox"] {
-  width: 22px;
-  height: 22px;
+  width: 25px;
+  height: 25px;
   cursor: pointer;
+  margin-inline: 10px;
 }
 
 /* Bouton de confirmation */
@@ -112,18 +116,20 @@
 }
 
 .btn-primary {
-  background-color: #00b894;
+  background-color: #1890cc;
   color: white;
   padding: 12px 28px;
   font-size: 16px;
   font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 10px;
   border: none;
   border-radius: 8px;
-  box-shadow: 0 5px 15px rgba(0, 184, 148, 0.3);
+  box-shadow: 0 5px 15px rgba(24, 144, 204, 0.3);
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .btn-primary:hover {
-  background-color: #019875;
+  background-color: #0d5892;
   transform: translateY(-2px);
 }

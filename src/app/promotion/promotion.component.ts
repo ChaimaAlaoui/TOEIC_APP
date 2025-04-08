@@ -5,10 +5,11 @@ import { SuccessDialogComponent } from '../success-dialog/success-dialog.compone
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { NavbarComponent } from '../navbar/navbar.component';
 @Component({
   selector: 'app-promotion',
   templateUrl: './promotion.component.html',
-  imports: [FormsModule,RouterModule,CommonModule],
+  imports: [FormsModule,RouterModule,CommonModule,NavbarComponent],
   styleUrls: ['./promotion.component.css'],
 })
 export class PromotionComponent implements OnInit {

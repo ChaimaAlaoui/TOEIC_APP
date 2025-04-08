@@ -4,13 +4,14 @@ import { TestCreationService } from '../services/testcreation.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http'; // Importer HttpClient pour récupérer les données
+import { NavbarComponent } from '../navbar/navbar.component';
 
 @Component({
   selector: 'app-test',
   standalone: true,
   templateUrl: './test.component.html',
   styleUrls: ['./test.component.css'],
-  imports: [CommonModule, FormsModule, RouterModule]
+  imports: [CommonModule, FormsModule, RouterModule, NavbarComponent]
 })
 export class TestComponent implements OnInit {
 
@@ -117,6 +118,8 @@ fetchSites(): void {
         this.test = { Titre: '', Description: '', Site: '', Date: '' };
         this.selectedGroups = [];
         this.responses = [];
+
+        this.router.navigate(['/evaluations']);
       } else {
         alert(`Erreur: ${result.error || 'Erreur inconnue'}`);
       }

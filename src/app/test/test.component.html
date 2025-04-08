@@ -1,3 +1,4 @@
+<app-navbar></app-navbar>
 <div class="container my-5">
   <h1 class="text-center mb-4">📘 Création d’un Test TOEIC</h1>
   
@@ -30,19 +31,19 @@
       <input type="date" id="Date" [(ngModel)]="test.Date" name="Date" class="form-control" required>
     </div>
 
-    <div class="form-group mb-3">
+    <div class="form-group center-group  mb-3">
       <button type="button" class="btn btn-secondary form-control" (click)="selectionnerClasse()">
         Selectionner Groupe
       </button>
     </div>
 
-    <div class="form-group mb-3">
+    <div class="form-group center-group mb-3">
       <button type="button" class="btn btn-secondary form-control" (click)="onConfigureReponses()">
         Configurer les réponses
       </button>
     </div>
 
-    <div class="text-center mt-4">
+    <div class="text-center center-group mt-4">
       <button type="button" class="btn btn-primary" (click)="onSaveTest()">Enregistrer Test</button>
     </div>
   </form>

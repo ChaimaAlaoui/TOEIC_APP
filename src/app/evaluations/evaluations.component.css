@@ -15,12 +15,12 @@ body {
 /* Conteneur principal */
 .container {
   /* Largeur maximale plus restreinte pour éviter que le tableau soit trop large */
-  max-width: 1000px;
+  max-width: 90%;
   margin: 40px auto; /* Centre le conteneur */
   background: #fff;
   padding: 30px;
   border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
 }
 
 /* Conteneur du tableau */
@@ -40,7 +40,7 @@ body {
 }
 
 .evaluation-table thead {
-  background-color: #007bff;
+  background-color: #1890cc; /* Couleur modifiée */
   color: #fff;
 }
 
@@ -64,7 +64,6 @@ body {
 .evaluation-table tbody tr:hover {
   background-color: #e9ecef;
 }
-
 
 /* Titres */
 .title {
@@ -91,7 +90,7 @@ body {
 }
 
 .search-bar input:focus {
-  border-color: #3b82f6;
+  border-color: #1890cc; /* Couleur modifiée */
   outline: none;
 }
 
@@ -106,7 +105,7 @@ body {
 }
 
 .evaluation-table thead {
-  background-color: #007bff;
+  background-color: #1890cc; /* Couleur modifiée */
   color: #fff;
 }
 
@@ -154,12 +153,12 @@ body {
 
 /* Bouton Dupliquer (bleu) */
 .btn-duplicate {
-  background-color: #007bff;
+  background-color: #1890cc; /* Couleur modifiée */
   color: #fff;
 }
 
 .btn-duplicate:hover {
-  background-color: #0056b3;
+  background-color: #0d5892; /* Couleur modifiée */
   transform: translateY(-2px);
 }
 
@@ -187,8 +186,185 @@ td > .btn:last-child {
   }
 }
 
-
 .evaluation-table th.actions,
 .evaluation-table td.action-buttons {
   text-align: center;
+}
+
+.btn-download {
+  background-color: #1890cc; /* Couleur modifiée */
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-download:hover {
+  background-color: #0d5892; /* Couleur modifiée */
+}
+
+.btn-download:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+.spinner-border {
+  width: 1rem;
+  height: 1rem;
+  vertical-align: text-bottom;
+}
+
+/* Bouton Corriger */
+.btn-correct {
+  background-color: #1890cc; /* Couleur de fond */
+  color: white; /* Texte blanc */
+  font-size: 1rem;
+  padding: 10px 20px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-correct:hover {
+  background-color: #0d5892; /* Couleur de fond au survol */
+  transform: translateY(-2px); /* Légère élévation au survol */
+}
+
+.btn-correct:disabled {
+  background-color: #d6e4f1; /* Couleur de fond désactivée */
+  color: #a0b8d3; /* Couleur du texte désactivé */
+  cursor: not-allowed; /* Curseur désactivé */
+  transform: none; /* Annule l'élévation quand désactivé */
+}
+
+
+
+/* ///////////// */
+/* Styles pour la modale */
+
+.modal-backdrop-blur {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(6px);
+  background-color: rgba(0, 0, 0, 0.3); /* assombri légèrement */
+  z-index: 1040; /* juste en dessous de la modale */
+}
+
+.custom-modal {
+  z-index: 1050 !important;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 600px;
+  width: 90%;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+}
+
+.modal-body .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: auto;
+  padding: 20px;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  padding: 2rem;
+  width: 100%;
+  max-width: 500px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Le reste des styles que vous avez fournis */
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+.card-body {
+  text-align: center;
+}
+
+h2 {
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #555;
+  font-weight: bold;
+}
+
+.form-control-file {
+  display: block;
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+  transition: border-color 0.3s ease;
+}
+
+.form-control-file:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.btn-primary:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+.alert {
+  margin-top: 1rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 5px;
+  font-size: 0.875rem;
+}
+
+.alert-success {
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+  color: #155724;
+}
+
+.alert-danger {
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+  color: #721c24;
 }

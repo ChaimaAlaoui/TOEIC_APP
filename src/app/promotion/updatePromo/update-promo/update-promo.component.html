@@ -1,31 +1,33 @@
-<div class="container d-flex justify-content-center align-items-center vh-100">
-    <div class="card p-4 shadow" style="width: 100%; max-width: 500px;">
-      <h2 class="text-center mb-4" style="font-size: 1.5rem;">Mettre à jour une Promotion</h2>
-      <form (ngSubmit)="updatePromo()">
-        <!-- Niveau de la Promotion (Liste déroulante) -->
-        <div class="form-group mb-3">
-          <label for="promoLevel">Niveau de la Promotion</label>
-          <select class="form-control" id="promoLevel" [(ngModel)]="promoLevel" name="promoLevel" required>
-            <option value="" disabled selected>Choisissez un niveau</option>
-            <option *ngFor="let level of levels" [value]="level">{{ level }}</option>
-          </select>
-          <div class="error-message" *ngIf="errors['promoLevel']">{{ errors['promoLevel'] }}</div>
-        </div>
-  
-        <!-- Site (Liste déroulante) -->
-        <div class="form-group mb-3">
-          <label for="promoSiteId">Site</label>
-          <select class="form-control" id="promoSiteId" [(ngModel)]="promoSiteId" name="promoSiteId" required>
-            <option value="" disabled selected>Choisissez un site</option>
-            <option *ngFor="let site of sites" [value]="site.id">{{ site.nom }}</option>
-          </select>
-          <div class="error-message" *ngIf="errors['promoSiteId']">{{ errors['promoSiteId'] }}</div>
-        </div>
-  
-        <div class="d-flex justify-content-between">
-          <button type="submit" class="btn btn-primary">Mettre à jour</button>
-          <button type="button" class="btn btn-secondary" [routerLink]="['/promotionlist']">Retour</button>
-        </div>
-      </form>
-    </div>
+<app-navbar></app-navbar>
+<div class="container my-5">
+  <div class="form-card">
+    <h1 class="title">Mettre à jour une Promotion</h1>
+    
+    <form (ngSubmit)="updatePromo()">
+      <!-- Niveau de la Promotion -->
+      <div class="form-group">
+        <label for="promoLevel">Niveau de la Promotion</label>
+        <select class="form-input" id="promoLevel" [(ngModel)]="promoLevel" name="promoLevel" required>
+          <option value="" disabled selected>Choisissez un niveau</option>
+          <option *ngFor="let level of levels" [value]="level">{{ level }}</option>
+        </select>
+        <div class="error-message" *ngIf="errors['promoLevel']">{{ errors['promoLevel'] }}</div>
+      </div>
+      
+      <!-- Site -->
+      <div class="form-group">
+        <label for="promoSiteId">Site</label>
+        <select class="form-input" id="promoSiteId" [(ngModel)]="promoSiteId" name="promoSiteId" required>
+          <option value="" disabled selected>Choisissez un site</option>
+          <option *ngFor="let site of sites" [value]="site.id">{{ site.nom }}</option>
+        </select>
+        <div class="error-message" *ngIf="errors['promoSiteId']">{{ errors['promoSiteId'] }}</div>
+      </div>
+      
+      <div class="form-actions">
+        <button type="submit" class="btn btn-update">Mettre à jour</button>
+        <button type="button" class="btn btn-return" [routerLink]="['/promotionlist']">Retour</button>
+      </div>
+    </form>
   </div>
+</div>

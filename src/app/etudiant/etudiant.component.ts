@@ -5,12 +5,13 @@ import { FormsModule } from '@angular/forms';
 import { EtudiantService } from '../etudiant.service';
 import { MatDialog } from '@angular/material/dialog';  
 import { SuccessDialogComponent } from '../success-dialog/success-dialog.component';
+import { NavbarComponent } from '../navbar/navbar.component';
 
 
 @Component({
   selector: 'app-etudiant',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule],
+  imports: [CommonModule, RouterModule, FormsModule,NavbarComponent],
   templateUrl: './etudiant.component.html',
   styleUrls: ['./etudiant.component.css'],
 })

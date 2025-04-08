@@ -4,7 +4,6 @@ import { RegisterComponent } from './register/register.component';
 import { ActivateAccountComponent } from './activate-account/activate-account.component';
 import { TestComponent } from './test/test.component';
 import { HomeComponent } from './home/home.component';
-import { ClasseComponent } from './classe/classe.component';
 import { EvaluationsComponent } from './evaluations/evaluations.component';
 import { ReponseEtudiantComponent } from './reponseetudiant/reponseetudiant.component';
 import { ImpressionComponent } from './impression/impression.component';
@@ -35,11 +34,10 @@ export const routes: Routes = [
   { path: 'activate-account/:token', component: ActivateAccountComponent },
   { path: 'test', component: TestComponent },
   { path: 'home', component: HomeComponent },
-  { path: 'classe', component: ClasseComponent },
   { path: 'evaluations', component: EvaluationsComponent },
   { path: 'classes', component: TestGroupeComponent },
   { path: 'reponseetudiant', component: ReponseEtudiantComponent },
-  { path: 'impression', component: ImpressionComponent },
+  { path: 'impression/:testId/:groupeId', component: ImpressionComponent },
   { path: 'reponsejuste', component: ReponseJusteComponent },
   { path: 'studentlist', component: EtudiantComponent },
   {path:'update-student/:id', component:UpdateStudentComponent},

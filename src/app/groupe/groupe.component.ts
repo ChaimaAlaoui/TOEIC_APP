@@ -5,12 +5,13 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { GroupeService } from '../services/groupe.service';
+import { NavbarComponent } from '../navbar/navbar.component';
 
 @Component({
   selector: 'app-groupe',
   templateUrl: './groupe.component.html',
   styleUrls: ['./groupe.component.css'],
-  imports: [FormsModule, RouterModule, CommonModule],
+  imports: [FormsModule, RouterModule, CommonModule,NavbarComponent],
 })
 export class GroupeComponent implements OnInit {
   groupes: any[] = [];

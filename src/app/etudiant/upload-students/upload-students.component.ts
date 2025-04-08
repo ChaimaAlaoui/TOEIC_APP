@@ -3,11 +3,12 @@ import { NgIf } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { NavbarComponent } from '../../navbar/navbar.component';
 
 @Component({
   selector: 'app-upload-students',
   standalone: true,
-  imports: [NgIf,FormsModule, CommonModule,ReactiveFormsModule],
+  imports: [NgIf,FormsModule, CommonModule,ReactiveFormsModule, NavbarComponent],
   templateUrl: './upload-students.component.html',
   styleUrls: ['./upload-students.component.css']
 })

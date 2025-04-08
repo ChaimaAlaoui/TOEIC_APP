@@ -18,8 +18,10 @@ test_promotion = db.Table(
 test_groupe = db.Table(
     'test_groupe',
     db.Column('test_id', db.Integer, db.ForeignKey('test.id'), primary_key=True),
-    db.Column('groupe_id', db.Integer, db.ForeignKey('groupe.id'), primary_key=True)
+    db.Column('groupe_id', db.Integer, db.ForeignKey('groupe.id'), primary_key=True),
+    db.Column('feuille_generee', db.Boolean, default=False) 
 )
+
 
 
 
@@ -108,7 +110,7 @@ class Test(db.Model):
     nom = db.Column(db.String(100), nullable=False)  # Nom du test
     date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)  # Date du test
     description = db.Column(db.Text, nullable=True)  # Description du test
-
+   
     # Clé étrangère pour le site
     site_id = db.Column(db.Integer, db.ForeignKey('site.id'), nullable=False)  
 
@@ -125,6 +127,8 @@ class Test(db.Model):
             'site_id': self.site_id,  # Juste l'ID du site au lieu de l'objet complet
             'promotions': [promotion.nom for promotion in self.promotions],
             'groupes': [groupe.nom for groupe in self.groupes]
+           
+
         }
 
     def __repr__(self):
@@ -185,7 +189,7 @@ class ReponseProf(db.Model):
 class ReponseEtudiant(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     num_question = db.Column(db.String(50), nullable=False)
-    choix = db.Column(db.String(2), nullable=False)
+    choix = db.Column(db.String(50), nullable=False)
     etudiant_id = db.Column(db.Integer, db.ForeignKey('etudiant.id'), nullable=False)
     test_id = db.Column(db.Integer, db.ForeignKey('test.id'), nullable=False)
     

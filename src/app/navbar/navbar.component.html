@@ -1,14 +1,25 @@
 <header class="navbar animate-on-scroll" appAnimateOnScroll>
-    <div class="container nav-container">
-      <a routerLink="/" class="logo">TOEIC Grader</a>
-      <nav class="nav-menu">
-        <a routerLink="/">Accueil</a>
-        <a routerLink="/test">Tests</a>
-        <a routerLink="/classe">Classes</a>
-        <a routerLink="/evaluations">Évaluations</a>
-        <a routerLink="/login" class="btn nav-cta">
-          <i class="fas fa-sign-in-alt"></i> Login
-        </a>
-      </nav>
-    </div>
-  </header>
+  <div class="container nav-container">
+    <a routerLink="/home" class="logo">TOEIC Grader</a>
+    <nav class="nav-menu">
+      <a routerLink="/home">Accueil</a>
+      <a routerLink="/studentlist">Students</a>
+      <a routerLink="/groupelist">Groupes</a>
+      <a routerLink="/evaluations">Évaluations</a>
+      <a routerLink="/test">Tests</a>
+      
+      <div class="dropdown">
+        <a class="dropdown-trigger">Other</a>
+        <div class="dropdown-content">
+          <a routerLink="/promotionlist">Promotions</a>
+          <a routerLink="/semestres">Semestres</a>
+          <a routerLink="/site">Sites</a>
+        </div>
+      </div>
+      
+      <a routerLink="/login" class="btn nav-cta">
+        <i class="fas fa-sign-in-alt"></i> LogOut
+      </a>
+    </nav>
+  </div>
+</header>

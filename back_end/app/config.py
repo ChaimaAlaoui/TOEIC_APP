@@ -11,6 +11,6 @@ class Config:
     MAIL_PORT = 587
     MAIL_USE_TLS = True
     MAIL_USE_SSL = False
-    MAIL_USERNAME = 'elalamisafa2003@gmail.com' 
-    MAIL_PASSWORD = 'aojz nien jciv ymvh'   
-    MAIL_DEFAULT_SENDER = 'elalamisafa2003@gmail.com' 
+    MAIL_USERNAME = 'toeicgrader@gmail.com' 
+    MAIL_PASSWORD = 'spet xrcx nlxe upjc'   
+    MAIL_DEFAULT_SENDER = 'toeicgrader@gmail.com' 

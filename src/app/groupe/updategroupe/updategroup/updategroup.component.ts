@@ -5,11 +5,12 @@ import { CommonModule } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { SuccessDialogComponent } from '../../../success-dialog/success-dialog.component';
 import { RouterModule } from '@angular/router';
+import { NavbarComponent } from '../../../navbar/navbar.component';
 
 @Component({
   selector: 'app-update-group',
   standalone: true,
-  imports: [FormsModule, CommonModule,RouterModule],
+  imports: [FormsModule, CommonModule,RouterModule, NavbarComponent],
   templateUrl: './updategroup.component.html',
   styleUrl: './updategroup.component.css'
 })

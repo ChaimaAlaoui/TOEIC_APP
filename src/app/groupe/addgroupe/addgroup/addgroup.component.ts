@@ -5,10 +5,11 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { SuccessDialogComponent } from '../../../success-dialog/success-dialog.component';
+import { NavbarComponent } from '../../../navbar/navbar.component';
 
 @Component({
   selector: 'app-addgroup',
-  imports: [RouterLink, FormsModule, CommonModule],
+  imports: [RouterLink, FormsModule, CommonModule, NavbarComponent],
   standalone: true,
   templateUrl: './addgroup.component.html',
   styleUrl: './addgroup.component.css'

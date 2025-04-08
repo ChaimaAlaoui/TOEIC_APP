@@ -1,16 +1,19 @@
-<div class="container d-flex justify-content-center align-items-center vh-100">
-  <div class="card p-4 shadow" style="width: 100%; max-width: 500px;">
-    <h2 class="text-center mb-4" style="font-size: 1.5rem;">Ajouter un Groupe</h2>
-    <form (ngSubmit)="addGroup()">
+<app-navbar></app-navbar>
+
+<div class="container my-5">
+  <div class="form-container">
+    <h1 class="title">Ajouter un Groupe</h1>
+    
+    <form (ngSubmit)="addGroup()" class="standard-form">
       <!-- Nom du Groupe -->
-      <div class="form-group mb-3">
+      <div class="form-group">
         <label for="groupName">Nom du Groupe</label>
         <input type="text" class="form-control" id="groupName" [(ngModel)]="groupName" name="groupName" placeholder="Entrez le nom du groupe" required>
         <div class="error-message" *ngIf="errors['groupName']">{{ errors['groupName'] }}</div>
       </div>
 
       <!-- Site (Liste déroulante) -->
-      <div class="form-group mb-3">
+      <div class="form-group">
         <label for="groupSiteId">Site</label>
         <select class="form-control" id="groupSiteId" [(ngModel)]="groupSiteId" name="groupSiteId" (change)="onSiteChange(groupSiteId)" required>
           <option value="" disabled selected>Choisissez un site</option>
@@ -20,7 +23,7 @@
       </div>
 
       <!-- Promotion (Liste déroulante) -->
-      <div class="form-group mb-3">
+      <div class="form-group">
         <label for="groupPromotionId">Promotion</label>
         <select class="form-control" id="groupPromotionId" [(ngModel)]="groupPromotionId" name="groupPromotionId" (change)="onPromotionChange(groupPromotionId)" required>
           <option value="" disabled selected>Choisissez une promotion</option>
@@ -30,7 +33,7 @@
       </div>
 
       <!-- Semestre (Liste déroulante) -->
-      <div class="form-group mb-3">
+      <div class="form-group">
         <label for="groupSemestreId">Semestre</label>
         <select class="form-control" id="groupSemestreId" [(ngModel)]="groupSemestreId" name="groupSemestreId" required>
           <option value="" disabled selected>Choisissez un semestre</option>
@@ -39,7 +42,7 @@
         <div class="error-message" *ngIf="errors['groupSemestreId']">{{ errors['groupSemestreId'] }}</div>
       </div>
 
-      <div class="d-flex justify-content-between">
+      <div class="form-actions">
         <button type="submit" class="btn btn-primary">Ajouter</button>
         <button type="button" class="btn btn-secondary" [routerLink]="['/groupelist']">Retour</button>
       </div>

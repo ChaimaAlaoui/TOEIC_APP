@@ -43,14 +43,23 @@ export class ReponseJusteComponent implements OnInit {
   }
 
   onSaveConfig(): void {
-    // Convert from component format to service format
+    // Vérification que toutes les questions ont une réponse
+    const allQuestionsAnswered = this.configQuestions.every(item => item.choix !== undefined && item.choix !== null && item.choix !== '');
+  
+    if (!allQuestionsAnswered) {
+      alert('Toutes les questions doivent être répondues.');
+      return; // Empêche l'enregistrement si une question n'est pas répondue
+    }
+  
+    // Convertir du format du composant au format du service
     const serviceReponses = this.configQuestions.map(item => ({
       num_question: item.numero_question.toString(),
       choix: item.choix
     }));
-    
+  
     this.testCreationService.setReponses(serviceReponses);
     alert('Configuration des réponses enregistrée.');
     this.router.navigate(['/test']);
   }
+  
 }

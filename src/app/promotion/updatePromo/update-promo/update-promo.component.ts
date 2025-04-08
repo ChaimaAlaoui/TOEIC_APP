@@ -5,10 +5,11 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { SuccessDialogComponent } from '../../../success-dialog/success-dialog.component';
+import { NavbarComponent } from '../../../navbar/navbar.component';
 
 @Component({
   selector: 'app-update-promo',
-  imports: [FormsModule, CommonModule,RouterModule],
+  imports: [FormsModule, CommonModule,RouterModule,NavbarComponent],
   templateUrl: './update-promo.component.html',
   styleUrl: './update-promo.component.css'
 })

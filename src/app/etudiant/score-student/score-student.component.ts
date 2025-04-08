@@ -7,7 +7,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 @Component({
   selector: 'app-score-student',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [CommonModule, FormsModule],
   templateUrl: './score-student.component.html',
   styleUrls: ['./score-student.component.css'],
 })

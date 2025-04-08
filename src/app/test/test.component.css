@@ -7,23 +7,23 @@ body {
   background-color: #f7f9fc;
   margin: 0;
   padding: 20px;
-  color: #2c3e50;
+  color: #0d5892;
 }
 
 /* Conteneur principal */
 .container {
-  max-width: 800px;
+  max-width: 1000px;
   margin: 30px auto;
   background: #ffffff;
   padding: 30px;
   border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
 }
 
 /* Titres */
 .container h1 {
   text-align: center;
-  color: #2c3e50;
+  color: black;
   font-size: 2rem;
   margin-bottom: 20px;
 }
@@ -44,7 +44,7 @@ form div {
 form label {
   font-weight: 700;
   margin-bottom: 5px;
-  color: #34495e;
+  color: black;
 }
 
 /* Champs de saisie */
@@ -53,7 +53,7 @@ form input[type="date"],
 form select,
 form textarea {
   padding: 5px;
-  border: 1px solid #bdc3c7;
+  border: 1px solid #74a3c2;
   border-radius: 5px;
   font-size: 16px;
   width: 100%;
@@ -65,7 +65,7 @@ form input[type="text"]:focus,
 form input[type="date"]:focus,
 form select:focus,
 form textarea:focus {
-  border-color: #2980b9;
+  border-color: #1890cc;
   outline: none;
 }
 
@@ -75,7 +75,7 @@ form textarea {
 
 /* Bouton d'enregistrement */
 button[type="submit"] {
-  background-color: #2980b9;
+  background-color: #1890cc;
   color: #ffffff;
   border: none;
   padding: 12px 20px;
@@ -87,7 +87,7 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-  background-color: #1c638d;
+  background-color: #0d5892;
 }
 
 button[type="submit"]:active {
@@ -100,17 +100,16 @@ button[type="submit"]:active {
     padding: 20px;
     margin: 20px;
   }
-  
+
   form input, form select, form textarea {
     font-size: 14px;
   }
-  
+
   button[type="submit"] {
     font-size: 16px;
     padding: 10px 15px;
   }
 }
-
 
 button {
   font-size: 1rem;
@@ -118,33 +117,39 @@ button {
   border-radius: 8px;
   border: none;
   cursor: pointer;
+  background-color: #1890cc;
+  width: 80%;
   transition: all 0.3s ease;
 }
 
 /* Style des boutons principaux */
 button.btn-submit {
-  background-color: #007bff;
+  background-color: #1890cc;
   color: #fff;
   font-weight: bold;
-  width: 100%;
+  width: 90%;
   margin-top: 20px;
 }
 
 button.btn-submit:hover {
-  background-color: #0056b3;
+  background-color: #0d5892;
 }
 
 /* Style des boutons secondaires */
 button.btn-secondary {
   background-color: #f8f9fa;
-  border: 1px solid #007bff;
-  color: #007bff;
+  border: 1px solid #1890cc;
+  color: #1890cc;
   margin-top: 20px;
-  width: 100%;
+  width: 70%;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 button.btn-secondary:hover {
-  background-color: #007bff;
+  background-color: #1890cc;
   color: #fff;
 }
 
@@ -158,4 +163,11 @@ button.w-100 {
   width: 100%;
   padding: 15px;
   font-size: 1.1rem;
+}
+
+/* Centrage */
+.center-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
