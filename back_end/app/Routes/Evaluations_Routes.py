@@ -3,7 +3,7 @@ from datetime import datetime
 import tempfile
 import os
 from werkzeug.utils import secure_filename
-from flask import request, jsonify, send_file
+from flask import request, jsonify, send_file, session
 from sqlalchemy import insert
 
 
@@ -243,3 +243,14 @@ def register_evaluation_routes(app):
             "new_test_id": new_test.id,
             "new_test_nom": new_test.nom
         }), 201
+    
+    @app.route('/api/evaluations/<int:test_id>', methods=['DELETE'])
+    def delete_evaluation(test_id):
+    # Récupérer le test en base
+       test = Test.query.get_or_404(test_id)
+    # Supprimer
+       db.session.delete(test)
+       db.session.commit()
+       return jsonify({"message": "Test supprimé en base"}), 200
+
+

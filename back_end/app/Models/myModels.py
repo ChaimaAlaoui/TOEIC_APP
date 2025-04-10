@@ -117,7 +117,7 @@ class Test(db.Model):
     # Relations avec promotions et groupes
     groupes = db.relationship('Groupe', secondary=test_groupe, backref=db.backref('tests', lazy='dynamic'))
     promotions = db.relationship('Promotion', secondary=test_promotion, backref=db.backref('tests', lazy='dynamic'))
-
+    
     def to_dict(self):
         return {
             'id': self.id,
@@ -171,9 +171,9 @@ class ReponseProf(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     num_question = db.Column(db.String(50), nullable=False)  # Numéro de la question
     choix = db.Column(db.String(2), nullable=False)  # Choix correct (ex: A, B, C, D)
-    test_id = db.Column(db.Integer, db.ForeignKey('test.id'), nullable=False)
-    
-    test = db.relationship('Test', backref='reponses_prof')
+    test_id = db.Column(db.Integer, db.ForeignKey('test.id', ondelete='CASCADE'), nullable=False)
+
+    test = db.relationship('Test', backref=db.backref('reponses_prof', cascade='all, delete-orphan'))
     
     def to_dict(self):
         return {

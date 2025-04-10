@@ -3,6 +3,7 @@ import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NavbarComponent } from '../navbar/navbar.component';
+import { EvaluationService } from '../services/evaluations.service';
 
 interface TestGroupe {
   test_id: number;
@@ -158,12 +159,32 @@ export class EvaluationsComponent implements OnInit {
 
   // 6) Supprimer
   deleteEvaluation(id: number): void {
-    // Ici, tu peux faire un appel fetch / HTTP DELETE
-    if (!confirm("Voulez-vous vraiment supprimer ce test ?")) return;
-
-    // Suppression locale pour l'exemple
-    this.testsAndGroups = this.testsAndGroups.filter(e => e.test_id !== id);
-    alert("Test supprimé.");
+    if (!confirm("Voulez-vous vraiment supprimer ce test ?")) {
+      return;
+    }
+  
+    // Appel HTTP DELETE vers l’API
+    fetch(`http://localhost:5000/api/evaluations/${id}`, {
+      method: 'DELETE'
+    })
+    .then((response) => {
+      // Vérifier si la requête a réussi
+      if (!response.ok) {
+        throw new Error(`Erreur suppression: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data.message);
+  
+      // Si succès, on retire localement le test
+      this.testsAndGroups = this.testsAndGroups.filter(e => e.test_id !== id);
+      alert("Test supprimé avec succès !");
+    })
+    .catch((err) => {
+      console.error("Erreur lors de la suppression:", err);
+      alert("Une erreur est survenue lors de la suppression du test.");
+    });
   }
 
   // =========================================================
