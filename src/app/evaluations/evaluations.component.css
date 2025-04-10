@@ -5,67 +5,23 @@
   box-sizing: border-box;
 }
 
-/* Corps de page */
 body {
   font-family: Arial, sans-serif;
   background-color: #f8f9fc;
   color: #2c3e50;
 }
 
-/* Conteneur principal */
+/* Container principal de la page */
 .container {
-  /* Largeur maximale plus restreinte pour éviter que le tableau soit trop large */
   max-width: 90%;
-  margin: 40px auto; /* Centre le conteneur */
+  margin: 40px auto;
   background: #fff;
   padding: 30px;
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
 }
 
-/* Conteneur du tableau */
-.table-container {
-  /* Centre le tableau dans le conteneur si nécessaire */
-  margin: 0 auto;
-  /* Garde un overflow-x auto pour permettre un défilement horizontal si l'écran est trop petit */
-  overflow-x: auto;
-  /* Largeur max pour éviter que le tableau déborde */
-  max-width: 100%;
-}
-
-.evaluation-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 0 auto; /* Centre le tableau à l'intérieur de .table-container */
-}
-
-.evaluation-table thead {
-  background-color: #1890cc; /* Couleur modifiée */
-  color: #fff;
-}
-
-.evaluation-table th,
-.evaluation-table td {
-  padding: 15px;
-  text-align: left;
-  font-size: 16px;
-  border-bottom: 1px solid #e9ecef;
-}
-
-.evaluation-table th {
-  font-weight: bold;
-}
-
-/* Pour marquer les lignes paires */
-.evaluation-table tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
-
-.evaluation-table tbody tr:hover {
-  background-color: #e9ecef;
-}
-
-/* Titres */
+/* Titre principal */
 .title {
   text-align: center;
   margin-bottom: 30px;
@@ -78,7 +34,6 @@ body {
   text-align: center;
   margin-bottom: 20px;
 }
-
 .search-bar input {
   width: 100%;
   max-width: 400px;
@@ -88,24 +43,27 @@ body {
   border-radius: 4px;
   transition: border-color 0.3s;
 }
-
 .search-bar input:focus {
-  border-color: #1890cc; /* Couleur modifiée */
+  border-color: #1890cc;
   outline: none;
 }
 
-/* Tableau des évaluations */
+/* ====================== TABLEAU DES ÉVALUATIONS ====================== */
+
 .table-container {
-  overflow-x: auto;
+  margin: 0 auto;
+  overflow-x: auto; /* Pour le scroll horizontal sur petits écrans */
+  max-width: 100%;
 }
 
 .evaluation-table {
   width: 100%;
   border-collapse: collapse;
+  margin: 0 auto;
 }
 
 .evaluation-table thead {
-  background-color: #1890cc; /* Couleur modifiée */
+  background-color: #1890cc; /* Couleur de fond de l'en-tête */
   color: #fff;
 }
 
@@ -121,6 +79,7 @@ body {
   font-weight: bold;
 }
 
+/* Colorer les lignes paires */
 .evaluation-table tr:nth-child(even) {
   background-color: #f2f2f2;
 }
@@ -129,7 +88,13 @@ body {
   background-color: #e9ecef;
 }
 
-/* Boutons */
+.evaluation-table th.actions,
+.evaluation-table td.action-buttons {
+  text-align: center;
+}
+
+/* ====================== BOUTONS ====================== */
+
 .btn {
   font-size: 0.9rem;
   padding: 8px 16px;
@@ -138,28 +103,74 @@ body {
   cursor: pointer;
   margin-right: 8px;
   transition: background-color 0.3s ease, transform 0.2s ease;
+  display: inline-block;
 }
 
-/* Bouton Supprimer (rouge) */
+/* Bouton "Télécharger Feuille" */
+.btn-download {
+  background-color: #1890cc; 
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+}
+.btn-download:hover {
+  background-color: #0d5892;
+}
+.btn-download:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+/* Bouton Corriger */
+.btn-correct {
+  background-color: #1890cc;
+  color: white;
+  font-size: 1rem;
+  padding: 10px 20px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.btn-correct:hover {
+  background-color: #0d5892;
+  transform: translateY(-2px);
+}
+.btn-correct:disabled {
+  background-color: #d6e4f1;
+  color: #a0b8d3;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Bouton Supprimer */
 .btn-delete {
   background-color: #dc3545;
   color: #fff;
+  margin-right: 0; /* Removing right margin for the delete button */
 }
-
 .btn-delete:hover {
   background-color: #c82333;
   transform: translateY(-2px);
 }
 
-/* Bouton Dupliquer (bleu) */
+/* Bouton Dupliquer */
 .btn-duplicate {
-  background-color: #1890cc; /* Couleur modifiée */
+  background-color: #1890cc;
   color: #fff;
 }
-
 .btn-duplicate:hover {
-  background-color: #0d5892; /* Couleur modifiée */
+  background-color: #0d5892;
   transform: translateY(-2px);
+}
+
+/* Action buttons container */
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px; /* Consistent spacing between buttons */
 }
 
 /* Retrait de la marge sur le dernier bouton */
@@ -167,7 +178,8 @@ td > .btn:last-child {
   margin-right: 0;
 }
 
-/* Responsive */
+/* ====================== RESPONSIVE ====================== */
+
 @media (max-width: 768px) {
   .title {
     font-size: 1.5rem;
@@ -186,185 +198,159 @@ td > .btn:last-child {
   }
 }
 
-.evaluation-table th.actions,
-.evaluation-table td.action-buttons {
-  text-align: center;
-}
-
-.btn-download {
-  background-color: #1890cc; /* Couleur modifiée */
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.btn-download:hover {
-  background-color: #0d5892; /* Couleur modifiée */
-}
-
-.btn-download:disabled {
-  background-color: #6c757d;
-  cursor: not-allowed;
-}
+/* ====================== SPINNER ====================== */
 
 .spinner-border {
   width: 1rem;
   height: 1rem;
   vertical-align: text-bottom;
+  border: 2px solid rgba(0,0,0,0.2);
+  border-top: 2px solid #fff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
 
-/* Bouton Corriger */
-.btn-correct {
-  background-color: #1890cc; /* Couleur de fond */
-  color: white; /* Texte blanc */
-  font-size: 1rem;
-  padding: 10px 20px;
-  border-radius: 6px;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
+/* ====================== MODALES ====================== */
 
-.btn-correct:hover {
-  background-color: #0d5892; /* Couleur de fond au survol */
-  transform: translateY(-2px); /* Légère élévation au survol */
-}
-
-.btn-correct:disabled {
-  background-color: #d6e4f1; /* Couleur de fond désactivée */
-  color: #a0b8d3; /* Couleur du texte désactivé */
-  cursor: not-allowed; /* Curseur désactivé */
-  transform: none; /* Annule l'élévation quand désactivé */
-}
-
-
-
-/* ///////////// */
-/* Styles pour la modale */
-
+/* ------------------------------------- */
+/*       BACKDROP (fond flou)           */
+/* ------------------------------------- */
 .modal-backdrop-blur {
   position: fixed;
-  top: 0;
+  top: 0; 
   left: 0;
-  width: 100%;
+  width: 100%; 
   height: 100%;
   backdrop-filter: blur(6px);
-  background-color: rgba(0, 0, 0, 0.3); /* assombri légèrement */
-  z-index: 1040; /* juste en dessous de la modale */
+  background-color: rgba(0,0,0,0.3);
+  z-index: 1040;
 }
 
+/* ------------------------------------- */
+/*        MODAL (conteneur)             */
+/* ------------------------------------- */
 .custom-modal {
-  z-index: 1050 !important;
   position: fixed;
   top: 50%;
   left: 50%;
+  width: 60%;             /* Largeur de la modale (peut ajuster à 50%, etc.) */
+  max-width: 800px;       /* Limite en px si tu veux */
+  max-height: 80vh;       /* La modal ne dépassera pas 80% de la hauteur écran */
+  display: flex;          /* Pour séparer header/body/footer en colonne */
+  flex-direction: column;
+  background: #fff;
   transform: translate(-50%, -50%);
-  background: white;
-  padding: 2rem;
   border-radius: 8px;
-  max-width: 600px;
-  width: 90%;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+  z-index: 1050;
 }
 
-.modal-body .container {
+/* ------------------------------------- */
+/*       MODAL HEADER (en-tête)         */
+/* ------------------------------------- */
+.modal-header {
   display: flex;
-  justify-content: center;
   align-items: center;
-  min-height: auto;
-  padding: 20px;
+  justify-content: space-between; /* Titre à gauche, bouton close à droite */
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #ddd;
+  background: #f8f8f8;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
 }
 
-.card {
-  background: rgba(255, 255, 255, 0.9);
-  border: none;
-  border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  padding: 2rem;
-  width: 100%;
-  max-width: 500px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-/* Le reste des styles que vous avez fournis */
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-}
-
-.card-body {
-  text-align: center;
-}
-
-h2 {
+.modal-header .modal-title {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 600;
   color: #333;
-  margin-bottom: 1.5rem;
 }
 
+.modal-header .close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  line-height: 1;
+}
+
+/* ------------------------------------- */
+/*       MODAL BODY (zone scrollable)   */
+/* ------------------------------------- */
+.modal-body {
+  flex: 1;               /* Occupe l'espace vertical restant */
+  overflow-y: auto;      /* Active le scroll vertical */
+  padding: 1rem 1.5rem;
+}
+
+/* ------------------------------------- */
+/*     MODAL FOOTER (bas de la modale)  */
+/* ------------------------------------- */
+.modal-footer {
+  border-top: 1px solid #ddd;
+  background: #f8f8f8;
+  padding: 1rem 1.5rem;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  display: flex;
+  justify-content: center; /* Centre le/les bouton(s) */
+}
+
+/* ------------------------------------- */
+/*       FORM GROUPS (exemple)          */
+/* ------------------------------------- */
 .form-group {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
-
 .form-group label {
   display: block;
   margin-bottom: 0.5rem;
-  color: #555;
-  font-weight: bold;
+  font-weight: 600;
 }
-
-.form-control-file {
-  display: block;
+.form-group input[type="text"],
+.form-group input[type="datetime-local"],
+.form-group textarea,
+.form-group select {
   width: 100%;
   padding: 0.5rem;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  background-color: #fff;
-  transition: border-color 0.3s ease;
+  font-size: 0.95rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
-.form-control-file:focus {
-  border-color: #007bff;
-  outline: none;
+/* Pour les sélecteurs multiples (Promotions, Groupes) */
+.form-group select[multiple] {
+  height: 5.5rem; /* Ajuste la hauteur selon besoin */
 }
 
+/* ------------------------------------- */
+/*    CHECKBOX (form-check)             */
+/* ------------------------------------- */
+.form-check {
+  margin-top: 1.5rem;
+  display: flex;
+  align-items: center;
+}
+.form-check-input {
+  margin-right: 8px;
+}
+
+/* ------------------------------------- */
+/*        BOUTON                         */
+/* ------------------------------------- */
 .btn-primary {
   background-color: #007bff;
   border: none;
-  border-radius: 5px;
-  padding: 0.5rem 1rem;
-  color: white;
-  font-weight: bold;
+  border-radius: 4px;
+  padding: 0.6rem 1.2rem;
+  color: #fff;
+  font-weight: 500;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
-
 .btn-primary:hover {
   background-color: #0056b3;
-}
-
-.btn-primary:disabled {
-  background-color: #6c757d;
-  cursor: not-allowed;
-}
-
-.alert {
-  margin-top: 1rem;
-  padding: 0.75rem 1.25rem;
-  border-radius: 5px;
-  font-size: 0.875rem;
-}
-
-.alert-success {
-  background-color: #d4edda;
-  border-color: #c3e6cb;
-  color: #155724;
-}
-
-.alert-danger {
-  background-color: #f8d7da;
-  border-color: #f5c6cb;
-  color: #721c24;
 }
