@@ -1,0 +1,50 @@
+<app-navbar></app-navbar>
+<div class="container my-5">
+  <h1 class="text-center mb-4">📘 Création d’un Test TOEIC</h1>
+  
+  <form>
+    <!-- Titre -->
+    <div class="form-group mb-3">
+      <label for="Titre">Nom du Test :</label>
+      <input type="text" id="Titre" [(ngModel)]="test.Titre" name="Titre" class="form-control" required placeholder="Entrez le nom du test">
+    </div>
+
+    <!-- Description -->
+    <div class="form-group mb-3">
+      <label for="Description">Description :</label>
+      <textarea id="Description" [(ngModel)]="test.Description" name="Description" class="form-control" placeholder="Entrez la description"></textarea>
+    </div>
+
+    <!-- Site -->
+<!-- Site -->
+<div class="form-group mb-3">
+  <label for="Site">Site :</label>
+  <select id="Site" [(ngModel)]="test.Site" name="Site" class="form-control" required>
+    <option *ngFor="let site of sites" [value]="site.id">{{ site.nom }}</option>
+  </select>
+</div>
+
+
+    <!-- Date -->
+    <div class="form-group mb-3">
+      <label for="Date">Date :</label>
+      <input type="date" id="Date" [(ngModel)]="test.Date" name="Date" class="form-control" required>
+    </div>
+
+    <div class="form-group center-group  mb-3">
+      <button type="button" class="btn btn-secondary form-control" (click)="selectionnerClasse()">
+        Selectionner Groupe
+      </button>
+    </div>
+
+    <div class="form-group center-group mb-3">
+      <button type="button" class="btn btn-secondary form-control" (click)="onConfigureReponses()">
+        Configurer les réponses
+      </button>
+    </div>
+
+    <div class="text-center center-group mt-4">
+      <button type="button" class="btn btn-primary" (click)="onSaveTest()">Enregistrer Test</button>
+    </div>
+  </form>
+</div>

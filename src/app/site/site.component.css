@@ -1,0 +1,247 @@
+/* ======= Reset / Base ======= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Corps de page */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fc;
+  color: #2c3e50;
+}
+
+/* Conteneur principal */
+.container {
+  max-width: 85%;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+/* Carte de liste */
+.list-card {
+  background: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.list-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+}
+
+/* En-tête de liste */
+.list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+/* Titre */
+.title {
+  font-size: 1.8rem;
+  color: #2c3e50;
+}
+
+/* Actions d'en-tête */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Bouton d'ajout */
+.btn-add {
+  background-color: #1890cc;
+  color: #fff;
+  padding: 10px 15px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-add:hover {
+  background-color: #0d5892;
+  transform: translateY(-2px);
+}
+
+/* Conteneur de recherche */
+.search-container {
+  position: relative;
+}
+
+/* Input de recherche */
+.search-input {
+  padding: 8px 12px;
+  width: 200px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.search-input:focus {
+  border-color: #1890cc;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(24, 144, 204, 0.2);
+}
+
+/* Table des données */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.data-table th {
+  background-color: #1890cc;
+  color: white;
+  text-align: left;
+  padding: 12px 15px;
+  font-weight: 600;
+}
+
+.data-table td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #eaedf2;
+}
+
+.data-table tbody tr {
+  transition: background-color 0.2s;
+}
+
+.data-table tbody tr:hover {
+  background-color: #f5f7fa;
+}
+
+/* Colonne d'actions */
+.action-column {
+  white-space: nowrap;
+}
+
+/* Liens d'action */
+.action-link {
+  display: inline-block;
+  margin-right: 12px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.action-link:hover {
+  transform: scale(1.2);
+}
+
+.action-link.edit {
+  color: #1890cc;
+}
+
+.action-link.delete {
+  color: #dc3545;
+}
+
+/* Contrôles de pagination */
+.pagination-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+/* Boutons de pagination */
+.pagination-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+/* Bouton de navigation */
+.btn-nav {
+  background-color: transparent;
+  color: #1890cc;
+  border: 1px solid #1890cc;
+  padding: 8px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-nav:hover:not([disabled]) {
+  background-color: #1890cc;
+  color: white;
+}
+
+.btn-nav[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Info de pagination */
+.pagination-info {
+  font-size: 0.9rem;
+  color: #6c757d;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.list-card {
+  animation: fadeIn 0.4s ease-out;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container {
+    max-width: 95%;
+    padding: 0 10px;
+  }
+  
+  .list-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+  
+  .header-actions {
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .search-container {
+    width: 100%;
+    margin-top: 10px;
+  }
+  
+  .search-input {
+    width: 100%;
+  }
+  
+  .title {
+    font-size: 1.5rem;
+  }
+  
+  .pagination-controls {
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-start;
+  }
+  
+  .pagination-info {
+    margin-top: 10px;
+  }
+}

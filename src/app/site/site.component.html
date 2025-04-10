@@ -1,0 +1,54 @@
+<app-navbar></app-navbar>
+<div class="container my-5">
+  <div class="list-card">
+    <div class="list-header">
+      <h1 class="title">Liste des Sites</h1>
+      <div class="header-actions">
+        <button class="btn btn-add" routerLink="/addsite">
+          <i class="fas fa-plus"></i> Ajouter un Site
+        </button>
+        <div class="search-container">
+          <input type="text" class="search-input" placeholder="Rechercher..." [(ngModel)]="searchText">
+        </div>
+      </div>
+    </div>
+
+    <!-- Tableau -->
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let site of filteredSites">
+          <td>{{ site.nom }}</td>
+          <td class="action-column">
+            <a [routerLink]="['/update-site', site.id]" class="action-link edit">
+              <i class="fas fa-edit"></i>
+            </a>
+            <a (click)="deleteSite(site.id)" class="action-link delete">
+              <i class="fas fa-times"></i>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Paginateur -->
+    <div class="pagination-controls">
+      <div class="pagination-buttons">
+        <button class="btn btn-nav" (click)="previousPage()" [disabled]="currentPage === 1">
+          <i class="fas fa-chevron-left"></i> Précédent
+        </button>
+        <button class="btn btn-nav" (click)="nextPage()" [disabled]="currentPage === totalPages">
+          Suivant <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+      <div class="pagination-info">
+        Page {{ currentPage }} sur {{ totalPages }}
+      </div>
+    </div>
+  </div>
+</div>

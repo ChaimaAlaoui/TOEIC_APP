@@ -1,0 +1,74 @@
+<app-navbar></app-navbar>
+
+<div class="container my-5">
+  <h1 class="title">Liste des Étudiants</h1>
+  
+  <!-- Search and Add Button Row -->
+  <div class="action-row">
+    <div class="search-bar">
+      <input type="text" [(ngModel)]="searchText" placeholder="Rechercher un étudiant..." />
+    </div >
+    <div class="same">
+    <button class="btn btn-add" routerLink="/addstudent">
+      <i class="fas fa-plus"></i> Ajouter un Étudiant
+    </button>
+
+    <button class="btn btn-add btn-add-list" routerLink="/uploadstudent">
+      <i class="fas fa-plus"></i> Import CSV List
+    </button>
+  </div>
+</div>
+
+  <!-- Table for students -->
+  <div class="table-container">
+    <table class="evaluation-table">
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Prénom</th>
+          <th>Promotion</th>
+          <th>Semestre</th>
+          <th>Groupe</th>
+          <th>Site</th>
+          <th>Spécialité</th>
+          <th class="actions">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let student of filteredStudents" class="evaluation-row">
+          <td>{{ student.nom }}</td>
+          <td>{{ student.prenom }}</td>
+          <td>{{ student.promotion }}</td>
+          <td>{{ student.semestre }}</td>
+          <td>{{ student.groupe }}</td>
+          <td>{{ student.site }}</td>
+          <td>{{ student.specialite }}</td>
+          
+          <td class="action-buttons">
+            <a [routerLink]="['/update-student', student.id]" class="btn-icon btn-edit">
+              <i class="fas fa-edit"></i>
+            </a>
+            <button class="btn-icon btn-delete" (click)="deleteStudent(student.id)">
+              <i class="fas fa-times"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <!-- Pagination -->
+  <div class="pagination-controls">
+    <div class="pagination-buttons">
+      <button class="btn btn-pagination" (click)="previousPage()" [disabled]="currentPage === 1">
+        <i class="fas fa-chevron-left"></i> Précédent
+      </button>
+      <button class="btn btn-pagination" (click)="nextPage()" [disabled]="currentPage === totalPages">
+        Suivant <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
+    <div class="pagination-info">
+      Page {{ currentPage }} sur {{ totalPages }}
+    </div>
+  </div>
+</div>

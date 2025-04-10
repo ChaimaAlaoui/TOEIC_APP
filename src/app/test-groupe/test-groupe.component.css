@@ -1,0 +1,135 @@
+/* Container globale */
+.test-groupe-container {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Bouton Ajouter Groupe */
+.header-section {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.header-section .btn {
+  background-color: #1890cc;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+}
+
+.header-section .btn:hover {
+  background-color: #0d5892;
+}
+
+/* Barre de recherche */
+.search-bar {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.search-bar input {
+  width: 70%;
+  padding: 12px 16px;
+  border: 1px solid #ddd;
+  border-radius: 30px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.search-bar input:focus {
+  outline: none;
+  border-color: #1890cc;
+  box-shadow: 0 0 10px rgba(24, 144, 204, 0.2);
+}
+
+/* Liste des groupes */
+.group-list {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Carte de groupe */
+.group-card {
+  display: flex;
+  width: 90%;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f0f7fb;
+  border-left: 8px solid #1890cc;
+  padding: 10px 40px;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(24, 144, 204, 0.2);
+  transition: transform 0.2s ease;
+}
+
+.group-card:hover {
+  transform: scale(1.02);
+}
+
+.group-info {
+  max-width: 85%;
+}
+
+.group-info h2 {
+  margin: 0 0 8px;
+  font-size: 20px;
+  color: #2c3e50;
+}
+
+.group-info p {
+  margin: 4px 0;
+  color: #555;
+  font-size: 15px;
+}
+
+/* Checkbox */
+.group-selection {
+  display: flex;
+  align-items: center;
+}
+
+.group-selection input[type="checkbox"] {
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  margin-inline: 10px;
+}
+
+/* Bouton de confirmation */
+.text-center {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.btn-primary {
+  background-color: #1890cc;
+  color: white;
+  padding: 12px 28px;
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(24, 144, 204, 0.3);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-primary:hover {
+  background-color: #0d5892;
+  transform: translateY(-2px);
+}

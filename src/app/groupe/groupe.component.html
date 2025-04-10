@@ -1,0 +1,61 @@
+<app-navbar></app-navbar>
+
+<div class="container my-5">
+  <h1 class="title">Liste des Groupes</h1>
+  
+  <!-- Search and Add Button Row -->
+  <div class="action-row">
+    <div class="search-bar">
+      <input type="text" [(ngModel)]="searchText" placeholder="Rechercher un groupe..." />
+    </div>
+    <button class="btn btn-add" routerLink="/addgroup">
+      <i class="fas fa-plus"></i> Ajouter un Groupe
+    </button>
+  </div>
+
+  <!-- Table for groups -->
+  <div class="table-container">
+    <table class="evaluation-table">
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Promotion</th>
+          <th>Semestre</th>
+          <th>Site</th>
+          <th class="actions">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let groupe of filteredGroupes" class="evaluation-row">
+          <td>{{ groupe.nom }}</td>
+          <td>{{ groupe.promotion }}</td>
+          <td>{{ groupe.semestre }}</td>
+          <td>{{ groupe.site }}</td>
+          <td class="action-buttons">
+            <a [routerLink]="['/updategroup', groupe.id]" class="btn-icon btn-edit">
+              <i class="fas fa-edit"></i>
+            </a>
+            <button class="btn-icon btn-delete" (click)="deleteGroupe(groupe.id)">
+              <i class="fas fa-times"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <!-- Pagination -->
+  <div class="pagination-controls">
+    <div class="pagination-buttons">
+      <button class="btn btn-pagination" (click)="previousPage()" [disabled]="currentPage === 1">
+        <i class="fas fa-chevron-left"></i> Précédent
+      </button>
+      <button class="btn btn-pagination" (click)="nextPage()" [disabled]="currentPage === totalPages">
+        Suivant <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
+    <div class="pagination-info">
+      Page {{ currentPage }} sur {{ totalPages }}
+    </div>
+  </div>
+</div>

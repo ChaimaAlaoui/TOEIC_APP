@@ -1,0 +1,119 @@
+<app-navbar></app-navbar>
+
+<div class="container my-5">
+  <h1 class="title">Liste des Évaluations</h1>
+  
+  <!-- Search Bar -->
+  <div class="search-bar">
+    <input type="text" [(ngModel)]="searchTerm" placeholder="Rechercher une évaluation..." />
+  </div>
+
+  <!-- Table for filtered evaluations -->
+  <div class="table-container">
+    <table class="evaluation-table">
+      <thead>
+        <tr>
+          <th>Titre</th>
+          <th>Groupe</th>
+          <th>Date</th> <!-- New column for Date -->
+          <th>Description</th> <!-- New column for Description -->
+          
+          <th class="actions">Feuilles De Reponse</th>
+          <th class="actions">Correct Test</th>
+          <th class="actions">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let evaluation of filteredEvaluations" class="evaluation-row">
+          <td>{{ evaluation.test_title }}</td>
+          <td>{{ evaluation.groupe_name }}</td>
+          <td>{{ evaluation.test_date | date: 'yyyy-MM-dd' }}</td>
+
+          <td>{{ evaluation.test_description }}</td> <!-- Display description -->
+         
+          
+
+          <td>
+
+          <button (click)="viewResponseSheet(evaluation.test_id, evaluation.groupe_id)" 
+          class="btn btn-download"
+          [disabled]="loadingButtonId === 'btn-' + evaluation.test_id + '-' + evaluation.groupe_id">
+    
+        <span *ngIf="loadingButtonId !== 'btn-' + evaluation.test_id + '-' + evaluation.groupe_id">
+            Télécharger la feuille de réponse
+        </span>
+        
+        <span *ngIf="loadingButtonId === 'btn-' + evaluation.test_id + '-' + evaluation.groupe_id" 
+              class="spinner-border spinner-border-sm" 
+              role="status" 
+              aria-hidden="true">
+        </span>
+        <span *ngIf="loadingButtonId === 'btn-' + evaluation.test_id + '-' + evaluation.groupe_id" 
+              class="ms-2">
+            Génération en cours...
+        </span>
+    </button>
+
+        </td>
+
+        <td>
+          <button class="btn btn-correct"
+                  [disabled]="!evaluation.feuille_generee"
+                  (click)="openUploadModal(evaluation)">
+            Corriger
+          </button>
+        </td>
+
+        <td class="action-buttons">
+          <!-- Add action buttons like Delete or Duplicate -->
+          <button class="btn btn-delete" (click)="deleteEvaluation(evaluation.test_id)">Supprimer</button>
+          <button class="btn btn-duplicate" (click)="duplicateEvaluation(evaluation.test_id)">Dupliquer</button>
+          
+
+        </td>
+
+
+          
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+ <!-- BACKDROP FLUO -->
+<div *ngIf="showModal" class="modal-backdrop-blur"></div>
+
+<!-- MODAL -->
+<div *ngIf="showModal" class="custom-modal">
+  <div class="modal-header">
+    <h2 class="modal-title">Téléverser Votre Fichier PDF</h2>
+    <button type="button" class="close" aria-label="Close" (click)="showModal = false">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form (ngSubmit)="onSubmit(); showModal = false" novalidate>
+      <div class="form-group">
+        <label for="file">Sélectionnez un fichier PDF</label>
+        <input
+          type="file"
+          class="form-control-file"
+          id="file"
+          (change)="onFileChange($event)"
+          accept=".pdf"
+          required
+        />
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="isLoading" 
+        (click)="uploadPdf(selectedEvaluation.test_id, selectedEvaluation.groupe_id)">
+        <span *ngIf="!isLoading">Téléverser</span>
+        <span *ngIf="isLoading">Téléversement en cours...</span>
+      </button>
+      
+    </form>
+  </div>
+</div>
+
+
+
