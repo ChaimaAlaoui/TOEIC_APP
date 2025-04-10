@@ -163,7 +163,7 @@ export class EvaluationsComponent implements OnInit {
 
     // Suppression locale pour l'exemple
     this.testsAndGroups = this.testsAndGroups.filter(e => e.test_id !== id);
-    alert("Test supprimé (suppression locale).");
+    alert("Test supprimé.");
   }
 
   // =========================================================
