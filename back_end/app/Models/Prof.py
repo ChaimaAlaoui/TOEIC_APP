@@ -9,9 +9,6 @@ class Prof(db.Model):
     email = db.Column(db.String(120), unique=True, nullable=False)  # Email unique de l'enseignant (champ requis)
     mot_de_passe = db.Column(db.String(200), nullable=False)  # Mot de passe haché de l'enseignant (champ requis)
     is_active = db.Column(db.Boolean, default=True)  # Statut d'activation (par défaut à True, actif)
-    
-    # safaa ajouter ce ligne  : 
-    
     # Méthode de représentation pour afficher un professeur sous forme de chaîne de caractères
     def __repr__(self):
         return f"<Prof {self.nom} {self.prenom}>"

@@ -22,6 +22,11 @@ import { AddGroupComponent } from './groupe/addgroupe/addgroup/addgroup.componen
 import { UpdateGroupComponent } from './groupe/updategroupe/updategroup/updategroup.component';
 import { AddPromoComponent } from './promotion/addPromo/add-promo/add-promo.component';
 import { UpdatePromoComponent } from './promotion/updatePromo/update-promo/update-promo.component';
+import { AddSiteComponent } from './site/addsite/add-site/add-site.component';
+import { ScoreComponent } from './score/score.component';
+import { SemestreComponent } from './semestre/semestre.component';
+import { AddSemestreComponent } from './semestre/add-semestre/add-semestre.component';
+import { UpdateSemestreComponent } from './semestre/update-semestre/update-semestre.component';
 
 
 
@@ -41,7 +46,7 @@ export const routes: Routes = [
   { path: 'reponsejuste', component: ReponseJusteComponent },
   { path: 'studentlist', component: EtudiantComponent },
   {path:'update-student/:id', component:UpdateStudentComponent},
-  {path: 'scorestudent/:id',component:ScoreStudentComponent},
+  // {path: 'scorestudent/:id',component:ScoreStudentComponent},
   {path:'addstudent', component:AddstudentComponent},
   {path:'uploadstudent',component:UploadStudentsComponent},
   {path:'site',component:SiteComponent},
@@ -51,6 +56,12 @@ export const routes: Routes = [
   {path:'updategroup/:id',component:UpdateGroupComponent},
   {path:'scorestudent',component:ScoreStudentComponent},
   { path: 'addpromo', component:AddPromoComponent },
-  { path: 'updatepromo/:id',component:UpdatePromoComponent  }
+  { path: 'updatepromo/:id',component:UpdatePromoComponent  },
+  { path: 'addsite', component: AddSiteComponent },
+  { path: 'score', component: ScoreComponent },
+  {path: 'semestre', component:SemestreComponent},
+  {path:'addsemestre', component:AddSemestreComponent},
+  {path:'updatesemestre/:id',component:UpdateSemestreComponent}
+
 
 ];

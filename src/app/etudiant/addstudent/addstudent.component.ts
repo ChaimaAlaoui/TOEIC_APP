@@ -23,7 +23,6 @@ export class AddstudentComponent implements OnInit {
   studentSemestreId = '';
   studentGroupId = '';
   studentSpecialite = '';
-  studentEmail = '';
 
   // Listes pour les sélections
   sites: any[] = [];
@@ -148,7 +147,6 @@ export class AddstudentComponent implements OnInit {
     if (!this.studentSemestreId) this.errors['studentSemestreId'] = 'Le semestre est requis.';
     if (!this.studentGroupId) this.errors['studentGroupId'] = 'Le groupe est requis.';
     if (!this.studentSpecialite) this.errors['studentSpecialite'] = 'La spécialité est requise.';
-    if (!this.studentEmail) this.errors['studentEmail'] = 'L\'email est requis.';
 
     // Si des erreurs existent, ne pas soumettre le formulaire
     return Object.keys(this.errors).length === 0;
@@ -169,7 +167,6 @@ export class AddstudentComponent implements OnInit {
       semestre_id: this.studentSemestreId,
       groupe_id: this.studentGroupId,
       specialite: this.studentSpecialite,
-      email: this.studentEmail
     };
 
     fetch('http://localhost:5000/api/etudiants', {

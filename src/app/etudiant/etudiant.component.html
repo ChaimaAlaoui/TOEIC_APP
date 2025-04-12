@@ -31,7 +31,6 @@
           <th>Groupe</th>
           <th>Site</th>
           <th>Spécialité</th>
-          <th>Score</th>
           <th class="actions">Actions</th>
         </tr>
       </thead>
@@ -44,11 +43,7 @@
           <td>{{ student.groupe }}</td>
           <td>{{ student.site }}</td>
           <td>{{ student.specialite }}</td>
-          <td>
-            <a [routerLink]="['/scorestudent', student.id]" class="btn-icon btn-score">
-              <i class="fas fa-chart-line"></i>
-            </a>
-          </td>
+          
           <td class="action-buttons">
             <a [routerLink]="['/update-student', student.id]" class="btn-icon btn-edit">
               <i class="fas fa-edit"></i>

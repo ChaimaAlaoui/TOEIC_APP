@@ -25,18 +25,25 @@
                 "glob": "**/*",
                 "input": "public"
 <<<<<<< HEAD
+<<<<<<< HEAD
               },
                "src/assets",
                 "src/favicon.ico"
 =======
+=======
+>>>>>>> a5f00270d44e6bbdd13c6804586b07cb4aa4df06
               }
             ],
             "styles": [
               "@angular/material/prebuilt-themes/azure-blue.css",
               "src/styles.css"
+<<<<<<< HEAD
 >>>>>>> origin/Chaima_Alaoui
             ],
            
+=======
+            ],
+>>>>>>> a5f00270d44e6bbdd13c6804586b07cb4aa4df06
             "scripts": [],
             "server": "src/main.server.ts",
             "outputMode": "server",
@@ -98,13 +105,19 @@
               }
             ],
 <<<<<<< HEAD
+<<<<<<< HEAD
            
 =======
+=======
+>>>>>>> a5f00270d44e6bbdd13c6804586b07cb4aa4df06
             "styles": [
               "@angular/material/prebuilt-themes/azure-blue.css",
               "src/styles.css"
             ],
+<<<<<<< HEAD
 >>>>>>> origin/Chaima_Alaoui
+=======
+>>>>>>> a5f00270d44e6bbdd13c6804586b07cb4aa4df06
             "scripts": []
           }
         }

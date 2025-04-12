@@ -1,0 +1,26 @@
+<app-navbar></app-navbar>
+<div class="container d-flex justify-content-center align-items-center vh-100">
+  <div class="card p-4 shadow" style="width: 100%; max-width: 500px;">
+    <h2 class="text-center mb-4" style="font-size: 1.5rem;">Ajouter un Site</h2>
+    <form (ngSubmit)="addSite()">
+      <!-- Nom du site -->
+      <div class="form-group mb-4">
+        <label for="siteNom">Nom du Site</label>
+        <input type="text" class="form-control" id="siteNom" 
+               [(ngModel)]="siteNom" name="siteNom" 
+               placeholder="Entrez le nom du site (ex: Boulogne, Calais...)" required>
+        <div class="error-message" *ngIf="errors['siteNom']">{{ errors['siteNom'] }}</div>
+      </div>
+
+      <!-- Message d'erreur général -->
+      <div class="error-message mb-3" *ngIf="errors['general']">
+        {{ errors['general'] }}
+      </div>
+
+      <div class="d-flex justify-content-between">
+        <button type="submit" class="btn btn-primary">Ajouter</button>
+        <button type="button" class="btn btn-secondary" [routerLink]="['/site']">Retour</button>
+      </div>
+    </form>
+  </div>
+</div>

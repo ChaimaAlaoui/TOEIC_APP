@@ -80,7 +80,6 @@ class Etudiant(db.Model):
     site_id = db.Column(db.Integer, db.ForeignKey('site.id'), nullable=False)
     semestre_id = db.Column(db.Integer, db.ForeignKey('semestre.id'), nullable=False) 
     specialite = db.Column(db.String(100), nullable=False)  # Exemple : "Informatique", "Génie Civil"
-    email = db.Column(db.String(150), unique=True, nullable=False)
 
     promotion = db.relationship('Promotion', backref='etudiants')
     groupe = db.relationship('Groupe', backref='etudiants')
@@ -93,11 +92,19 @@ class Etudiant(db.Model):
             'nom': self.nom,
             'prenom': self.prenom,
             'promotion': self.promotion.nom,
+            'promotion_id': self.promotion_id,
+
             'groupe': self.groupe.nom,
+            'groupe_id': self.groupe_id,
+
             'site': self.site.nom,
+            'site_id': self.site_id,
             'semestre': self.semestre.nom,
+            'semestre_id': self.semestre_id,
             'specialite': self.specialite,
-            'email': self.email
+            # 'email': self.email
+
+        
         }
 
     def __repr__(self):
@@ -117,7 +124,6 @@ class Test(db.Model):
     # Relations avec promotions et groupes
     groupes = db.relationship('Groupe', secondary=test_groupe, backref=db.backref('tests', lazy='dynamic'))
     promotions = db.relationship('Promotion', secondary=test_promotion, backref=db.backref('tests', lazy='dynamic'))
-    
     def to_dict(self):
         return {
             'id': self.id,
@@ -171,9 +177,9 @@ class ReponseProf(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     num_question = db.Column(db.String(50), nullable=False)  # Numéro de la question
     choix = db.Column(db.String(2), nullable=False)  # Choix correct (ex: A, B, C, D)
-    test_id = db.Column(db.Integer, db.ForeignKey('test.id', ondelete='CASCADE'), nullable=False)
-
-    test = db.relationship('Test', backref=db.backref('reponses_prof', cascade='all, delete-orphan'))
+    test_id = db.Column(db.Integer, db.ForeignKey('test.id'), nullable=False)
+    
+    test = db.relationship('Test', backref='reponses_prof')
     
     def to_dict(self):
         return {
@@ -256,13 +262,17 @@ class Semestre(db.Model):
     nom = db.Column(db.String(50), nullable=False)  # Exemple : "S5", "S6", "S7", "S8"
     promotion_id = db.Column(db.Integer, db.ForeignKey('promotion.id'), nullable=False)
     promotion = db.relationship('Promotion', backref='semestres')
-
+    site_id = db.Column(db.Integer, db.ForeignKey('site.id'), nullable=False)
+    site = db.relationship('Site', backref='semestres')
+    
     def to_dict(self):
         return {
             'id': self.id,
             'nom': self.nom,
             'promotion_id': self.promotion_id,
-            'promotion': self.promotion.nom
+            'promotion': self.promotion.nom,
+            'site_id': self.site_id,
+            'site': self.site.nom if self.site else None  # Include site name
         }
 # class Score(db.Model):
 #     id = db.Column(db.Integer, primary_key=True)

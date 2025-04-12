@@ -8,72 +8,75 @@
       <!-- Nom, Prénom -->
       <div class="row">
         <div class="form-group half">
-          <label for="studentLastName">Nom</label>
-          <input type="text" class="form-input" id="studentLastName" [(ngModel)]="studentLastName" name="studentLastName" placeholder="Entrez le nom" required>
-          <div class="error-message" *ngIf="errors['studentLastName']">{{ errors['studentLastName'] }}</div>
+          <label for="nom">Nom</label>
+          <input type="text" class="form-input" id="nom" [(ngModel)]="student.nom" name="nom" placeholder="Entrez le nom" required>
+          <div class="error-message" *ngIf="errors['nom']">{{ errors['nom'] }}</div>
         </div>
         <div class="form-group half">
-          <label for="studentFirstName">Prénom</label>
-          <input type="text" class="form-input" id="studentFirstName" [(ngModel)]="studentFirstName" name="studentFirstName" placeholder="Entrez le prénom" required>
-          <div class="error-message" *ngIf="errors['studentFirstName']">{{ errors['studentFirstName'] }}</div>
+          <label for="prenom">Prénom</label>
+          <input type="text" class="form-input" id="prenom" [(ngModel)]="student.prenom" name="prenom" placeholder="Entrez le prénom" required>
+          <div class="error-message" *ngIf="errors['prenom']">{{ errors['prenom'] }}</div>
         </div>
       </div>
 
       <!-- Site -->
       <div class="form-group">
-        <label for="studentSiteId">Site</label>
-        <select class="form-input" id="studentSiteId" [(ngModel)]="studentSiteId" name="studentSiteId" required (change)="onSiteChange(studentSiteId)">
+        <label for="site_id">Site</label>
+        <select class="form-input" id="site_id" [(ngModel)]="student.site_id" name="site_id" required (change)="onSiteChange(student.site_id)">
           <option value="" disabled selected>Choisissez un site</option>
-          <option *ngFor="let site of sites" [value]="site.id">{{ site.nom }}</option>
+          <option *ngFor="let site of sites" [value]="site.id" [selected]="site.id === student.site_id">
+            {{ site.nom }}
+          </option>
         </select>
-        <div class="error-message" *ngIf="errors['studentSiteId']">{{ errors['studentSiteId'] }}</div>
+        <div class="error-message" *ngIf="errors['site_id']">{{ errors['site_id'] }}</div>
       </div>
 
       <!-- Promotion -->
       <div class="form-group">
-        <label for="studentPromotionId">Promotion</label>
-        <select class="form-input" id="studentPromotionId" [(ngModel)]="studentPromotionId" name="studentPromotionId" required (change)="onPromotionChange(studentPromotionId)">
+        <label for="promotion_id">Promotion</label>
+        <select class="form-input" id="promotion_id" [(ngModel)]="student.promotion_id" name="promotion_id" required (change)="onPromotionChange(student.promotion_id)">
           <option value="" disabled selected>Choisissez une promotion</option>
-          <option *ngFor="let promo of promotions" [value]="promo.id">{{ promo.nom }}</option>
+          <option *ngFor="let promo of filteredPromotions" [value]="promo.id" [selected]="promo.id === student.promotion_id">
+            {{ promo.nom }}
+          </option>
         </select>
-        <div class="error-message" *ngIf="errors['studentPromotionId']">{{ errors['studentPromotionId'] }}</div>
+        <div class="error-message" *ngIf="errors['promotion_id']">{{ errors['promotion_id'] }}</div>
       </div>
 
       <!-- Semestre -->
       <div class="form-group">
-        <label for="studentSemestreId">Semestre</label>
-        <select class="form-input" id="studentSemestreId" [(ngModel)]="studentSemestreId" name="studentSemestreId" required (change)="onSemestreChange(studentSemestreId)">
+        <label for="semestre_id">Semestre</label>
+        <select class="form-input" id="semestre_id" [(ngModel)]="student.semestre_id" name="semestre_id" required (change)="onSemestreChange(student.semestre_id)">
           <option value="" disabled selected>Choisissez un semestre</option>
-          <option *ngFor="let semestre of semestres" [value]="semestre.id">{{ semestre.nom }}</option>
+          <option *ngFor="let semestre of filteredSemestres" [value]="semestre.id" [selected]="semestre.id === student.semestre_id">
+            {{ semestre.nom }}
+          </option>
         </select>
-        <div class="error-message" *ngIf="errors['studentSemestreId']">{{ errors['studentSemestreId'] }}</div>
+        <div class="error-message" *ngIf="errors['semestre_id']">{{ errors['semestre_id'] }}</div>
       </div>
 
       <!-- Groupe -->
       <div class="form-group">
-        <label for="studentGroupId">Groupe</label>
-        <select class="form-input" id="studentGroupId" [(ngModel)]="studentGroupId" name="studentGroupId" required>
+        <label for="groupe_id">Groupe</label>
+        <select class="form-input" id="groupe_id" [(ngModel)]="student.groupe_id" name="groupe_id" required>
           <option value="" disabled selected>Choisissez un groupe</option>
-          <option *ngFor="let groupe of groupes" [value]="groupe.id">{{ groupe.nom }}</option>
+          <option *ngFor="let groupe of filteredGroupes" [value]="groupe.id" [selected]="groupe.id === student.groupe_id">
+            {{ groupe.nom }}
+          </option>
         </select>
-        <div class="error-message" *ngIf="errors['studentGroupId']">{{ errors['studentGroupId'] }}</div>
+        <div class="error-message" *ngIf="errors['groupe_id']">{{ errors['groupe_id'] }}</div>
       </div>
 
       <!-- Spécialité -->
       <div class="form-group">
-        <label for="studentSpecialite">Spécialité</label>
-        <select class="form-input" id="studentSpecialite" [(ngModel)]="studentSpecialite" name="studentSpecialite" required>
+        <label for="specialite">Spécialité</label>
+        <select class="form-input" id="specialite" [(ngModel)]="student.specialite" name="specialite" required>
           <option value="" disabled selected>Choisissez une spécialité</option>
-          <option *ngFor="let specialite of specialites" [value]="specialite">{{ specialite }}</option>
+          <option *ngFor="let specialite of specialites" [value]="specialite" [selected]="specialite === student.specialite">
+            {{ specialite }}
+          </option>
         </select>
-        <div class="error-message" *ngIf="errors['studentSpecialite']">{{ errors['studentSpecialite'] }}</div>
-      </div>
-
-      <!-- Email -->
-      <div class="form-group">
-        <label for="studentEmail">Email</label>
-        <input type="email" class="form-input" id="studentEmail" [(ngModel)]="studentEmail" name="studentEmail" required>
-        <div class="error-message" *ngIf="errors['studentEmail']">{{ errors['studentEmail'] }}</div>
+        <div class="error-message" *ngIf="errors['specialite']">{{ errors['specialite'] }}</div>
       </div>
 
       <div class="form-actions">

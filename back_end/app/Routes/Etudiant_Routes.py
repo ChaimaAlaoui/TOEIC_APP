@@ -42,7 +42,7 @@ def init_etudiant_routes(app):
                 site_id=data['site_id'],
                 semestre_id=data['semestre_id'],  # Ajout du semestre_id
                 specialite=data['specialite'],
-                email=data['email']
+                # email=data['email']
             )
 
             # Ajouter et valider l'étudiant
@@ -79,7 +79,7 @@ def init_etudiant_routes(app):
             etudiant.site_id = data.get('site_id', etudiant.site_id)
             etudiant.semestre_id = data.get('semestre_id', etudiant.semestre_id)
             etudiant.specialite = data.get('specialite', etudiant.specialite)
-            etudiant.email = data.get('email', etudiant.email)
+            # etudiant.email = data.get('email', etudiant.email)
             db.session.commit()
             return jsonify(etudiant.to_dict()), 200
         except Exception as e:
@@ -118,7 +118,7 @@ def init_etudiant_routes(app):
             # Afficher les colonnes du fichier
             app.logger.info(f"Colonnes du fichier : {df.columns.tolist()}")
             
-            required_columns = ["nom", "prenom", "promotion", "groupe", "site", "Semestre", "specialite", "email"]
+            required_columns = ["nom", "prenom", "promotion", "groupe", "site", "Semestre", "specialite"]
             if not all(column in df.columns for column in required_columns):
                 missing_cols = [column for column in required_columns if column not in df.columns]
                 app.logger.error(f"Colonnes manquantes dans le fichier : {', '.join(missing_cols)}")
@@ -148,10 +148,10 @@ def init_etudiant_routes(app):
                     return jsonify({"error": f"Semestre non trouvé pour : {row['Semestre']}"}), 400
 
                 # Vérifier si l'étudiant existe déjà
-                existing_student = Etudiant.query.filter_by(email=row["email"]).first()
-                if existing_student:
-                    app.logger.info(f"Étudiant déjà existant : {row['email']}")
-                    continue  # ou retournez une erreur si nécessaire
+                # existing_student = Etudiant.query.filter_by(email=row["email"]).first()
+                # if existing_student:
+                #     app.logger.info(f"Étudiant déjà existant : {row['email']}")
+                #     continue  # ou retournez une erreur si nécessaire
 
                 # 🔹 Insertion de l'étudiant avec le `semestre_id`
                 etudiant = Etudiant(
@@ -162,7 +162,7 @@ def init_etudiant_routes(app):
                     site_id=site.id,
                     semestre_id=semestre.id,  # Ajout du semestre_id récupéré
                     specialite=row["specialite"],
-                    email=row["email"]
+                    # email=row["email"]
                 )
                 db.session.add(etudiant)
 

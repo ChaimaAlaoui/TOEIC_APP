@@ -3,9 +3,7 @@ from datetime import datetime
 import tempfile
 import os
 from werkzeug.utils import secure_filename
-from flask import request, jsonify, send_file, session
-from sqlalchemy import insert
-
+from flask import request, jsonify, send_file
 
 from app import db
 from app.Models.myModels import (
@@ -13,9 +11,7 @@ from app.Models.myModels import (
     Groupe, 
     ReponseEtudiant, 
     Test,
-    test_groupe,
-    test_promotion,
-    ReponseProf
+    test_groupe
 )
 from app.Routes.pdf_generator import generate_toeic_pdf
 from app.Routes.correction import process_pdf_for_students
@@ -180,77 +176,3 @@ def register_evaluation_routes(app):
                 return jsonify({'error': str(e)}), 500
         
         return jsonify({'error': 'Format de fichier non pris en charge'}), 400
-    @app.route('/api/evaluations/duplicate/<int:old_test_id>', methods=['POST'])
-    def duplicate_test(old_test_id):
-        """
-        Duplique un test en laissant l'utilisateur choisir (ou non) les nouvelles valeurs.
-        JSON attendu dans le body : 
-        {
-          "nom": "Nouveau nom",
-          "description": "Nouvelle desc",
-          "date": "2025-04-20T09:00:00", 
-          "site_id": 2,  
-          "promotions_ids": [1, 2],
-          "groupes_ids": [3, 4],
-          "copyReponsesProf": true
-        }
-        """
-        old_test = Test.query.get_or_404(old_test_id)
-        data = request.get_json() or {}
-
-        # 1) Créer le nouveau test
-        #    Soit on copie l'ancien + on écrase avec ce que l'utilisateur a fourni
-        new_test = Test(
-            nom=data.get("nom", old_test.nom + " (Copie)"),
-            description=data.get("description", old_test.description),
-            # Si "date" existe dans le JSON, on convertit depuis l'ISOString ; sinon on prend la date du jour
-            date=datetime.fromisoformat(data["date"]) if "date" in data else datetime.utcnow(),
-            site_id=data.get("site_id", old_test.site_id),
-        )
-        db.session.add(new_test)
-        db.session.commit()  # pour générer new_test.id
-
-        # 2) Associer promotions si l'utilisateur en fournit
-        promotions_ids = data.get("promotions_ids", [])
-        for promo_id in promotions_ids:
-            stmt = insert(test_promotion).values(test_id=new_test.id, promotion_id=promo_id)
-            db.session.execute(stmt)
-        
-        # 3) Associer groupes
-        groupes_ids = data.get("groupes_ids", [])
-        for grp_id in groupes_ids:
-            stmt = insert(test_groupe).values(
-                test_id=new_test.id,
-                groupe_id=grp_id,
-                feuille_generee=False  # ou True, ou recopier la valeur de l'ancien test, etc.
-            )
-            db.session.execute(stmt)
-
-        # 4) Copier les réponses prof si l'utilisateur le demande
-        if data.get("copyReponsesProf", True):
-            for old_rp in old_test.reponses_prof:  # liste ReponseProf
-                new_rp = ReponseProf(
-                    num_question=old_rp.num_question,
-                    choix=old_rp.choix,
-                    test_id=new_test.id
-                )
-                db.session.add(new_rp)
-
-        db.session.commit()
-
-        return jsonify({
-            "message": "Test dupliqué avec succès",
-            "new_test_id": new_test.id,
-            "new_test_nom": new_test.nom
-        }), 201
-    
-    @app.route('/api/evaluations/<int:test_id>', methods=['DELETE'])
-    def delete_evaluation(test_id):
-    # Récupérer le test en base
-       test = Test.query.get_or_404(test_id)
-    # Supprimer
-       db.session.delete(test)
-       db.session.commit()
-       return jsonify({"message": "Test supprimé en base"}), 200
-
-

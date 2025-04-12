@@ -51,6 +51,7 @@ export class UpdateGroupComponent implements OnInit {
       .then((data) => {
         console.log('Group details:', data);
         this.group = data;
+        console.log("voila le grp apres asse:",this.group)
 
         if (this.group.site_id) {
           this.fetchPromotionsBySite(this.group.site_id);
