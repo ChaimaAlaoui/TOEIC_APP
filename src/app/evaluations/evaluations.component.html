@@ -6,72 +6,65 @@
   <!-- Search Bar -->
   <div class="search-bar">
     <input type="text" [(ngModel)]="searchTerm" placeholder="Rechercher une évaluation..." />
+    <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#aaa">
+      <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+    </svg>
   </div>
 
-  <!-- Table for filtered evaluations -->
-  <div class="table-container">
-    <table class="evaluation-table">
-      <thead>
-        <tr>
-          <th>Titre</th>
-          <th>Groupe</th>
-          <th>Date</th>
-          <th>Description</th>
-          <th class="actions">Feuilles De Reponse</th>
-          <th class="actions">Corriger</th>
-          <th class="actions">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let evaluation of filteredEvaluations" class="evaluation-row">
-          <td>{{ evaluation.test_title }}</td>
-          <td>{{ evaluation.groupe_name }}</td>
-          <td>{{ evaluation.test_date | date: 'yyyy-MM-dd' }}</td>
-          <td>{{ evaluation.test_description }}</td>
-
-          <!-- Feuilles De Reponse -->
-          <td>
-            <button 
-              (click)="viewResponseSheet(evaluation.test_id, evaluation.groupe_id)"
-              class="btn btn-download"
-              [disabled]="loadingButtonId === 'btn-' + evaluation.test_id + '-' + evaluation.groupe_id"
-            >
-              <span *ngIf="loadingButtonId !== 'btn-' + evaluation.test_id + '-' + evaluation.groupe_id">
-                Télécharger la feuille de réponse
-              </span>
-              <span 
-                *ngIf="loadingButtonId === 'btn-' + evaluation.test_id + '-' + evaluation.groupe_id"
-                class="spinner-border spinner-border-sm"
-                role="status"
-                aria-hidden="true">
-              </span>
-              <span 
-                *ngIf="loadingButtonId === 'btn-' + evaluation.test_id + '-' + evaluation.groupe_id"
-                class="ms-2">
-                Génération en cours...
-              </span>
-            </button>
-          </td>
-
-          <!-- Corriger -->
-          <td>
-            <button
-              class="btn btn-correct"
-              [disabled]="!evaluation.feuille_generee"
-              (click)="openUploadModal(evaluation)"
-            >
-              Corriger
-            </button>
-          </td>
-
-          <!-- Actions -->
-          <td class="action-buttons">
-            <button class="btn btn-delete" (click)="deleteEvaluation(evaluation.test_id)">Supprimer</button>
-            <button class="btn btn-duplicate" (click)="openDuplicateModal(evaluation)">Dupliquer</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+  <!-- Conteneur principal avec grille pour les cartes -->
+  <div class="grid-card-container">
+    <!-- Utilisation de la classe fancy-card pour chaque carte -->
+    <div class="card fancy-card" *ngFor="let evaluation of filteredEvaluations">
+      <div class="card-body">
+        <h3 class="card-title">{{ evaluation.test_title }}</h3>
+        
+        <p class="card-group">
+          Évaluation TOEIC pour le groupe {{ evaluation.groupe_name }}
+        </p>
+        
+        <!-- Réintégration de la description du test -->
+        <p *ngIf="evaluation.test_description" class="card-description">
+          {{ evaluation.test_description }}
+        </p>
+        
+        <p class="card-date">
+          {{ evaluation.test_date | date:'dd/MM/yyyy' }}
+        </p>
+        
+        <!-- Les boutons sont maintenant empilés sur mobile -->
+        <div class="card-actions">
+          <button class="btn-action btn-download" 
+                [id]="'btn-' + evaluation.test_id + '-' + evaluation.groupe_id"
+                (click)="viewResponseSheet(evaluation.test_id, evaluation.groupe_id)"
+                [disabled]="loadingButtonId === 'btn-' + evaluation.test_id + '-' + evaluation.groupe_id">
+            <i class="fas fa-download"></i>
+            <span>Télécharger</span>
+          </button>
+          
+          <button class="btn-action btn-correct" 
+                (click)="openUploadModal(evaluation)"
+                [disabled]="!evaluation.feuille_generee">
+            <i class="fas fa-check-circle"></i>
+            <span>Corriger</span>
+          </button>
+          
+          <button class="btn-action btn-copy" (click)="openDuplicateModal(evaluation)">
+            <i class="fas fa-copy"></i>
+            <span>Dupliquer</span>
+          </button>
+          
+          <button class="btn-action btn-delete" (click)="deleteEvaluation(evaluation.test_id)">
+            <i class="fas fa-trash"></i>
+            <span>Supprimer</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Message quand aucune évaluation n'est trouvée -->
+    <div *ngIf="filteredEvaluations.length === 0" class="no-evaluations">
+      <p>Aucune évaluation trouvée.</p>
+    </div>
   </div>
 </div>
 

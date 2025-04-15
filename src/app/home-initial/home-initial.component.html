@@ -1,0 +1,66 @@
+<app-navbar></app-navbar>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>Plateforme d'Évaluation TOEIC</h1>
+    <p class="hero-subtitle">Évaluez et certifiez vos compétences en anglais</p>
+    <div class="hero-buttons">
+      <a routerLink="/evaluations" class="btn btn-primary">Commencer un test</a>
+      <a routerLink="/preparation" class="btn btn-secondary">Se préparer</a>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Section -->
+<section class="stats">
+  <div class="stats-container">
+    <div *ngFor="let stat of stats" class="stat-item">
+      <div class="stat-value">{{stat.value}}</div>
+      <div class="stat-label">{{stat.label}}</div>
+    </div>
+  </div>
+</section>
+
+<!-- Features Section -->
+<section class="features">
+  <h2>Nos Services</h2>
+  <div class="features-grid">
+    <div *ngFor="let feature of features" class="feature-card" [routerLink]="feature.link">
+      <div class="feature-icon">{{feature.icon}}</div>
+      <h3>{{feature.title}}</h3>
+      <p>{{feature.description}}</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta">
+  <div class="cta-content">
+    <h2>Prêt à évaluer votre niveau d'anglais ?</h2>
+    <p>Rejoignez des milliers d'étudiants qui ont déjà validé leur certification TOEIC</p>
+    <a routerLink="/evaluations" class="btn btn-primary">Commencer maintenant</a>
+  </div>
+</section>
+
+<!-- Info Section -->
+<section class="info-section">
+  <div class="info-grid">
+    <div class="info-card">
+      <h3>Pour les Étudiants</h3>
+      <ul>
+        <li>Passez votre test TOEIC</li>
+        <li>Accédez à vos résultats</li>
+        <li>Préparez-vous efficacement</li>
+      </ul>
+    </div>
+    <div class="info-card">
+      <h3>Pour les Enseignants</h3>
+      <ul>
+        <li>Gérez vos évaluations</li>
+        <li>Suivez les progrès</li>
+        <li>Analysez les résultats</li>
+      </ul>
+    </div>
+  </div>
+</section> 

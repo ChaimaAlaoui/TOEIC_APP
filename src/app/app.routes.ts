@@ -10,7 +10,6 @@ import { ImpressionComponent } from './impression/impression.component';
 import { ReponseJusteComponent } from './reponsejuste/reponsejuste.component';
 import { TestGroupeComponent } from './test-groupe/test-groupe.component';
 import { EtudiantComponent } from './etudiant/etudiant.component';
-import { Component, NgModule } from '@angular/core';
 import { UpdateStudentComponent } from './etudiant/update-student/update-student.component';
 import { ScoreStudentComponent } from './etudiant/score-student/score-student.component';
 import { AddstudentComponent } from './etudiant/addstudent/addstudent.component';
@@ -23,34 +22,40 @@ import { UpdateGroupComponent } from './groupe/updategroupe/updategroup/updategr
 import { AddPromoComponent } from './promotion/addPromo/add-promo/add-promo.component';
 import { UpdatePromoComponent } from './promotion/updatePromo/update-promo/update-promo.component';
 
-
-
-
-// Définir les routes de l'application
 export const routes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component:  RegisterComponent },
-  { path: '', redirectTo: '/login', pathMatch: 'full' } ,
-  { path: 'activate-account/:token', component: ActivateAccountComponent },
-  { path: 'test', component: TestComponent },
+  // Routes principales
+  { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
+  
+  // Routes d'authentification
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'activate-account/:token', component: ActivateAccountComponent },
+  
+  // Routes des évaluations
   { path: 'evaluations', component: EvaluationsComponent },
-  { path: 'classes', component: TestGroupeComponent },
+  { path: 'test', component: TestComponent },
   { path: 'reponseetudiant', component: ReponseEtudiantComponent },
-  { path: 'impression/:testId/:groupeId', component: ImpressionComponent },
   { path: 'reponsejuste', component: ReponseJusteComponent },
-  { path: 'studentlist', component: EtudiantComponent },
-  {path:'update-student/:id', component:UpdateStudentComponent},
-  {path: 'scorestudent/:id',component:ScoreStudentComponent},
-  {path:'addstudent', component:AddstudentComponent},
-  {path:'uploadstudent',component:UploadStudentsComponent},
-  {path:'site',component:SiteComponent},
-  {path:'promotionlist',component:PromotionComponent},
-  {path:'groupelist',component:GroupeComponent},
-  {path:'addgroup',component:AddGroupComponent},
-  {path:'updategroup/:id',component:UpdateGroupComponent},
-  {path:'scorestudent',component:ScoreStudentComponent},
-  { path: 'addpromo', component:AddPromoComponent },
-  { path: 'updatepromo/:id',component:UpdatePromoComponent  }
+  { path: 'impression/:testId/:groupeId', component: ImpressionComponent },
+  
+  // Routes de gestion des étudiants
+  { path: 'students', component: EtudiantComponent },
+  { path: 'students/add', component: AddstudentComponent },
+  { path: 'students/update/:id', component: UpdateStudentComponent },
+  { path: 'students/score/:id', component: ScoreStudentComponent },
+  { path: 'students/upload', component: UploadStudentsComponent },
+  
+  // Routes de gestion des groupes et promotions
+  { path: 'classes', component: TestGroupeComponent },
+  { path: 'sites', component: SiteComponent },
+  { path: 'promotions', component: PromotionComponent },
+  { path: 'promotions/add', component: AddPromoComponent },
+  { path: 'promotions/update/:id', component: UpdatePromoComponent },
+  { path: 'groups', component: GroupeComponent },
+  { path: 'groups/add', component: AddGroupComponent },
+  { path: 'groups/update/:id', component: UpdateGroupComponent },
 
+  // Route par défaut - redirige vers la page d'accueil
+  { path: '**', redirectTo: '', pathMatch: 'full' }
 ];

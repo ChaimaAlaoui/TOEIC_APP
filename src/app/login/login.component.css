@@ -185,3 +185,56 @@ input::placeholder {
 .image_eilco {
   display: none;
 }
+
+/* ====== RESPONSIVE ====== */
+
+@media (max-width: 992px) { /* Pour tablettes */
+  .form_login {
+    width: 70%; /* Élargir un peu le formulaire */
+    padding: 25px 30px; /* Réduire légèrement le padding */
+  }
+}
+
+@media (max-width: 768px) { /* Pour petites tablettes et grands mobiles */
+  .form_login {
+    width: 85%; /* Formulaire prend plus de largeur */
+    padding: 20px 25px;
+  }
+  .image_eilco_circle {
+    width: 200px; /* Réduire taille logo */
+    height: 200px;
+  }
+  .logo_eilco_center {
+    width: 150px; /* Réduire logo intérieur */
+  }
+}
+
+@media (max-width: 576px) { /* Pour mobiles */
+  .container_login {
+    padding: 15px; /* Ajouter padding au conteneur principal */
+    align-items: flex-start; /* Aligner le formulaire en haut */
+    padding-top: 5vh; /* Un peu d'espace en haut */
+  }
+  .form_login {
+    width: 95%; /* Presque toute la largeur */
+    padding: 15px 20px;
+    margin-top: 0; /* Rapprocher du haut */
+  }
+  .login_name {
+    font-size: 20px; /* Réduire taille titre */
+  }
+  .login_button {
+    width: 60%; /* Élargir bouton */
+    margin-inline: 20%; /* Ajuster marge bouton */
+    height: 45px;
+    font-size: 15px;
+  }
+  .image_eilco_circle {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 10px;
+  }
+  .logo_eilco_center {
+    width: 120px;
+  }
+}

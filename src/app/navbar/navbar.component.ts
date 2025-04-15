@@ -7,8 +7,19 @@ import { RouterModule } from '@angular/router';
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css',
-  imports: [FormsModule, CommonModule,RouterModule]
+  standalone: true,
+  imports: [CommonModule, RouterModule, FormsModule]
 })
 export class NavbarComponent {
+
+  isMenuOpen: boolean = false;
+
+  toggleMenu(): void {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
+
+  closeMenu(): void {
+    this.isMenuOpen = false;
+  }
 
 }

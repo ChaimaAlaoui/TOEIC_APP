@@ -24,17 +24,13 @@
               {
                 "glob": "**/*",
                 "input": "public"
-<<<<<<< HEAD
               },
-               "src/assets",
-                "src/favicon.ico"
-=======
-              }
+              "src/assets",
+              "src/favicon.ico"
             ],
             "styles": [
               "@angular/material/prebuilt-themes/azure-blue.css",
               "src/styles.css"
->>>>>>> origin/Chaima_Alaoui
             ],
            
             "scripts": [],
@@ -97,14 +93,10 @@
                 "input": "public"
               }
             ],
-<<<<<<< HEAD
-           
-=======
             "styles": [
               "@angular/material/prebuilt-themes/azure-blue.css",
               "src/styles.css"
             ],
->>>>>>> origin/Chaima_Alaoui
             "scripts": []
           }
         }

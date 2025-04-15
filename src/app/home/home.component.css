@@ -5,145 +5,148 @@
   box-sizing: border-box;
 }
 
-/* Corps de page */
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f8f9fc;
-  color: #2c3e50;
-  /* Animation fade-in globale (optionnelle) */
-  animation: fadeInPage 0.8s ease-in;
-}
+/* Appliquer un background à l'ensemble de la page */
 
-/* Animation d'apparition de la page */
 @keyframes fadeInPage {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-/* Conteneur global */
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
 }
 
-/* ====== NAVBAR ====== */
-.navbar {
-  background-color: #ffffff;
-  border-bottom: 1px solid #eee;
-}
-
-.nav-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 60px;
-}
-
-.logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #3b82f6;
-}
-
-.nav-menu a {
-  margin-left: 20px;
-  text-decoration: none;
-  color: #2c3e50;
-  font-weight: 500;
-  position: relative; /* Pour l’effet de soulignement */
-}
-
-.nav-menu a:hover {
-  color: #3b82f6;
-}
-
-/* Effet de soulignement progressif au survol */
-.nav-menu a::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -2px;
-  width: 0%;
-  height: 2px;
-  background: #3b82f6;
-  transition: width 0.3s;
-}
-.nav-menu a:hover::after {
-  width: 100%;
-}
-
-.nav-cta {
-  background-color: #3b82f6;
-  color: #fff;
-  padding: 8px 16px;
-  border-radius: 4px;
-  transition: background-color 0.3s;
-}
-
-.nav-cta:hover {
-  background-color: #2563eb;
-}
-
-/* ====== HERO ====== */
-/* ====== HERO ====== */
+/* ====== HERO & CAROUSEL ====== */
 .hero {
   position: relative;
   color: #fff;
   padding: 60px 0;
   overflow: hidden;
-  /* Hauteur minimale pour afficher suffisamment l'image */
   min-height: 60vh;
-  /* Utilisation de l'image en fond */
-  background: url("/assets/images/exam-hero.jpg") center center / cover no-repeat;
-  transition: background-size 0.5s ease;
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  /* Supprimer l'image de fond statique */
+  /* background: url("/assets/images/exam-hero.jpg") center center / cover no-repeat; */
+  background-color: #1e293b; /* Couleur de fond sombre de secours */
+  text-align: center; 
+}
 
-}
-.hero:hover {
-  background-size: 110%;
-}
-.hero::before {
-  content: "";
+/* Supprimer l'overlay ::before du hero */
+/* .hero::before { ... } */
+
+/* Conteneur du Carrousel */
+.hero-carousel {
   position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0, 0, 0, 0.3); /* Opacité 30% */
-  z-index: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1; /* Derrière le contenu */
 }
+
+.carousel-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0; /* Rétablir: Invisible par défaut */
+  animation: kenburns 15s infinite, fadeSlide 6s infinite; /* Rétablir */
+  z-index: 1;
+  background-image: none; /* Assurer qu'il n'y a pas d'image par défaut */
+}
+
+/* Définir les images spécifiques via CSS */
+.carousel-slide:nth-child(1) {
+  background-image: url('/assets/images/exam-hero.jpg');
+}
+.carousel-slide:nth-child(2) {
+  background-image: url('/assets/images/score.jpg');
+}
+.carousel-slide:nth-child(3) {
+  background-image: url('/assets/images/img3.jpg');
+}
+.carousel-slide:nth-child(4) {
+  background-image: url('/assets/images/toeic2.jpeg');
+}
+/* Ajoutez :nth-child(5), etc., si vous avez plus d'images */
+
+/* Overlay sombre pour la lisibilité */
+.carousel-slide::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6));
+  z-index: 2; /* Au-dessus de l'image du slide */
+}
+
+/* Logique d'affichage des slides (via JS/TS) */
+.carousel-slide.active {
+  opacity: 1; /* Rétablir: Rendre visible */
+  z-index: 2; 
+  animation-play-state: running; /* Rétablir */
+}
+
+/* Décalage des animations pour les slides suivants */
+.carousel-slide:nth-child(1) { animation-delay: 0s, 0s; }
+.carousel-slide:nth-child(2) { animation-delay: -6s, -6s; }
+.carousel-slide:nth-child(3) { animation-delay: -12s, -12s; }
+.carousel-slide:nth-child(4) { animation-delay: -18s, -18s; }
+/* Ajustez si vous avez plus de slides */
+
+/* Animation de fondu */
+@keyframes fadeSlide {
+  0%, 100% { opacity: 0; animation-timing-function: ease-in; }
+  10%, 90% { opacity: 1; }
+}
+
+/* Animation Ken Burns */
+@keyframes kenburns {
+  0% { transform: scale(1.1) translate(0, 0); }
+  50% { transform: scale(1.2) translate(5px, -5px); }
+  100% { transform: scale(1.1) translate(0, 0); }
+}
+
+/* Contenu du Hero */
 .hero-content {
   position: relative;
-  z-index: 1; /* Le contenu passe au-dessus de l’overlay */
+  z-index: 10; /* Au-dessus du carrousel et de l'overlay */
+  max-width: 800px; 
+  padding: 2rem; 
 }
 
-
-
-/* Animation du dégradé */
-@keyframes animateGradient {
-  0% {
-    background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
-  }
-  100% {
-    background: linear-gradient(135deg, #6366f1 0%, #3b82f6 100%);
-  }
+/* Styles pour le texte du hero (h1, p) */
+.hero-text h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  line-height: 1.2;
+  color: #fff; 
+  text-shadow: 0 2px 8px rgba(0,0,0,0.6); 
 }
 
-.hero-content {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.hero-text p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  color: rgba(255, 255, 255, 0.9); 
+  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
 }
 
+/* Style pour .hero-text (animation d'apparition) */
 .hero-text {
   max-width: 600px;
   opacity: 0;
   transform: translateY(30px);
-  animation: slideInUp 1s forwards; /* Apparition du texte */
+  animation: slideInUp 1s forwards 0.5s; 
 }
 
-/* Animation d’apparition du texte Hero */
 @keyframes slideInUp {
   to {
     opacity: 1;
@@ -151,179 +154,314 @@ body {
   }
 }
 
-.hero-text h1 {
-  font-size: 3rem;
-  margin-bottom: 20px;
-  line-height: 1.2;
-}
-
-.hero-text p {
-  font-size: 1.2rem;
-  margin-bottom: 30px;
-}
-
-.hero-image img {
-  max-width: 500px;
-  width: 100%;
-  border-radius: 10px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-}
-
-/* ====== BOUTONS ====== */
-.btn {
-  display: inline-block;
-  text-decoration: none;
-  font-weight: 600;
-  border-radius: 4px;
-  padding: 12px 24px;
-  transition: background-color 0.3s, transform 0.2s;
-  text-align: center;
-}
-
+/* Bouton CTA moderne */
 .btn-primary {
-  background-color: #007bff; /* Bleu principal */
+  padding: 12px 30px;
+  font-size: 1.1rem;
+  background: #007bff;
   color: #fff;
+  border: none;
+  border-radius: 30px;
+  transition: background 0.3s, transform 0.2s;
 }
 
 .btn-primary:hover {
-  background-color: #0056b3; /* Bleu foncé pour le hover */
-  transform: translateY(-2px);
+  background: #0056b3;
+  transform: translateY(-3px);
 }
 
+/* Clés d'animation */
+@keyframes slideInDown {
+  from { opacity: 0; transform: translateY(-50px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(50px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ====== (Les autres styles de votre page restent inchangés) ====== */
+
+/* Style de base commun à tous les boutons */
+.btn {
+  display: inline-block;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  position: relative; /* Nécessaire pour l'effet shine */
+  overflow: hidden;   /* Pour masquer l'animation en dehors du bouton */
+  transition: all 0.3s ease;
+  margin-top: 50px;
+}
+
+/* Pour le bouton primaire, on conserve le texte en blanc */
+.btn-primary {
+  background: linear-gradient(45deg, #007bff, #00d4ff);
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(0, 123, 255, 0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-primary:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 123, 255, 0.6);
+  color: #fff; /* On fixe la couleur du texte en hover à blanc */
+}
+
+/* Pour le bouton secondaire, on fixe la couleur du texte en bleu */
 .btn-secondary {
-  background-color: #fff;
-  color: #3b82f6;
-  border: 1px solid #3b82f6;
+  background: linear-gradient(45deg, #fff, #f0f0f0);
+  color: #007bff;
+  border: 2px solid #007bff;
+  box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .btn-secondary:hover {
-  background-color: #3b82f6;
-  color: #fff;
-  transform: translateY(-2px);
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 123, 255, 0.4);
+  color: #007bff; /* Maintenir la couleur du texte en bleu lors du survol */
 }
 
-/* ====== SERVICES (cards) ====== */
-/* Section Services */
+/* Effet "shine" avec pseudo-élément pour les deux boutons */
+.btn-primary::before,
+.btn-secondary::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: skewX(-20deg);
+  transition: all 0.5s ease;
+}
+
+.btn-primary:hover::before,
+.btn-secondary:hover::before {
+  left: 200%;
+}
+
+/* ====== SERVICES ====== */
 .services {
+  width: 100%;
+  margin: 0;
   padding: 60px 0;
-  text-align: center; /* Centrer le titre et, si besoin, le contenu */
+  text-align: center;
 }
 
 .services h2 {
-  font-size: 2rem;
+  text-align: center; 
   margin-bottom: 40px;
+  font-size: 2rem;
+  color: #212529; /* Rétablir couleur sombre pour fond clair */
 }
 
-/* Grille responsive des cartes */
 .cards {
   display: grid;
-  /* Force 3 colonnes, peu importe la taille de l’écran (jusqu’à un certain point) */
-  grid-template-columns: repeat(3, 1fr);
-  gap: 30px; /* Espacement horizontal et vertical entre les cartes */
-}
-
-/* Style de chaque carte */
-.card {
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  padding: 20px;
-  transition: transform 0.3s, box-shadow 0.3s;
-  display: flex;          
-  flex-direction: column; 
-  align-items: center;     
+  grid-template-columns: repeat(3, 1fr); /* 3 colonnes */
+  gap: 30px;
+  /* Optionnel : assurez-vous d'avoir la pleine largeur souhaitée */
+  width: 100%;
+  align-items: stretch;
 }
 
 @media (max-width: 992px) {
   .cards {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Réduire un peu la taille min des cartes */
+    gap: 1.5rem;
   }
 }
-
-/* 1 colonne sur mobile */
 @media (max-width: 576px) {
   .cards {
     grid-template-columns: 1fr;
   }
 }
 
-.card-icon {
-  font-size: 2rem;
-  color: #3b82f6;
-  margin-bottom: 10px;
+/* Style de base pour toutes les cartes */
+.card {
+  background-color: #ffffff; /* Fond blanc pour les cartes */
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  padding: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-/* Titre de la carte */
-.card h3 {
-  margin-bottom: 10px;
-  font-size: 1.2rem;
-  color: #2c3e50;
-}
+/* Couleurs de fond spécifiques pour chaque carte */
 
-/* Paragraphe */
-.card p {
-  margin-bottom: 20px;
-  line-height: 1.4;
-  font-size: 0.95rem;
-  color: #555;
-}
-
-/* Bouton en bas de carte */
-.card a.btn {
-  margin-top: auto; /* Pousse le bouton vers le bas si le contenu est long */
-}
-
-/* Effet de survol */
+/* Effet de survol pour l'ensemble des cartes */
 .card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
-
+/* Style de base pour les icônes dans les cartes */
 .card-icon {
   font-size: 2rem;
-  color: #3b82f6;
+  transition: transform 0.3s, color 0.3s;
   margin-bottom: 10px;
 }
 
-/* ====== TESTIMONIAL ====== */
-.testimonial {
-  padding: 60px 0;
+/* Couleurs spécifiques aux icônes */
+.icon-test {
+  color: #e53e3e; /* Rouge vif */
+}
+.icon-classes {
+  color: #38b2ac; /* Turquoise */
+}
+.icon-eval {
+  color: #4299e1; /* Bleu clair */
+}
+.icon-import {
+  color: #d69e2e; /* Jaune/orangé */
+}
+.icon-print {
+  color: #805ad5; /* Violet */
+}
+.icon-export {
+  color: #ed64a6; /* Rose */
+}
+
+/* Animation légère au survol des icônes */
+.card-icon:hover {
+  transform: scale(1.2);
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* (Vous pouvez conserver ou adapter les styles existants pour le reste du contenu de la page) */
+
+/* ====== SECTION NATURE ====== */
+/* ====== SECTION NATURE REDESIGN ====== */
+.nature {
+  position: relative;            /* Pour pouvoir placer un overlay décoratif */
+  padding: 80px 0;              /* Espace vertical haut et bas */
+  overflow: hidden;             /* Cache le débordement potentiel de l'overlay */
+}
+
+/* Overlay décoratif (ex : motif "feuilles" ou wave pattern) */
+.nature-bg-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: url('/assets/images/leaf-pattern.png') no-repeat center;
+  background-size: cover;
+  opacity: 0.05;                /* Décoration très subtile */
+  z-index: 0;
+  pointer-events: none;         /* Empêche toute interaction souris */
+}
+
+.nature-content {
+  position: relative;           /* Se place au-dessus de l'overlay */
+  z-index: 1;
+  display: flex;
+  align-items: center;          /* Centre verticalement les deux colonnes */
+  justify-content: space-between;
+  gap: 30px;
+  flex-wrap: wrap;              /* Sur petits écrans, passe en colonne */
+}
+
+/* Colonne de texte */
+.nature-text {
+  flex: 1;
+  min-width: 300px;
+  max-width: 600px;             /* Limite la largeur du texte sur de grands écrans */
+}
+
+.nature-text h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #007bff;               /* Couleur d'accent (bleu) */
+  animation: fadeInDown 0.8s forwards; 
+}
+
+.nature-text p {
+  font-size: 1.1rem;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  animation: fadeInUp 1s forwards;
+  opacity: 0;
+}
+
+/* Bouton avec un léger effet */
+.nature-text .btn {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 12px 24px;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.nature-text .btn:hover {
+  background-color: #0056b3;
+  transform: translateY(-3px);
+}
+
+/* Colonne d'image */
+.nature-image {
+  flex: 1;
+  min-width: 300px;
   text-align: center;
 }
 
-.testimonial h2 {
-  font-size: 2rem;
-  margin-bottom: 20px;
+.nature-image img {
+  max-width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transform: translateY(30px);
+  opacity: 0;
+  animation: fadeInUp 1s forwards 0.5s;
 }
 
-.testimonial p {
-  max-width: 700px;
-  margin: 0 auto 30px auto;
-  line-height: 1.5;
+/* Animations clés pour le texte et l'image */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.logos {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.logos img {
-  filter: grayscale(100%);
-  transition: filter 0.3s, transform 0.3s;
-  max-width: 100px;
-  max-height: 50px;
+/* Responsivité : sur petits écrans, on passe en colonne */
+@media (max-width: 768px) {
+  .nature-content {
+    flex-direction: column;
+    text-align: center;
+  }
+  .nature-text,
+  .nature-image {
+    max-width: 100%;
+  }
+  .nature-text {
+    margin-right: 0;
+    margin-bottom: 2rem;
+  }
 }
 
-.logos img:hover {
-  filter: none;
-  transform: scale(1.1);
-}
-
-/* ====== CTA ====== */
+/* ====== SECTION CTA ====== */
 .cta {
   padding: 60px 0;
   text-align: center;
@@ -336,90 +474,50 @@ body {
 
 .cta p {
   max-width: 600px;
-  margin: 0 auto 30px auto;
+  margin: 0 auto 30px;
   font-size: 1.1rem;
   color: #555;
 }
 
-/* ====== FOOTER ====== */
-.footer {
-  background-color: #f1f5f9;
-  padding: 20px 0;
-}
 
-.footer-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.footer-container p {
-  margin: 0;
-  font-size: 0.9rem;
-}
-
-.footer-nav a {
-  margin-left: 20px;
-  font-size: 0.9rem;
-  text-decoration: none;
-  color: #2c3e50;
-}
-
-.footer-nav a:hover {
-  color: #3b82f6;
-}
-
-/* ====== RESPONSIVE ====== */
-@media (max-width: 992px) {
-  .hero-content {
-    flex-direction: column;
-    text-align: center;
-  }
-  .hero-text {
-    margin-bottom: 30px;
-  }
-}
-
-@media (max-width: 768px) {
-  .hero-text h1 {
-    font-size: 2.2rem;
-  }
-  .hero-text p {
-    font-size: 1rem;
-  }
-}
 
 @media (max-width: 576px) {
-  .navbar .nav-menu a {
-    margin-left: 10px;
-  }
-  .footer-container {
-    flex-direction: column;
-    gap: 10px;
-  }
+  .navbar .nav-menu a { margin-left: 10px; }
+  .footer-container { flex-direction: column; gap: 10px; }
 }
-/* ====== Section Partenaires & Réussites TOEIC ====== */
+
+/* ====== ANIMATION SCROLL ====== */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+.animate-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ====== SECTION TESTIMONIAL (si utilisée) ====== */
 .testimonial {
   padding: 60px 0;
   text-align: center;
-  background-color: #f1f5f9;  /* Une couleur de fond neutre */
+  background-color: #f1f5f9;
 }
 
 .testimonial h2 {
   font-size: 2.5rem;
   margin-bottom: 20px;
-  color: #007bff;  /* Accent bleu pour rappeler l'univers TOEIC */
+  color: #007bff;
 }
 
 .testimonial p {
   max-width: 800px;
-  margin: 0 auto 30px auto;
+  margin: 0 auto 30px;
   font-size: 1.1rem;
   color: #555;
   line-height: 1.5;
 }
 
-/* Logos : ajustement pour aligner et espacer les images */
 .logos {
   display: flex;
   justify-content: center;
@@ -440,82 +538,104 @@ body {
   filter: none;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
-  .testimonial h2 {
-    font-size: 2rem;
+  .testimonial h2 { font-size: 2rem; }
+  .testimonial p { font-size: 1rem; }
+  .logos img { max-width: 120px; max-height: 70px; }
+}
+
+/* ====== RESPONSIVE DESIGN ====== */
+
+/* Tablettes (<= 992px) */
+@media (max-width: 992px) {
+  .hero h1 {
+    font-size: 2.5rem; /* Réduire taille titre Hero */
   }
-  .testimonial p {
-    font-size: 1rem;
+  .hero p {
+    font-size: 1.1rem;
   }
-  .logos img {
-    max-width: 120px;
-    max-height: 70px;
+  .cards {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Réduire un peu la taille min des cartes */
+    gap: 1.5rem;
   }
-}
-
-/* ====== SECTION NATURE ====== */
-.nature {
-  padding: 60px 0;
-  background-color: #f9f9f9; /* Couleur de fond douce */
-}
-
-.nature-content {
-  display: flex;
-  align-items: center;       /* Centre verticalement l'image et le texte */
-  justify-content: space-between;
-  gap: 30px;
-  flex-wrap: wrap;          /* Permet le passage en colonne sur petits écrans */
-}
-
-/* Bloc texte */
-.nature-text {
-  flex: 1;                   /* Prend l'espace disponible */
-  min-width: 300px;          /* Évite que le bloc devienne trop étroit */
-  margin-right: 20px;        /* Espacement avec l'image si besoin */
-}
-
-.nature-text h2 {
-  font-size: 2rem;
-  margin-bottom: 20px;
-  color: #007bff;            /* Couleur d'accent */
-}
-
-.nature-text p {
-  font-size: 1.1rem;
-  color: #555;
-  line-height: 1.5;
-  margin-bottom: 20px;
-}
-
-/* Bouton dans le bloc texte */
-.nature-text .btn {
-  margin-top: 10px;
-}
-
-/* Bloc image */
-.nature-image {
-  flex: 1;
-  min-width: 300px;
-  text-align: center;        /* Centre l'image si la colonne est plus large */
-}
-
-.nature-image img {
-  max-width: 100%;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-
-/* Responsive : sur écrans plus petits, on passe le texte et l'image en colonne */
-@media (max-width: 768px) {
   .nature-content {
-    flex-direction: column;
+    flex-direction: column; /* Passer en colonne */
     text-align: center;
   }
   .nature-text {
     margin-right: 0;
+    margin-bottom: 2rem;
+  }
+  .cta h2 {
+     font-size: 1.8rem;
+  }
+  .cta p {
+     font-size: 1rem;
+     
+  }
+}
+
+/* Mobiles Moyens (<= 768px) */
+@media (max-width: 768px) {
+  .hero {
+    min-height: 50vh; /* Réduire hauteur minimale */
+    padding: 40px 0;
+  }
+  .hero h1 {
+    font-size: 2rem;
+  }
+  .services {
+    padding: 40px 0;
+  }
+  .services h2 {
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+  }
+  .nature {
+    padding: 40px 0;
   }
   .nature-text h2 {
     font-size: 1.8rem;
+  }
+   .cta {
+    padding: 40px 15px;
+  }
+  .footer-container {
+    flex-direction: column; /* Empiler les éléments du footer */
+    gap: 1rem;
+  }
+  .footer-nav {
+    margin-top: 1rem;
+  }
+}
+
+/* Petits Mobiles (<= 576px) */
+@media (max-width: 576px) {
+  .hero-text .btn-primary {
+     padding: 10px 20px;
+     font-size: 0.9rem;
+  }
+  .cards {
+    grid-template-columns: 1fr; /* Une seule colonne */
+    gap: 1rem;
+  }
+  .card {
+    padding: 1.5rem;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .nature-text .btn {
+     width: 100%; /* Bouton pleine largeur */
+     max-width: 300px;
+  }
+  .cta .btn-primary {
+     width: 100%;
+     max-width: 300px;
+     padding: 10px 20px;
+     font-size: 0.9rem;
+  }
+  .footer-nav a {
+      margin-left: 10px; /* Réduire espace liens footer */
+      font-size: 0.8rem;
   }
 }
