@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { NavbarComponent } from "../navbar/navbar.component";
 
@@ -9,7 +8,7 @@ import { NavbarComponent } from "../navbar/navbar.component";
 @Component({
   selector: 'app-score',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink, NavbarComponent],
+  imports: [CommonModule, FormsModule, NavbarComponent],
    templateUrl: './score.component.html',
   styleUrl: './score.component.css'
 })

@@ -20,13 +20,23 @@ export class AddPromoComponent {
 
   levels: string[] = ['ING1', 'ING2', 'ING3']; // Liste des niveaux disponibles
   sites: any[] = []; // Liste des sites récupérés depuis l'API
+  existingPromotions: any[] = []; // Liste des promotions existantes
 
   errors: any = {}; // Gestion des erreurs de validation
 
   constructor(private router: Router, private dialog: MatDialog) {}
 
   ngOnInit() {
+    // Load Font Awesome dynamically if not already loaded
+    if (!document.querySelector('link[href*="font-awesome"]')) {
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css';
+      document.head.appendChild(link);
+    }
+    
     this.fetchSites(); // Récupérer les sites au chargement du composant
+    this.fetchExistingPromotions(); // Récupérer les promotions existantes
   }
 
   // Récupération des sites depuis l'API
@@ -39,6 +49,21 @@ export class AddPromoComponent {
       .catch((error) => console.error('Erreur lors du chargement des sites:', error));
   }
 
+  // Récupération des promotions existantes
+  fetchExistingPromotions() {
+    fetch('http://localhost:5000/api/promotions')
+      .then((res) => res.json())
+      .then((data) => {
+        this.existingPromotions = data;
+      })
+      .catch((error) => console.error('Erreur lors du chargement des promotions existantes:', error));
+  }
+
+  // Vérifier si tous les champs obligatoires sont remplis
+  isFormFilled(): boolean {
+    return this.promoLevel !== '' && this.promoSiteId !== '';
+  }
+
   // Validation du formulaire
   validateForm(): boolean {
     this.errors = {};
@@ -48,6 +73,15 @@ export class AddPromoComponent {
     }
     if (!this.promoSiteId) {
       this.errors['promoSiteId'] = 'Le site est requis.';
+    }
+
+    // Vérification si la promotion existe déjà pour ce site
+    const promotionExists = this.existingPromotions.some(
+      promo => promo.nom === this.promoLevel && promo.site_id == this.promoSiteId
+    );
+
+    if (promotionExists) {
+      this.errors['promoLevel'] = `La promotion ${this.promoLevel} existe déjà pour ce site. Veuillez choisir un autre niveau ou un autre site.`;
     }
 
     return Object.keys(this.errors).length === 0;
@@ -85,7 +119,7 @@ export class AddPromoComponent {
         });
       })
       .catch((error) => {
-        console.error('Erreur lors de l’ajout de la promotion:', error);
+        console.error('Erreur lors de l\'ajout de la promotion:', error);
       });
   }
 }

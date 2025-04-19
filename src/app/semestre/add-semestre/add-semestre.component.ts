@@ -22,6 +22,7 @@ export class AddSemestreComponent {
   promotions: any[] = []; // Liste des promotions filtrées par site
   allPromotions: any[] = []; // Liste complète des promotions
   sites: any[] = []; // Liste des sites
+  existingSemestres: any[] = []; // Liste des semestres existants
 
   errors: any = {}; // Gestion des erreurs
 
@@ -30,6 +31,31 @@ export class AddSemestreComponent {
   ngOnInit() {
     this.fetchAllPromotions();
     this.fetchSites();
+    this.fetchExistingSemestres();
+  }
+
+  // Récupère le nom du site sélectionné
+  getSiteNom(): string {
+    if (!this.siteId || !this.sites || this.sites.length === 0) return '';
+    const site = this.sites.find(s => s.id == this.siteId);
+    return site ? site.nom : '';
+  }
+
+  // Récupère le nom de la promotion sélectionnée
+  getPromotionNom(): string {
+    if (!this.promotionId || !this.promotions || this.promotions.length === 0) return '';
+    const promotion = this.promotions.find(p => p.id == this.promotionId);
+    return promotion ? promotion.nom : '';
+  }
+
+  // Récupération de tous les semestres existants
+  fetchExistingSemestres() {
+    fetch('http://localhost:5000/api/semestres')
+      .then((res) => res.json())
+      .then((data) => {
+        this.existingSemestres = data;
+      })
+      .catch((error) => console.error('Erreur lors du chargement des semestres:', error));
   }
 
   // Récupération de toutes les promotions
@@ -52,6 +78,11 @@ export class AddSemestreComponent {
       .catch((error) => console.error('Erreur:', error));
   }
 
+  // Vérifier si tous les champs obligatoires sont remplis
+  isFormFilled(): boolean {
+    return this.semestreNom !== '' && this.promotionId !== '' && this.siteId !== '';
+  }
+
   // Validation du formulaire
   validateForm(): boolean {
     this.errors = {};
@@ -64,6 +95,18 @@ export class AddSemestreComponent {
     }
     if (!this.siteId) {
       this.errors['siteId'] = 'Le site est requis.';
+    }
+
+    // Vérification si le semestre existe déjà pour cette promotion
+    const semestreExists = this.existingSemestres.some(
+      semestre => semestre.nom.toLowerCase() === this.semestreNom.toLowerCase() && 
+                 semestre.promotion_id == this.promotionId
+    );
+
+    if (semestreExists) {
+      // Trouver le nom de la promotion pour un message plus informatif
+      const promotionName = this.allPromotions.find(p => p.id == this.promotionId)?.nom || '';
+      this.errors['semestreNom'] = `Le semestre "${this.semestreNom}" existe déjà pour la promotion ${promotionName}. Veuillez choisir un autre nom.`;
     }
 
     return Object.keys(this.errors).length === 0;

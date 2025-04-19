@@ -33,6 +33,14 @@ export class TestComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    // Load Font Awesome dynamically if not already loaded
+    if (!document.querySelector('link[href*="font-awesome"]')) {
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css';
+      document.head.appendChild(link);
+    }
+
     // Récupérer les données du test depuis le service
     const storedTest = this.testCreationService.getTestData();
     this.fetchSites();  // Charger les sites au démarrage
@@ -70,19 +78,20 @@ fetchSites(): void {
     this.router.navigate(['/reponsejuste']);
   }
 
+  // Méthode pour vérifier si le formulaire est valide
+  isFormValid(): boolean {
+    return (
+      this.test.Titre.trim() !== '' && 
+      this.test.Site !== '' && 
+      this.test.Date !== '' && 
+      this.selectedGroups.length > 0 && 
+      this.responses.length > 0
+    );
+  }
+
   onSaveTest(): void {
-    if (!this.test.Titre || !this.test.Date) {
-      alert('Veuillez remplir au moins le titre et la date du test');
-      return;
-    }
-  
-    if (this.selectedGroups.length === 0) {
-      alert('Veuillez sélectionner au moins un groupe');
-      return;
-    }
-  
-    if (this.responses.length === 0) {
-      alert('Veuillez configurer les réponses du test');
+    if (!this.isFormValid()) {
+      alert('Veuillez remplir tous les champs requis et configurer les réponses du test');
       return;
     }
   
@@ -134,5 +143,11 @@ fetchSites(): void {
     this.testCreationService.setTestData(this.test);
     console.log(this.test);
     this.router.navigate(['/classes']);
+  }
+
+  // Méthode pour récupérer le nom du site à partir de son ID
+  getSiteName(siteId: string): string {
+    const site = this.sites.find(s => s.id.toString() === siteId.toString());
+    return site ? site.nom : '';
   }
 }

@@ -32,6 +32,14 @@ export class AddGroupComponent implements OnInit {
   constructor(private router: Router, private dialog: MatDialog) {}
 
   ngOnInit() {
+    // Load Font Awesome dynamically if not already loaded
+    if (!document.querySelector('link[href*="font-awesome"]')) {
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css';
+      document.head.appendChild(link);
+    }
+
     this.fetchSites();
   }
 
@@ -109,6 +117,32 @@ fetchSemestresBySiteAndPromotion(siteId: string, promotionId: string) {
     return Object.keys(this.errors).length === 0;
   }
 
+  // Vérifier si tous les champs obligatoires sont remplis
+  isFormFilled(): boolean {
+    return (
+      this.groupName.trim() !== '' && 
+      this.groupPromotionId !== '' && 
+      this.groupSiteId !== '' && 
+      this.groupSemestreId !== ''
+    );
+  }
+
+  // Méthodes pour récupérer les noms des éléments sélectionnés
+  getSiteName(siteId: string): string {
+    const site = this.sites.find(s => s.id == siteId);
+    return site ? site.nom : '';
+  }
+
+  getPromotionName(promotionId: string): string {
+    const promotion = this.filteredPromotions.find(p => p.id == promotionId);
+    return promotion ? promotion.nom : '';
+  }
+
+  getSemestreName(semestreId: string): string {
+    const semestre = this.filteredSemestres.find(s => s.id == semestreId);
+    return semestre ? semestre.nom : '';
+  }
+
   // Ajouter un groupe
   addGroup() {
     if (!this.validateForm()) {
@@ -144,7 +178,7 @@ fetchSemestresBySiteAndPromotion(siteId: string, promotionId: string) {
         });
       })
       .catch((error) => {
-        console.error('Erreur lors de l’ajout du groupe:', error);
+        console.error('Erreur lors de l\'ajout du groupe:', error);
       });
   }
 }

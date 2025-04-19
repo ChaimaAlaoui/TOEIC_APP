@@ -62,34 +62,131 @@ body {
   
   /* Boutons */
   .btn {
-    border-radius: 6px;
-    padding: 10px 20px;
+    display: inline-block;
+    font-family: inherit;
     font-size: 1rem;
-    font-weight: bold;
-    transition: all 0.3s ease;
-    cursor: pointer;
+    font-weight: 600;
+    padding: 12px 30px;
     border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    position: relative; /* Nécessaire pour l'effet shine */
+    overflow: hidden;   /* Pour masquer l'animation en dehors du bouton */
+    transition: all 0.3s ease;
+    margin-top: 50px;
   }
   
+  /* Pour le bouton primaire, on conserve le texte en blanc */
   .btn-primary {
-    background: linear-gradient(135deg, #6a11cb, #2575fc);
-    color: white;
+    background: linear-gradient(140deg, #2980b9, #2980b9);
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
   
   .btn-primary:hover {
-    background: linear-gradient(135deg, #2575fc, #6a11cb);
-    transform: translateY(-2px);
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 123, 255, 0.6);
+    color: #fff; /* On fixe la couleur du texte en hover à blanc */
   }
   
+  /* Pour le bouton secondaire, on fixe la couleur du texte en bleu */
   .btn-secondary {
-    background: #f5f5f5;
-    color: #333;
-    border: 1px solid #ddd;
+    background: linear-gradient(45deg, #fff, #f0f0f0);
+    color: #007bff;
+    border: 2px solid #007bff;
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
   
   .btn-secondary:hover {
-    background: #eaeaea;
-    transform: translateY(-2px);
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 123, 255, 0.4);
+    color: #007bff; /* Maintenir la couleur du texte en bleu lors du survol */
+  }
+  
+  /* Style pour le bouton désactivé */
+  .btn-disabled {
+    background: #cccccc;
+    color: #666666;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+    border: none;
+  }
+  
+  .btn-disabled:hover {
+    background: #cccccc;
+    color: #666666;
+    transform: none;
+    box-shadow: none;
+  }
+  
+  .btn-disabled::before {
+    display: none;
+  }
+  
+  /* Bouton update avec icône */
+  .btn-update {
+    background: linear-gradient(140deg, #2980b9, #3498db);
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(41, 128, 185, 0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .btn-update:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(41, 128, 185, 0.6);
+    color: #fff;
+  }
+  
+  .btn-update:focus {
+    outline: none;
+  }
+  
+  /* Bouton retour avec icône */
+  .btn-return {
+    background: linear-gradient(45deg, #fff, #f0f0f0);
+    color: #333;
+    border: 2px solid #ddd;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .btn-return:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    color: #333;
+  }
+  
+  .btn-return:focus {
+    outline: none;
+  }
+  
+  /* Style pour l'icône du titre */
+  .title-icon {
+    margin-right: 10px;
+    
+    font-size: 1.2em;
+  }
+  
+  /* Effet "shine" avec pseudo-élément pour les deux boutons */
+  .btn-primary::before,
+  .btn-secondary::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: skewX(-20deg);
+    transition: all 0.5s ease;
+  }
+  
+  .btn-primary:hover::before,
+  .btn-secondary:hover::before {
+    left: 200%;
   }
   
   /* Message d'erreur */
@@ -97,12 +194,26 @@ body {
     color: #dc3545;
     font-size: 0.85rem;
     font-weight: 500;
-    margin-top: 5px;
-    padding: 8px;
+    margin-top: 8px;
+    padding: 10px 12px;
     background-color: #f8d7da;
     border: 1px solid #f5c6cb;
-    border-radius: 4px;
+    border-radius: 6px;
     box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    animation: errorShake 0.5s ease-in-out;
+  }
+  
+  .error-message i {
+    margin-right: 8px;
+    font-size: 16px;
+  }
+  
+  @keyframes errorShake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-5px); }
+    40%, 80% { transform: translateX(5px); }
   }
   
   /* Animation */

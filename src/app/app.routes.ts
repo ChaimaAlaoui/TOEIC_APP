@@ -35,7 +35,18 @@ import { UpdateSemestreComponent } from './semestre/update-semestre/update-semes
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component:  RegisterComponent },
-  { path: '', redirectTo: '/login', pathMatch: 'full' } ,
+  { 
+    path: '', 
+    loadComponent: () => import('./home/home.component').then(m => m.HomeComponent),
+    canActivate: [() => {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        window.location.href = '/login';
+        return false;
+      }
+      return true;
+    }]
+  },
   { path: 'activate-account/:token', component: ActivateAccountComponent },
   { path: 'test', component: TestComponent },
   { path: 'home', component: HomeComponent },

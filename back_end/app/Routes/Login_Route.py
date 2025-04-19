@@ -1,12 +1,12 @@
-
 # ------------------------------------------------------
 # DÉPENDANCES NÉCESSAIRES
 # ------------------------------------------------------
 
 from flask import jsonify, request
 from app.Models.Prof import Prof
-from flask import jsonify, request
-from app.Models.Prof import Prof
+import jwt
+import datetime
+from app.config import Config
 
 # ------------------------------------------------------
 # Fonction de login pour les enseignants
@@ -34,6 +34,23 @@ def login_user(app):
         if not teacher.is_active:
             return jsonify({"status": "success", "accountActivated": False}), 200
 
+        # Générer un token JWT
+        token = jwt.encode({
+            'id': teacher.id,
+            'email': teacher.email,
+            'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=24)
+        }, Config.SECRET_KEY, algorithm='HS256')
+
         # Connexion réussie avec compte activé
-        return jsonify({"status": "success", "accountActivated": True}), 200
+        return jsonify({
+            "status": "success", 
+            "accountActivated": True,
+            "token": token,
+            "user": {
+                "id": teacher.id,
+                "nom": teacher.nom,
+                "prenom": teacher.prenom,
+                "email": teacher.email
+            }
+        }), 200
 

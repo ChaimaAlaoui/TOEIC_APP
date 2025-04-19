@@ -1,141 +1,309 @@
-/* ======= Reset / Base ======= */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+/* ======= Modern Form Styles with Bold Colors ======= */
+:root {
+  --primary-color: #6C63FF;
+  --secondary-color: #FF6584;
+  --accent-color: #30D5C8;
+  --dark-color: #2A265F;
+  --light-color: #F5F5FF;
+  --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  --icon-blue: #007bff; /* Couleur bleue pour les icônes */
 }
 
-/* Corps de page */
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f8f9fc;
-  color: #2c3e50;
+/* Style des icônes */
+.fas {
+  margin-right: 8px;
 }
 
-/* Conteneur principal */
+/* Style spécifique pour les icônes des labels */
+.icon-label {
+  color: #007bff;
+  font-size: 1.2rem;
+}
+
+/* Style spécifique pour les icônes dans les labels */
+label .fas {
+  color: var(--icon-blue);
+  font-size: 1.2rem;
+}
+
+/* Layout de la page */
 .container {
-  max-width: 50%;
-  margin: 40px auto;
+  max-width: 100%;
+  margin: 0 auto;
   padding: 0 20px;
 }
 
-/* Carte du formulaire */
-.form-card {
-  background: #fff;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+/* Conteneur du formulaire */
+.form-container {
+  max-width: 650px;
+  margin: 60px auto;
+  background: var(--light-color);
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.18);
+  position: relative;
+  overflow: hidden;
+  transform: translateZ(0);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-.form-card:hover {
+.form-container:before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: 0;
+  height: 10px;
+  width: 100%;
+  background: var(--gradient);
+  z-index: 1;
+}
+
+.form-container:hover {
+  box-shadow: 0 20px 40px rgba(108, 99, 255, 0.25);
   transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
 }
 
 /* Titre */
 .title {
-  text-align: center;
+  font-size: 2.5rem;
+  color: var(--dark-color);
   margin-bottom: 30px;
-  font-size: 1.8rem;
-  color: #2c3e50;
+  font-weight: 700;
+  position: relative;
+  padding-bottom: 10px;
+  text-align: center;
 }
 
-/* Structure du formulaire */
-.form-row {
+.title:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: var(--gradient);
+  border-radius: 2px;
+}
+
+/* Formulaire */
+.standard-form {
+  margin-top: 30px;
+}
+
+/* Structure des champs */
+.row {
   display: flex;
-  flex-wrap: wrap;
-  margin: -10px;
+  gap: 20px;
+  margin-bottom: 20px;
 }
 
 .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 25px;
+  position: relative;
   width: 100%;
 }
 
-.half {
-  width: 50%;
+.form-group.half {
+  width: calc(50% - 10px);
 }
 
-
-
 /* Labels */
-label {
+.form-group label {
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
   font-weight: 600;
-  color: #2c3e50;
+  color: var(--dark-color);
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
 }
 
 /* Inputs et selects */
-.form-input {
+.form-control {
   width: 100%;
-  padding: 10px;
-  font-size: 1rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  transition: border-color 0.3s;
+  padding: 15px 20px;
+  font-size: 1.05rem;
+  border: 2px solid #e0e0ff;
+  border-radius: 12px;
+  background-color: rgba(255, 255, 255, 0.8);
+  transition: all 0.3s;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
-.form-input:focus {
-  border-color: #1890cc;
+.form-control:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 5px 15px rgba(108, 99, 255, 0.15);
   outline: none;
-  box-shadow: 0 0 0 2px rgba(24, 144, 204, 0.2);
+  transform: translateY(-2px);
 }
 
 /* Style spécifique pour les selects */
-select.form-input {
+select.form-control {
   appearance: none;
-  padding-right: 30px;
-  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%231890cc' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") no-repeat right 10px center;
-  background-size: 16px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='%236C63FF' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 15px center;
+  padding-right: 40px;
+  cursor: pointer;
+  color: var(--dark-color);
+  font-weight: 500;
+}
+
+select.form-control option {
+  color: var(--dark-color);
+  background-color: white;
+  font-weight: 500;
+}
+
+/* Force l'affichage du texte sélectionné */
+select.form-control:not([value=""]):not([value="undefined"]) {
+  color: var(--dark-color);
+  font-weight: 600;
+}
+
+/* Pour les options par défaut (placeholder) */
+select.form-control option[value=""][disabled] {
+  color: #8888;
+  font-weight: normal;
+}
+
+/* Style pour l'affichage de la valeur sélectionnée */
+.selected-value {
+  margin-top: 8px;
+  padding: 8px 12px;
+  background-color: rgba(108, 99, 255, 0.1);
+  border-radius: 6px;
+  color: var(--primary-color);
+  font-weight: 500;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+}
+
+.selected-value::before {
+  content: "\f058"; /* FontAwesome check icon */
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  margin-right: 8px;
+  color: var(--primary-color);
 }
 
 /* Messages d'erreur */
 .error-message {
-  color: #dc3545;
-  font-size: 0.85rem;
-  margin-top: 5px;
-  padding: 8px;
-  background-color: #f8d7da;
-  border: 1px solid #f5c6cb;
-  border-radius: 4px;
+  color: #fe3f61;
+  font-size: 0.9rem;
+  margin-top: 8px;
+  padding: 10px 12px;
+  background-color: rgba(254, 63, 97, 0.1);
+  border-left: 4px solid #fe3f61;
+  border-radius: 6px;
+  transform: translateY(5px);
+  animation: errorShake 0.5s ease-in-out;
 }
 
-/* Boutons */
+@keyframes errorShake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-5px); }
+  40%, 80% { transform: translateX(5px); }
+}
+
+/* Actions du formulaire */
 .form-actions {
   display: flex;
   justify-content: space-between;
-  margin-top: 25px;
+  margin-top: 40px;
+  gap: 15px;
 }
 
+/* Boutons */
 .btn {
-  font-size: 0.9rem;
-  padding: 10px 20px;
-  border-radius: 6px;
+  display: inline-block;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 12px 30px;
   border: none;
+  border-radius: 30px;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  position: relative; /* Nécessaire pour l'effet shine */
+  overflow: hidden;   /* Pour masquer l'animation en dehors du bouton */
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  z-index: 1;
 }
 
+/* Bouton de mise à jour */
 .btn-update {
-  background-color: #1890cc;
+  background: linear-gradient(140deg, #2980b9, #2980b9);
   color: #fff;
+  box-shadow: 0 4px 10px rgba(0, 123, 255, 0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: none;
 }
 
 .btn-update:hover {
-  background-color: #0d5892;
-  transform: translateY(-2px);
-}
-
-.btn-return {
-  background-color: #6c757d;
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 123, 255, 0.6);
   color: #fff;
 }
 
+/* Bouton de retour */
+.btn-return {
+  background: linear-gradient(45deg, #fff, #f0f0f0);
+  color: #007bff;
+  border: 2px solid #007bff;
+  box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
 .btn-return:hover {
-  background-color: #5a6268;
-  transform: translateY(-2px);
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 123, 255, 0.4);
+  color: #007bff;
+}
+
+/* Effet "shine" avec pseudo-élément pour les deux boutons */
+.btn-update::before,
+.btn-return::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: skewX(-20deg);
+  transition: all 0.5s ease;
+}
+
+.btn-update:hover::before,
+.btn-return:hover::before {
+  left: 200%;
+}
+
+/* Style pour le bouton désactivé */
+.btn-disabled {
+  background: #cccccc;
+  color: #666666;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+  border: none;
+}
+
+.btn-disabled:hover {
+  background: #cccccc;
+  color: #666666;
+  transform: none;
+  box-shadow: none;
+}
+
+.btn-disabled::before {
+  display: none;
 }
 
 /* Animation */
@@ -150,26 +318,40 @@ select.form-input {
   }
 }
 
-.form-card {
+.form-container {
   animation: fadeIn 0.4s ease-out;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-  .form-row {
+  .form-container {
+    padding: 30px 20px;
+    margin: 30px 15px;
+  }
+  
+  .title {
+    font-size: 2rem;
+  }
+  
+  .row {
     flex-direction: column;
     gap: 0;
   }
   
-  .half {
+  .form-group.half {
     width: 100%;
   }
   
-  .title {
-    font-size: 1.5rem;
+  .form-actions {
+    flex-direction: column;
+    gap: 15px;
   }
   
-  .form-card {
-    padding: 20px;
+  .btn {
+    width: 100%;
+  }
+
+  .form-control {
+    padding: 12px 15px;
   }
 }

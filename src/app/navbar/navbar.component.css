@@ -144,3 +144,75 @@
   from { opacity: 0; transform: translateY(-10px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+/* ====== RESPONSIVE NAVBAR ====== */
+
+.menu-toggle {
+  display: none; /* Masqué par défaut sur grand écran */
+  background: none;
+  border: none;
+  color: #1890cc; /* Couleur du burger (bleu principal) */
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) { /* Point de rupture pour mobile/tablette */
+  .nav-menu {
+    display: none; /* Masquer le menu principal */
+    /* Styles pour le menu mobile ouvert (sera activé par TS via la classe .active) */
+    position: absolute;
+    top: 60px; /* Juste sous la navbar (hauteur de .nav-container) */
+    left: 0;
+    width: 100%;
+    background-color: #ffffff; /* Fond blanc comme la navbar */
+    flex-direction: column; /* Afficher les liens verticalement */
+    align-items: stretch; /* Étirer les éléments sur la largeur */
+    padding: 0; /* Pas de padding haut/bas ici, géré par les liens */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-top: 1px solid #eee; /* Séparateur */
+  }
+
+  .nav-menu.active {
+    display: flex; /* Afficher le menu quand il est actif */
+  }
+
+  .nav-menu li {
+    margin: 0; /* Annuler marge latérale */
+    width: 100%; /* Prendre toute la largeur */
+    text-align: center; /* Centrer le texte des liens */
+    border-bottom: 1px solid #eee; /* Séparateur entre liens */
+  }
+  
+  .nav-menu li:last-child {
+      border-bottom: none; /* Pas de bordure pour le dernier */
+  }
+
+  .nav-menu a {
+     color: #0d5892; /* Assurer la couleur des liens dans le menu mobile */
+     padding: 15px 20px; /* Ajouter du padding aux liens */
+     display: block; /* Pour que le padding s'applique */
+     width: 100%; /* Assurer que le lien prend toute la largeur */
+     margin-left: 0; /* Annuler la marge spécifique */
+  }
+  
+  .nav-menu a::after {
+      display: none; /* Pas besoin de soulignement dans le menu mobile */
+  }
+  
+  .nav-menu a:hover {
+      background-color: #f9f9f9; /* Fond léger au survol */
+      color: #1890cc;
+  }
+
+  .menu-toggle {
+    display: block; /* Afficher le bouton burger */
+  }
+
+  .nav-cta {
+      /* Optionnel: Décider quoi faire du bouton logout */
+      /* Par exemple, l'intégrer au menu mobile ou le laisser */
+      margin-left: auto; /* Le pousser à droite si les liens disparaissent */
+      margin-right: 10px; /* Un peu d'espace avant le burger */
+  }
+  
+}

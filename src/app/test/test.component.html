@@ -1,50 +1,59 @@
 <app-navbar></app-navbar>
 <div class="container my-5">
-  <h1 class="text-center mb-4">📘 Création d’un Test TOEIC</h1>
-  
-  <form>
-    <!-- Titre -->
-    <div class="form-group mb-3">
-      <label for="Titre">Nom du Test :</label>
-      <input type="text" id="Titre" [(ngModel)]="test.Titre" name="Titre" class="form-control" required placeholder="Entrez le nom du test">
-    </div>
+  <div class="form-container">
+    <h1 class="title"><i class="fas fa-clipboard-check title-icon"></i> Création d'un Test TOEIC</h1>
+    
+    <form class="standard-form">
+      <!-- Titre -->
+      <div class="form-group">
+        <label for="Titre">
+          <i class="fas fa-heading icon-label"></i> Nom du Test
+        </label>
+        <input type="text" id="Titre" [(ngModel)]="test.Titre" name="Titre" class="form-input" required placeholder="Entrez le nom du test">
+      </div>
 
-    <!-- Description -->
-    <div class="form-group mb-3">
-      <label for="Description">Description :</label>
-      <textarea id="Description" [(ngModel)]="test.Description" name="Description" class="form-control" placeholder="Entrez la description"></textarea>
-    </div>
+      <!-- Description -->
+      <div class="form-group">
+        <label for="Description">
+          <i class="fas fa-align-left icon-label"></i> Description
+        </label>
+        <textarea id="Description" [(ngModel)]="test.Description" name="Description" class="form-input" placeholder="Entrez la description"></textarea>
+      </div>
 
-    <!-- Site -->
-<!-- Site -->
-<div class="form-group mb-3">
-  <label for="Site">Site :</label>
-  <select id="Site" [(ngModel)]="test.Site" name="Site" class="form-control" required>
-    <option *ngFor="let site of sites" [value]="site.id">{{ site.nom }}</option>
-  </select>
-</div>
+      <!-- Site -->
+      <div class="form-group">
+        <label for="Site">
+          <i class="fas fa-map-marker-alt icon-label"></i> Site
+        </label>
+        <select id="Site" [(ngModel)]="test.Site" name="Site" class="form-input" required>
+          <option value="" disabled selected>Sélectionnez un site</option>
+          <option *ngFor="let site of sites" [value]="site.id">{{ site.nom }}</option>
+        </select>
+      </div>
 
+      <!-- Date -->
+      <div class="form-group">
+        <label for="Date">
+          <i class="fas fa-calendar-alt icon-label"></i> Date
+        </label>
+        <input type="date" id="Date" [(ngModel)]="test.Date" name="Date" class="form-input" required>
+      </div>
 
-    <!-- Date -->
-    <div class="form-group mb-3">
-      <label for="Date">Date :</label>
-      <input type="date" id="Date" [(ngModel)]="test.Date" name="Date" class="form-control" required>
-    </div>
+      <div class="button-stack">
+        <button type="button" class="btn btn-secondary" (click)="selectionnerClasse()">
+          <i class="fas fa-users"></i> Sélectionner Groupe
+        </button>
+        
+        <button type="button" class="btn btn-secondary" (click)="onConfigureReponses()">
+          <i class="fas fa-check-circle"></i> Configurer les réponses
+        </button>
+      </div>
 
-    <div class="form-group center-group  mb-3">
-      <button type="button" class="btn btn-secondary form-control" (click)="selectionnerClasse()">
-        Selectionner Groupe
-      </button>
-    </div>
-
-    <div class="form-group center-group mb-3">
-      <button type="button" class="btn btn-secondary form-control" (click)="onConfigureReponses()">
-        Configurer les réponses
-      </button>
-    </div>
-
-    <div class="text-center center-group mt-4">
-      <button type="button" class="btn btn-primary" (click)="onSaveTest()">Enregistrer Test</button>
-    </div>
-  </form>
+      <div class="button-center">
+        <button type="button" [ngClass]="{'btn': true, 'btn-update': isFormValid(), 'btn-disabled': !isFormValid()}" (click)="onSaveTest()" [disabled]="!isFormValid()">
+          <i class="fas fa-save"></i> Enregistrer Test
+        </button>
+      </div>
+    </form>
+  </div>
 </div>
